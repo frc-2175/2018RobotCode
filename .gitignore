@@ -16,4 +16,3 @@ hs_err_pid*
 /buildlistener/
 /dist/
 sysProps.xml
-.classpath
