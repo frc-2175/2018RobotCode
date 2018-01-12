@@ -3,6 +3,7 @@ package org.usfirst.frc.team2175.info;
 import java.util.HashMap;
 import java.util.Properties;
 
+import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.property.PropertiesLoader;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -17,6 +18,7 @@ public class RobotInfo {
 	private Properties botProperties;
 	
 	public RobotInfo() {
+		ServiceLocator.register(this);
 		info = new HashMap<>();
 		propLoader = new PropertiesLoader();
 		botProperties = propLoader.loadProperties("/home/lvuser/bot.properties");
@@ -36,5 +38,9 @@ public class RobotInfo {
 		} else {
 			info.put(key, practice);
 		}
+	}
+	
+	public <T> T get(String key) {
+		return (T) info.get(key);
 	}
 }
