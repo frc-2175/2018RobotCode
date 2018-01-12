@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-public class DrivetrainSubsystem {
+public class DrivetrainSubsystem extends Base_S{
 	private WPI_TalonSRX leftMaster;
 	private WPI_TalonSRX leftSlaveOne;
 	private WPI_TalonSRX leftSlaveTwo;
