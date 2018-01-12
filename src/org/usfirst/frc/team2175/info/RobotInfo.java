@@ -12,6 +12,7 @@ public class RobotInfo {
 	public static final String LEFT_MOTOR_MASTER = "drivetrain.motor.left.master";
 	public static final String LEFT_MOTOR_SLAVE1 = "drivetrain.motor.left.slave1";
 	public static final String LEFT_MOTOR_SLAVE2 = "drivetrain.motor.left.slave2";
+	public static final String INTAKE_MOTOR = "intake.motor";
 	private HashMap<String, Object> info;
 	private final boolean isComp;
 	private PropertiesLoader propLoader;
@@ -30,6 +31,7 @@ public class RobotInfo {
 		put(LEFT_MOTOR_MASTER, new WPI_TalonSRX(0), new WPI_TalonSRX(1));
 		put(LEFT_MOTOR_MASTER, new WPI_TalonSRX(5), new WPI_TalonSRX(3));
 		put(LEFT_MOTOR_MASTER, new WPI_TalonSRX(2), new WPI_TalonSRX(4));
+		put(INTAKE_MOTOR, new WPI_TalonSRX(1), new WPI_TalonSRX(3));
 	}
 	
 	private void put(String key, Object comp, Object practice) {
