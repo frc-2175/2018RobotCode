@@ -1,4 +1,4 @@
 ::Bot Specified Files
 pscp -pw "" src\properties\compbot\*.properties admin@roborio-2175-frc.local:/home/lvuser
 ::SSH files to robot
-plink -ssh -pw "" admin@roborio-2175-frc.local "mkdir -m 775 -v -p log; killall -q netconsole-host || :"
+plink -ssh -pw "" admin@roborio-2175-frc.local "mkdir -m 775 -v -p log; . /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r"
