@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2175.control;
 
+import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.info.RobotInfo;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -11,6 +12,7 @@ public class Driverstation {
 	RobotInfo robotInfo;
 	
 	public Driverstation() {
+		ServiceLocator.register(this);
 		leftJoystick = robotInfo.get(RobotInfo.LEFT_JOYSTICK);
 		rightJoystick = robotInfo.get(RobotInfo.RIGHT_JOYSTICK);
 		gamepad = robotInfo.get(RobotInfo.GAMEPAD);
