@@ -46,13 +46,39 @@
   	</jar>
   </target>
   
+  <target name="test" depends="compile-test" description="Run the tests.">
+    <mkdir dir="${test.output.dir}"/>
+
+    <junit printsummary="yes" haltonfailure="no" errorproperty="isTestErrors" failureproperty="isTestFailures">
+      <classpath>
+        <pathelement path="${classpath}" />
+        <pathelement path="${userLibs}" />
+        <pathelement path="${test.libs}" />
+        <pathelement path="${build.dir}" />
+        <pathelement path="${build.test.dir}" />
+      </classpath>
+
+      <formatter type="plain" />
+      <formatter type="xml" />
+
+      <batchtest fork="yes" todir="${test.output.dir}">
+        <fileset dir="${src.test.dir}">
+          <include name="**/*Test.java" />
+        </fileset>
+      </batchtest>
+    </junit>
+
+    <fail if="isTestErrors" message="Test errors exist" />
+    <fail if="isTestFailurs" message="Test failures exist" />
+  </target>
+  
   <target name="clean-2175" depends="clean" description="Delete build output dirs.">
     <delete dir="${build.test.dir}" quiet="true"/>
   	<delete dir="${build.listener.dir}" quiet="true"/>
   </target>
   
-  <target name="clean-jar" depends="clean-compile, jar" description="Clean build, create jar." />
-  
+  <target name="clean-jar" depends="clean-test, jar" description="Clean build, create jar." />
+  <target name="clean-test" depends="clean-2175, test" description="Clean build, run the tests." />
   <target name="clean-compile" depends="clean-2175, compile" description="Clean build, compile the code." />
 
 </project>
