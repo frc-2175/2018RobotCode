@@ -18,14 +18,12 @@ public class RobotInfo {
 	public static final String INTAKE_MOTOR = "intake.motor";
 	private HashMap<String, Object> info;
 	private final boolean isComp;
-	private PropertiesLoader propLoader;
 	private Properties botProperties;
 	
 	public RobotInfo() {
 		ServiceLocator.register(this);
 		info = new HashMap<>();
-		propLoader = new PropertiesLoader();
-		botProperties = propLoader.loadProperties("/home/lvuser/bot.properties");
+		botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
 		isComp = (boolean) botProperties.get("isComp");
 		populate();
 	}

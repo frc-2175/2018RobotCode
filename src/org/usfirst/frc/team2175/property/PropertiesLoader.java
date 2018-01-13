@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class PropertiesLoader {
 
-    private final Logger log = Logger.getLogger(getClass().getName());
+    private static final Logger log = Logger.getLogger(PropertiesLoader.class.getName());
 
     private static final String CAN_T_CONTINUE_MSG = "; can't continue";
 
@@ -23,12 +23,12 @@ public class PropertiesLoader {
      *            relative).
      * @return Properties instance loaded with the properties in the file.
      */
-    public Properties loadProperties(final String fileName) {
+    public static Properties loadProperties(final String fileName) {
         final File file = new File(fileName);
         return loadProperties(file);
     }
 
-    public Properties loadProperties(final File file) {
+    public static Properties loadProperties(final File file) {
         final InputStream inputStream = openPropertiesFile(file);
         final Properties prop = loadPropertiesFromFile(file, inputStream);
         errorIfNoPropertiesLoaded(file, prop);
@@ -36,7 +36,7 @@ public class PropertiesLoader {
         return prop;
     }
 
-    private InputStream openPropertiesFile(final File file) {
+    private static InputStream openPropertiesFile(final File file) {
         InputStream inputStream;
         try {
             inputStream = new FileInputStream(file);
@@ -49,7 +49,7 @@ public class PropertiesLoader {
         return inputStream;
     }
 
-    private Properties loadPropertiesFromFile(final File file,
+    private static Properties loadPropertiesFromFile(final File file,
             final InputStream inputStream) {
         final Properties prop = new Properties();
         try {
@@ -63,7 +63,7 @@ public class PropertiesLoader {
         return prop;
     }
 
-    private void errorIfNoPropertiesLoaded(final File file,
+    private static void errorIfNoPropertiesLoaded(final File file,
             final Properties prop) {
         if (prop.isEmpty()) {
             final String msg = "No properties were loaded from file=" + file
