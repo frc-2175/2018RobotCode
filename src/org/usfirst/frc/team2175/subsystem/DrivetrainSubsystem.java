@@ -18,6 +18,7 @@ public class DrivetrainSubsystem extends Base_S{
 	private DifferentialDrive robotDrive;
 
 	public DrivetrainSubsystem() {
+		ServiceLocator.register(this);
 		robotInfo = ServiceLocator.get(RobotInfo.class);
 		leftMaster = robotInfo.get(RobotInfo.LEFT_MOTOR_MASTER);
 		leftSlaveOne = robotInfo.get(RobotInfo.LEFT_MOTOR_SLAVE1);
@@ -35,5 +36,9 @@ public class DrivetrainSubsystem extends Base_S{
 
 	public void robotDrive(double xSpeed, double zRotation) {
 		robotDrive.arcadeDrive(xSpeed, zRotation, false);
+	}
+	
+	public void stopAllMotors() {
+		robotDrive(0, 0);
 	}
 }
