@@ -54,6 +54,7 @@ node {
     stage ('Build') {
       try {
         bat 'ant clean-compile'
+        bat 'ant compile-listener'
       } catch (Exception e) {
         currentBuild.result = 'ERROR'
         compileSuccess = false
@@ -90,8 +91,6 @@ node {
         if (deploySuccess) {
           stage ('Startup') {
             try {
-              bat 'ant compile-listener'
-
               echo '--------------------------\nStarting practice robot\n--------------------------'
               bat 'deployPropertiesFiles_Practice.bat'
               timeout (time: 30, unit: 'SECONDS') {
