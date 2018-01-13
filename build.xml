@@ -72,6 +72,22 @@
     <fail if="isTestFailurs" message="Test failures exist" />
   </target>
   
+  <target name="compile-test" depends="compile" description="Compile the tests code.">
+    <mkdir dir="${build.test.dir}"/>
+    <echo>[athena-compile] Compiling ${src.test.dir} with classpath=${classpath}:${external.libs}:${test.libs}:${build.dir} to ${build.test.dir}</echo>
+
+    <javac srcdir="${src.test.dir}"
+     destdir="${build.test.dir}"
+     includeAntRuntime="no"
+     includeJavaRuntime="no"
+     classpath="${classpath}:${external.libs}:${test.libs}:${build.dir}"
+     target="${ant.java.version}"
+     source="${ant.java.version}"
+     compiler="javac${ant.java.version}"
+     debug="true">
+    </javac>
+  </target>
+  
   <target name="clean-2175" depends="clean" description="Delete build output dirs.">
     <delete dir="${build.test.dir}" quiet="true"/>
   	<delete dir="${build.listener.dir}" quiet="true"/>
