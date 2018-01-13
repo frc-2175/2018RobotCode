@@ -1,5 +1,12 @@
 package team2175.control;
 
-public class DriverStationTest {
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
+public class DriverStationTest {
+	@Test
+	public void testDUMMY() {
+		assertTrue(true);
+	}
 }
