@@ -41,7 +41,7 @@
   	
   	<jar jarfile="${build.listener.dir}/listener.jar" basedir="${build.listener.dir}">
   	  <manifest>
-        <attribute name="Main-Class" value="NetConsoleReceiver"/>
+        <attribute name="Main-Class" value="Riolog"/>
       </manifest>
   	</jar>
   </target>
