@@ -26,5 +26,33 @@
   <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
 
   <import file="${wpilib.ant.dir}/build.xml"/>
+  
+  <target name="compile-listener" description="Compile the NetConsole listener.">
+  	<mkdir dir="${build.listener.dir}"/>
+  	
+  	<javac srcdir="${src.listener.dir}"
+  	 destdir="${build.listener.dir}"
+  	 includeAntRuntime="no"
+  	 target="${ant.java.version}"
+  	 source="${ant.java.version}"
+  	 compiler="javac${ant.java.version}"
+  	 debug="true">
+  	</javac>
+  	
+  	<jar jarfile="${build.listener.dir}/listener.jar" basedir="${build.listener.dir}">
+  	  <manifest>
+        <attribute name="Main-Class" value="NetConsoleReceiver"/>
+      </manifest>
+  	</jar>
+  </target>
+  
+  <target name="clean-2175" depends="clean" description="Delete build output dirs.">
+    <delete dir="${build.test.dir}" quiet="true"/>
+  	<delete dir="${build.listener.dir}" quiet="true"/>
+  </target>
+  
+  <target name="clean-jar" depends="clean-compile, jar" description="Clean build, create jar." />
+  
+  <target name="clean-compile" depends="clean-2175, compile" description="Clean build, compile the code." />
 
 </project>
