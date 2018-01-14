@@ -150,23 +150,23 @@ node {
         slackSend channel: slackChannel, color: (overallSuccess ? 'good' : 'danger'), message: slackMessage.trim()
       }
     }
-    // stage ('Upload to Archive') {
-    //   withCredentials([
-    //     string(credentialsId: archiveHostId, variable: 'ARCHIVEHOST'),
-    //     string(credentialsId: archivePathId, variable: 'ARCHIVEPATH'),
-    //     usernamePassword(credentialsId: archiveCredentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')
-    //   ]) {
-    //     def projectName = getProjectName()
-    //     def buildDirectory = env.JENKINS_HOME + "\\jobs\\${projectName}\\branches\\${env.BRANCH_NAME}\\builds\\${env.BUILD_NUMBER}"
-    //     def archiveDirectory = urlSanitize("$ARCHIVEPATH/jobs/${projectName}/${env.BRANCH_NAME}/${env.BUILD_NUMBER}")
+    stage ('Upload to Archive') {
+      withCredentials([
+        string(credentialsId: archiveHostId, variable: 'ARCHIVEHOST'),
+        string(credentialsId: archivePathId, variable: 'ARCHIVEPATH'),
+        usernamePassword(credentialsId: archiveCredentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')
+      ]) {
+        def projectName = getProjectName()
+        def buildDirectory = env.JENKINS_HOME + "\\jobs\\${projectName}\\branches\\${env.BRANCH_NAME}\\builds\\${env.BUILD_NUMBER}"
+        def archiveDirectory = urlSanitize("$ARCHIVEPATH/jobs/${projectName}/${env.BRANCH_NAME}/${env.BUILD_NUMBER}")
 
-    //     echo "Switching to directory: ${buildDirectory}"
-    //     dir (buildDirectory) {
-    //       bat 'copy log log_archive.txt'
-    //       bat "plink -v -ssh -pw $PASSWORD $USERNAME@$ARCHIVEHOST \"mkdir -p ${archiveDirectory}\""
-    //       bat returnStatus: true, script: "pscp -r -v -pw $PASSWORD *.xml *.txt *.log $USERNAME@$ARCHIVEHOST:${archiveDirectory}"
-    //     }
-    //   }
-    // }
+        echo "Switching to directory: ${buildDirectory}"
+        dir (buildDirectory) {
+          bat 'copy log log_archive.txt'
+          bat "plink -v -ssh -pw $PASSWORD $USERNAME@$ARCHIVEHOST \"mkdir -p ${archiveDirectory}\""
+          bat returnStatus: true, script: "pscp -r -v -pw $PASSWORD *.xml *.txt *.log $USERNAME@$ARCHIVEHOST:${archiveDirectory}"
+        }
+      }
+    }
   }
 }
