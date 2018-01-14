@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Base_S extends Subsystem {
-	public Base_S() {
+public class BaseSubsystem extends Subsystem {
+	public BaseSubsystem() {
 		ServiceLocator.register(this);
 	}
 

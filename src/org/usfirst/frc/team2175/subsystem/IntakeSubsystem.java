@@ -5,7 +5,7 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class IntakeSubsystem extends Base_S {
+public class IntakeSubsystem extends BaseSubsystem {
 	private WPI_TalonSRX rollerBar;
 	private RobotInfo robotInfo;
 	public IntakeSubsystem () {

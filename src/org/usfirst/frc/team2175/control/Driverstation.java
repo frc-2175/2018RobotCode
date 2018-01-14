@@ -5,13 +5,13 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class Driverstation {
+public class DriverStation {
 	private Joystick leftJoystick;
 	private Joystick rightJoystick;
 	private Joystick gamepad;
 	RobotInfo robotInfo;
 	
-	public Driverstation() {
+	public DriverStation() {
 		ServiceLocator.register(this);
 		leftJoystick = robotInfo.get(RobotInfo.LEFT_JOYSTICK);
 		rightJoystick = robotInfo.get(RobotInfo.RIGHT_JOYSTICK);
