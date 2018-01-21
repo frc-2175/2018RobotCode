@@ -11,6 +11,7 @@ public class ArcadeDriveDefaultCommand extends BaseCommand {
 	public ArcadeDriveDefaultCommand() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		driverStation = ServiceLocator.get(DryverStation.class);
+		requires(drivetrainSubsystem);
 	}
 	@Override
 	protected void execute() {
