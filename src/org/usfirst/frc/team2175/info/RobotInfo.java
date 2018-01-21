@@ -29,7 +29,7 @@ public class RobotInfo {
 		ServiceLocator.register(this);
 		info = new HashMap<>();
 		botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
-		isComp = (boolean) botProperties.get("isComp");
+		isComp = Boolean.parseBoolean((String) botProperties.get("isComp"));
 		populate();
 	}
 	
