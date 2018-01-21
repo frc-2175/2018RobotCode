@@ -18,7 +18,6 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	private DifferentialDrive robotDrive;
 
 	public DrivetrainSubsystem() {
-		ServiceLocator.register(this);
 		robotInfo = ServiceLocator.get(RobotInfo.class);
 		leftMaster = robotInfo.get(RobotInfo.LEFT_MOTOR_MASTER);
 		leftSlaveOne = robotInfo.get(RobotInfo.LEFT_MOTOR_SLAVE1);
