@@ -15,7 +15,7 @@ public class PrintMessage implements Message {
     timestamp = data.getFloat();
     seqNumber = data.getShort() & 0xffff;
     line = StandardCharsets.UTF_8.decode(data).toString();
-    if(line.indexOf("Robot program successfully initialized!") > -1) {
+    if (line.indexOf("Robot program is disabled and ready.") > -1) {
     	System.exit(0);
     } else if(line.indexOf("Robots should not quit, but yours did!") > -1) {
     	System.exit(1);

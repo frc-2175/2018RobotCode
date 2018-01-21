@@ -40,10 +40,14 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-		log.info("Robot program successfully initialized!");
 		defaultCommandFactory = new DefaultCommandFactory();
 	}
 
+	@Override
+	public void disabledInit() {
+		log.info("Robot program is disabled and ready.");
+	}
+	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
