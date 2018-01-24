@@ -19,7 +19,7 @@ public class RobotInfo {
 	public static final String RIGHT_MOTOR_SLAVE2 = "drivetrain.motor.right.slave2";
 	public static final String INTAKE_MOTOR = "intake.motor";
 	public static final String ELEVATOR_MOTOR = "elevator.motor1";
-	public static final String ELEVATOR_MOTOR = "elevator.motor2";
+	public static final String ELEVATOR_MOTOR2 = "elevator.motor2";
 	public static final String LEFT_JOYSTICK = "driverstation.joystick.left";
 	public static final String RIGHT_JOYSTICK = "driverstation.joystick.right";
 	public static final String GAMEPAD = "driverstation.gamepad";
