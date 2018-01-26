@@ -18,5 +18,8 @@ public class IntakeSubsystem extends BaseSubsystem {
 	public void runRollerBarOut() {
 		rollerBar.set(-0.5);
 	} 
+	public void stopRollerBar() {
+		rollerBar.set(0);
+	}
 
 }

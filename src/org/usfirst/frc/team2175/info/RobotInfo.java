@@ -23,6 +23,9 @@ public class RobotInfo {
 	public static final String LEFT_JOYSTICK = "driverstation.joystick.left";
 	public static final String RIGHT_JOYSTICK = "driverstation.joystick.right";
 	public static final String GAMEPAD = "driverstation.gamepad";
+	public static final String CLIMBER_LEFT_MOTOR = "climber.motor.left";
+	public static final String CLIMBER_RIGHT_MOTOR = "climber.motor.right";
+	
 	private HashMap<String, Object> info;
 	private final boolean isComp;
 	private Properties botProperties;
@@ -36,13 +39,15 @@ public class RobotInfo {
 	}
 	
 	private void populate() {
-		put(LEFT_MOTOR_MASTER, new WPI_TalonSRX(0), new WPI_TalonSRX(1));
-		put(LEFT_MOTOR_SLAVE1, new WPI_TalonSRX(5), new WPI_TalonSRX(3));
-		put(LEFT_MOTOR_SLAVE2, new WPI_TalonSRX(2), new WPI_TalonSRX(4));
-		put(RIGHT_MOTOR_MASTER, new WPI_TalonSRX(4), new WPI_TalonSRX(6));
-		put(RIGHT_MOTOR_SLAVE1, new WPI_TalonSRX(7), new WPI_TalonSRX(8));
-		put(RIGHT_MOTOR_SLAVE2, new WPI_TalonSRX(9), new WPI_TalonSRX(3));
-		put(INTAKE_MOTOR, new WPI_TalonSRX(1), new WPI_TalonSRX(3));
+		put(LEFT_MOTOR_MASTER, new WPI_TalonSRX(1), new WPI_TalonSRX(1));
+		put(LEFT_MOTOR_SLAVE1, new WPI_TalonSRX(2), new WPI_TalonSRX(2));
+		put(LEFT_MOTOR_SLAVE2, new WPI_TalonSRX(3), new WPI_TalonSRX(3));
+		put(RIGHT_MOTOR_MASTER, new WPI_TalonSRX(4), new WPI_TalonSRX(4));
+		put(RIGHT_MOTOR_SLAVE1, new WPI_TalonSRX(5), new WPI_TalonSRX(5));
+		put(RIGHT_MOTOR_SLAVE2, new WPI_TalonSRX(6), new WPI_TalonSRX(6));
+		put(INTAKE_MOTOR, new WPI_TalonSRX(7), new WPI_TalonSRX(7));
+		put(CLIMBER_LEFT_MOTOR, new WPI_TalonSRX(8), new WPI_TalonSRX(8));
+		put(CLIMBER_RIGHT_MOTOR, new WPI_TalonSRX(9), new WPI_TalonSRX(9));
 		put(LEFT_JOYSTICK, new Joystick(0), new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1), new Joystick(1));
 		put(GAMEPAD, new Joystick(2), new Joystick(2));
