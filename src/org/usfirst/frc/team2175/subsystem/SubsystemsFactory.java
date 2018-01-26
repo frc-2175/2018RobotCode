@@ -4,5 +4,7 @@ public class SubsystemsFactory {
 	public static void makeAllSubsystems() {
 		new DrivetrainSubsystem();
 		new IntakeSubsystem();
+		new ClimberSubsystem();
+		new ElevatorSubsystem();
 	}
 }
