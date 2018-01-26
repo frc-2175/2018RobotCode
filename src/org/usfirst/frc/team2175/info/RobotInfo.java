@@ -46,6 +46,8 @@ public class RobotInfo {
 		put(RIGHT_MOTOR_SLAVE1, new WPI_TalonSRX(5), new WPI_TalonSRX(5));
 		put(RIGHT_MOTOR_SLAVE2, new WPI_TalonSRX(6), new WPI_TalonSRX(6));
 		put(INTAKE_MOTOR, new WPI_TalonSRX(7), new WPI_TalonSRX(7));
+		put(ELEVATOR_MOTOR, new WPI_TalonSRX(10),new WPI_TalonSRX(10));
+		put(ELEVATOR_MOTOR2, new WPI_TalonSRX(11), new WPI_TalonSRX(11));
 		put(CLIMBER_LEFT_MOTOR, new WPI_TalonSRX(8), new WPI_TalonSRX(8));
 		put(CLIMBER_RIGHT_MOTOR, new WPI_TalonSRX(9), new WPI_TalonSRX(9));
 		put(LEFT_JOYSTICK, new Joystick(0), new Joystick(0));
