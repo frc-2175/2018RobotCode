@@ -5,7 +5,7 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class ClimberSubsystem extends Base_S {
+public class ClimberSubsystem extends BaseSubsystem {
 	private WPI_TalonSRX leftMotor;
 	private WPI_TalonSRX rightMotor;
 	private RobotInfo robotInfo;
