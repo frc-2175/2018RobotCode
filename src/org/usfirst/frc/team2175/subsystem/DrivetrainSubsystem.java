@@ -1,13 +1,14 @@
 package org.usfirst.frc.team2175.subsystem;
 
 import org.usfirst.frc.team2175.ServiceLocator;
+import org.usfirst.frc.team2175.control.BetterDrive;
 import org.usfirst.frc.team2175.info.RobotInfo;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-public class DrivetrainSubsystem extends BaseSubsystem{
+public class DrivetrainSubsystem extends BaseSubsystem {
 	private RobotInfo robotInfo;
 	private WPI_TalonSRX leftMaster;
 	private WPI_TalonSRX leftSlaveOne;
@@ -34,9 +35,10 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	}
 
 	public void robotDrive(double xSpeed, double zRotation) {
-		robotDrive.arcadeDrive(xSpeed, zRotation, false);
+		double[] speed = BetterDrive.getMotorValues(xSpeed, zRotation);
+		robotDrive.tankDrive(speed[0], speed[1], false);
 	}
-	
+
 	public void stopAllMotors() {
 		robotDrive(0, 0);
 	}
