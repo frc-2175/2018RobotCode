@@ -15,9 +15,7 @@ public class DefaultCommandFactory {
 	
 	public DefaultCommandFactory() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
-		constructDefaultCommands();
 		climberSubsystem = ServiceLocator.get(ClimberSubsystem.class);
-		constructDefaultCommands();
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
 		constructDefaultCommands();
 	}
