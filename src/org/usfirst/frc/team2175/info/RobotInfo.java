@@ -56,8 +56,8 @@ public class RobotInfo {
 		put(INTAKE_RIGHT_MOTOR, new WPI_TalonSRX(11), new WPI_TalonSRX(11));
 		put(ELEVATOR_MOTOR, new WPI_TalonSRX(12),new WPI_TalonSRX(12));
 		put(ELEVATOR_MOTOR2, new WPI_TalonSRX(13), new WPI_TalonSRX(13));
-		put(INTAKE_PISTON1, new SolenoidWrapper(1), new SolenoidWrapper(1));
-		put(INTAKE_PISTON2, new SolenoidWrapper(2), new SolenoidWrapper(2));
+		put(INTAKE_PISTON1, new SolenoidWrapper(1), new SolenoidWrapper(2));
+		put(INTAKE_PISTON2, new SolenoidWrapper(3), new SolenoidWrapper(4));
 		put(LEFT_JOYSTICK, new Joystick(0), new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1), new Joystick(1));
 		put(GAMEPAD, new Joystick(2), new Joystick(2));
