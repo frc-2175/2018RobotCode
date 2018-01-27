@@ -43,6 +43,7 @@ node {
     int failureCount = 0
     int skippedCount = 0
     boolean compileSuccess = true
+	boolean testCompileSuccess = true
     boolean deploySuccess = true
     boolean startupSuccess = true
 
@@ -67,6 +68,7 @@ node {
         } catch (Exception e) {
           echo 'The build and test stage failed!'
           currentBuild.result = 'ERROR'
+		  testCompileSuccess = false
         } 
         step([$class: 'JUnitResultArchiver', testResults: 'buildtest/results/*.xml', allowEmptyResults: true])
         def xmlFiles = findFiles(glob: 'buildtest/results/*.xml')
@@ -80,7 +82,7 @@ node {
           skippedCount += matchInt(contents, 'skipped')
         }
       }
-      if (failureCount == 0) {
+      if (testCompileSuccess && failureCount == 0) {
         stage ('Deploy') {
           try {
             bat 'ant deploy'
