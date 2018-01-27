@@ -43,6 +43,7 @@ node {
     int failureCount = 0
     int skippedCount = 0
     boolean compileSuccess = true
+	boolean testCompileSuccess = true
     boolean deploySuccess = true
     boolean startupSuccess = true
 
@@ -55,6 +56,7 @@ node {
       try {
         bat 'ant clean-compile'
       } catch (Exception e) {
+        echo 'The build stage failed!'
         currentBuild.result = 'ERROR'
         compileSuccess = false
       }
@@ -64,7 +66,9 @@ node {
         try {
           bat 'ant clean-jar'
         } catch (Exception e) {
+          echo 'The build and test stage failed!'
           currentBuild.result = 'ERROR'
+		  testCompileSuccess = false
         } 
         step([$class: 'JUnitResultArchiver', testResults: 'buildtest/results/*.xml', allowEmptyResults: true])
         def xmlFiles = findFiles(glob: 'buildtest/results/*.xml')
@@ -78,11 +82,12 @@ node {
           skippedCount += matchInt(contents, 'skipped')
         }
       }
-      if (failureCount == 0) {
+      if (testCompileSuccess && failureCount == 0) {
         stage ('Deploy') {
           try {
             bat 'ant deploy'
           } catch (Exception e) {
+            echo 'The deploy stage failed!'
             currentBuild.result = 'ERROR'
             deploySuccess = false
           }
@@ -106,6 +111,7 @@ node {
               }
               echo 'Competition robot started up successfully!\n'
             } catch (Exception e) {
+              echo 'The startup stage failed!'
               currentBuild.result = 'ERROR'
               startupSuccess = false
             }
@@ -114,10 +120,11 @@ node {
       }
     }
     stage ('Update GitHub Status & Notify') {
-      boolean overallSuccess = (compileSuccess && failureCount == 0 && deploySuccess && startupSuccess)
+      boolean allCompileSuccess = compileSuccess && testCompileSuccess
+	  boolean overallSuccess = (allCompileSuccess && failureCount == 0 && deploySuccess && startupSuccess)
       
-      def githubStatusMessage = "Compile ${compileSuccess ? 'succeeded' : 'failed'}"
-      if (compileSuccess) {
+      def githubStatusMessage = "Compile ${allCompileSuccess ? 'succeeded' : 'failed'}"
+      if (allCompileSuccess) {
         githubStatusMessage += ", ${testCount - failureCount}/${testCount} tests passed"
         if (failureCount == 0) {
           githubStatusMessage += ", deploy ${deploySuccess ? 'succeeded' : 'failed'}"
@@ -132,9 +139,9 @@ node {
       
       if (env.BRANCH_NAME == 'master') {
         def slackMessage = "Build #${env.BUILD_NUMBER} ${overallSuccess ? 'Success' : 'Failure'}"
-        slackMessage += "\nCompile Result:\n    ${compileSuccess ? 'Success' : 'Failure'}"
+        slackMessage += "\nCompile Result:\n    ${allCompileSuccess ? 'Success' : 'Failure'}"
 
-        if (compileSuccess) {
+        if (allCompileSuccess) {
           slackMessage += "\nTest Status:\n    Passed: ${testCount - failureCount}, Failed: ${failureCount}, Skipped: ${skippedCount}"
           if (failureCount == 0) {
             slackMessage += "\nDeploy Result:\n    ${deploySuccess ? 'Success' : 'Failure'}"
