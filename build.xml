@@ -27,35 +27,36 @@
 
   <import file="${wpilib.ant.dir}/build.xml"/>
   
-  <target name="compile"
-          description="Compile the source code.">
+  <typedef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${user.home}/wpilib/user/kotlin-compiler-1.2.21/kotlinc/lib/kotlin-ant.jar"/>
+  
+  <target name="compile" description="Compile the source code.">
     <mkdir dir="${build.dir}" />
     <path id="classpath.path">
-      <fileset dir="${userLibs.dir}"
-               includes="*.jar"
-               excludes="*-sources.jar,*-javadoc.jar" />
+      <fileset dir="${userLibs.dir}" includes="*.jar" excludes="*-sources.jar,*-javadoc.jar" />
       <fileset file="${wpilib.jar}" />
       <fileset file="${ntcore.jar}" />
       <fileset file="${opencv.jar}" />
       <fileset file="${cscore.jar}" />
       <fileset file="${wpiutil.jar}" />
-      <fileset dir="${lib.dir}" 
-          		includes = "*.jar"/>
-      <fileset dir="${userLibs}"
-               erroronmissingdir="false" />
+      <fileset file="${external.libs}" />
+      <fileset dir="${lib.dir}" includes = "*.jar"/>
+      <fileset dir="${userLibs}" erroronmissingdir="false" />
     </path>
-    <pathconvert property="classpathProp"
-                 refid="classpath.path" />
+    <pathconvert property="classpathProp" refid="classpath.path" />
     <echo message="[athena-compile] Compiling ${src.dir} with classpath=${classpathProp} to ${build.dir}" />
-    <javac srcdir="${src.dir}"
-           destdir="${build.dir}"
-           includeAntRuntime="no"
-           includeJavaRuntime="no"
-           classpathref="classpath.path"
-           target="${ant.java.version}"
-           source="${ant.java.version}"
-           compiler="javac${ant.java.version}"
-           debug="true"></javac>
+    <javac
+      srcdir="${src.dir}"
+      destdir="${build.dir}"
+      includeAntRuntime="no"
+      includeJavaRuntime="no"
+      classpathref="classpath.path"
+      target="${ant.java.version}"
+      source="${ant.java.version}"
+      compiler="javac${ant.java.version}"
+      debug="true"
+    >
+      <withKotlin />
+    </javac>
   </target>
   
   <target name="compile-listener" description="Compile the NetConsole listener.">
