@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import org.usfirst.frc.team2175.ServiceLocator;
+import org.usfirst.frc.team2175.SolenoidWrapper;
 import org.usfirst.frc.team2175.property.PropertiesLoader;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -27,7 +28,8 @@ public class RobotInfo {
 	public static final String CLIMBER_RIGHT_MOTOR = "climber.motor.right";
 	public static final String INTAKE_LEFT_MOTOR = "intake.motor.left";
 	public static final String INTAKE_RIGHT_MOTOR = "intake.motor.right";
-	
+	public static final String INTAKE_PISTON1 = "intake.piston1";
+	public static final String INTAKE_PISTON2 = "intake.piston2";	
 	private HashMap<String, Object> info;
 	private final boolean isComp;
 	private Properties botProperties;
@@ -54,6 +56,8 @@ public class RobotInfo {
 		put(INTAKE_RIGHT_MOTOR, new WPI_TalonSRX(11), new WPI_TalonSRX(11));
 		put(ELEVATOR_MOTOR, new WPI_TalonSRX(12),new WPI_TalonSRX(12));
 		put(ELEVATOR_MOTOR2, new WPI_TalonSRX(13), new WPI_TalonSRX(13));
+		put(INTAKE_PISTON1, new SolenoidWrapper(1), new SolenoidWrapper(1));
+		put(INTAKE_PISTON2, new SolenoidWrapper(2), new SolenoidWrapper(2));
 		put(LEFT_JOYSTICK, new Joystick(0), new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1), new Joystick(1));
 		put(GAMEPAD, new Joystick(2), new Joystick(2));

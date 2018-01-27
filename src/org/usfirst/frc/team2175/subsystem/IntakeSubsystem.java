@@ -1,14 +1,19 @@
 package org.usfirst.frc.team2175.subsystem;
 
 import org.usfirst.frc.team2175.ServiceLocator;
+import org.usfirst.frc.team2175.SolenoidWrapper;
 import org.usfirst.frc.team2175.info.RobotInfo;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class IntakeSubsystem extends BaseSubsystem {
 	private WPI_TalonSRX rollerBar;
 	private WPI_TalonSRX leftIntakeWheel;
 	private WPI_TalonSRX rightIntakeWheel;
+	private SolenoidWrapper actuationPiston1;
+	private SolenoidWrapper actuationPiston2;
 	private RobotInfo robotInfo;
 	private double leftSpeed;
 	private double rightSpeed;
@@ -38,5 +43,17 @@ public class IntakeSubsystem extends BaseSubsystem {
 	public void stopRollerBar() {
 		rollerBar.set(0);
 	}
+	public void moveUp() {
+		actuationPiston1.set(false);
+		actuationPiston2.set(false);
+	}
+	public void moveHalf() {
+		actuationPiston1.set(false);
+		actuationPiston2.set(true);
 
+	}
+	public void moveDown() {
+		actuationPiston1.set(true);
+		actuationPiston2.set(true);
+	}
 }
