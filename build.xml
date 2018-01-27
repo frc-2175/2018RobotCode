@@ -27,7 +27,7 @@
 
   <import file="${wpilib.ant.dir}/build.xml"/>
   
-  <typedef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${user.home}/wpilib/user/kotlin-compiler-1.2.21/kotlinc/lib/kotlin-ant.jar"/>
+  <typedef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${user.home}/wpilib/user/kotlinc/lib/kotlin-ant.jar"/>
   
   <target name="compile" description="Compile the source code.">
     <mkdir dir="${build.dir}" />
