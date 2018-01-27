@@ -13,14 +13,14 @@ public class ClimberSubsystem extends BaseSubsystem {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
 		leftMotor = robotInfo.get(RobotInfo.CLIMBER_LEFT_MOTOR);
 		rightMotor = robotInfo.get(RobotInfo.CLIMBER_RIGHT_MOTOR);
+		
+		rightMotor.follow(leftMotor);
 	}
 	public void turnClimberOn () {
 		leftMotor.set(0.7);
-		rightMotor.set(0.7);
 	}
 	public void turnClimberOff () {
 		leftMotor.set(0);
-		rightMotor.set(0);
 	}
 	
 }

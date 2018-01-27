@@ -25,4 +25,8 @@ public class DryverStation {
 	public double getTurnValue() {
 		return rightJoystick.getX();
 	}
+
+	public double getIntakeAxisValue() {
+		return gamepad.getRawAxis(0);
+	}
 }

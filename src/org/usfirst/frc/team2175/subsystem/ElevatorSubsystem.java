@@ -14,18 +14,15 @@ public class ElevatorSubsystem extends BaseSubsystem {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
 		elevatorOne = robotInfo.get(RobotInfo.ELEVATOR_MOTOR);
 		elevatorTwo = robotInfo.get(RobotInfo.ELEVATOR_MOTOR2);
-
+		
+		elevatorTwo.follow(elevatorOne);
 	}
 
 	public void runElevatorUp() {
 		elevatorOne.set(.5);
-		elevatorTwo.set(.5);
-
 	}
 
 	public void runElevatorDown() {
 		elevatorOne.set(-.5);
-		elevatorTwo.set(-.5);
-
 	}
 }
