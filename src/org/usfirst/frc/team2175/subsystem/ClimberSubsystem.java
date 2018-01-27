@@ -22,5 +22,8 @@ public class ClimberSubsystem extends BaseSubsystem {
 	public void turnClimberOff () {
 		leftMotor.set(0);
 	}
+	public void spinClimber(double axisValue) {
+		leftMotor.set(axisValue);
+	}
 	
 }
