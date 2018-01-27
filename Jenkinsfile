@@ -55,6 +55,7 @@ node {
       try {
         bat 'ant clean-compile'
       } catch (Exception e) {
+        echo 'The build stage failed!'
         currentBuild.result = 'ERROR'
         compileSuccess = false
       }
@@ -64,6 +65,7 @@ node {
         try {
           bat 'ant clean-jar'
         } catch (Exception e) {
+          echo 'The build and test stage failed!'
           currentBuild.result = 'ERROR'
         } 
         step([$class: 'JUnitResultArchiver', testResults: 'buildtest/results/*.xml', allowEmptyResults: true])
@@ -83,6 +85,7 @@ node {
           try {
             bat 'ant deploy'
           } catch (Exception e) {
+            echo 'The deploy stage failed!'
             currentBuild.result = 'ERROR'
             deploySuccess = false
           }
@@ -106,6 +109,7 @@ node {
               }
               echo 'Competition robot started up successfully!\n'
             } catch (Exception e) {
+              echo 'The startup stage failed!'
               currentBuild.result = 'ERROR'
               startupSuccess = false
             }
