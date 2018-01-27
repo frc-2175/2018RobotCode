@@ -9,7 +9,11 @@ public class BetterDrive {
 		zRotation = limit(zRotation);
 		zRotation = applyDeadband(zRotation, 0.02);
 
-		double angularPower = Math.abs(xSpeed) * zRotation;
+		return calculateSpeeds(xSpeed, zRotation);
+	}
+
+	public static double[] calculateSpeeds(double xSpeed, double zRotation) {
+		double angularPower = xSpeed * zRotation;
 
 		double leftSpeed = xSpeed + angularPower;
 		double rightSpeed = xSpeed - angularPower;
