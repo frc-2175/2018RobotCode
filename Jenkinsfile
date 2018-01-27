@@ -120,10 +120,11 @@ node {
       }
     }
     stage ('Update GitHub Status & Notify') {
-      boolean overallSuccess = (compileSuccess && failureCount == 0 && deploySuccess && startupSuccess)
+      boolean allCompileSuccess = compileSuccess && testCompileSuccess
+	  boolean overallSuccess = (allCompileSuccess && failureCount == 0 && deploySuccess && startupSuccess)
       
-      def githubStatusMessage = "Compile ${compileSuccess ? 'succeeded' : 'failed'}"
-      if (compileSuccess) {
+      def githubStatusMessage = "Compile ${allCompileSuccess ? 'succeeded' : 'failed'}"
+      if (allCompileSuccess) {
         githubStatusMessage += ", ${testCount - failureCount}/${testCount} tests passed"
         if (failureCount == 0) {
           githubStatusMessage += ", deploy ${deploySuccess ? 'succeeded' : 'failed'}"
@@ -138,9 +139,9 @@ node {
       
       if (env.BRANCH_NAME == 'master') {
         def slackMessage = "Build #${env.BUILD_NUMBER} ${overallSuccess ? 'Success' : 'Failure'}"
-        slackMessage += "\nCompile Result:\n    ${compileSuccess ? 'Success' : 'Failure'}"
+        slackMessage += "\nCompile Result:\n    ${allCompileSuccess ? 'Success' : 'Failure'}"
 
-        if (compileSuccess) {
+        if (allCompileSuccess) {
           slackMessage += "\nTest Status:\n    Passed: ${testCount - failureCount}, Failed: ${failureCount}, Skipped: ${skippedCount}"
           if (failureCount == 0) {
             slackMessage += "\nDeploy Result:\n    ${deploySuccess ? 'Success' : 'Failure'}"
