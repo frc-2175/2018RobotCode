@@ -1,4 +1,4 @@
-package team2175;
+package team2175.mock;
 
 import mockit.Mock;
 import mockit.MockUp;
