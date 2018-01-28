@@ -66,7 +66,7 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 		double rightCurvatureValue = rightVirtualSpeedController.get();
 		
 		double lerpT = Math.abs(moveValue) / INPUT_THRESHOLD;
-		lerpT = clamp(lerpT, 0, INPUT_THRESHOLD);
+		lerpT = clamp(lerpT, 0, 1);
 		double leftBlend = lerp(leftArcadeValue, leftCurvatureValue, lerpT);
 		double rightBlend = lerp(rightArcadeValue, rightCurvatureValue, lerpT);
 		
