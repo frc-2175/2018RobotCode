@@ -1,11 +1,13 @@
-package team2175.control;
+package team2175.subsystem;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
-public class DrivetrainSubsystemTest {
+import team2175.BaseTest;
+
+public class DrivetrainSubsystemTest extends BaseTest {
 	@Test
 	public void testGetBlendedMotorValues_Left_Full_Right_Half() {
 		final double moveValue = 1;

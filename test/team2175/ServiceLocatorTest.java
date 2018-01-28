@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.usfirst.frc.team2175.ServiceLocator;
 
-public class ServiceLocatorTest {
+public class ServiceLocatorTest extends BaseTest {
 	private final Foo foo = new Foo();
 
 	@Before
