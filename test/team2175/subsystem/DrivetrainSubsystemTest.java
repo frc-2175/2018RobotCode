@@ -11,10 +11,28 @@ import team2175.BaseTest;
 
 public class DrivetrainSubsystemTest extends BaseTest {
 	@Test
-	public void testGetBlendedMotorValues_Left_Full_Right_Half() {
+	public void testGetBlendedMotorValues_LeftFullRightHalf() {
 		final double moveValue = undeadband(1, RobotDriveBase.kDefaultDeadband);
 		final double turnValue = undeadband(0.5, RobotDriveBase.kDefaultDeadband);
 		final double[] expectedBlends = {1.5, 0.5};
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+	
+	@Test
+	public void testGetBlendedMotorValues_LeftZeroRightFull() {
+		final double moveValue = 0;
+		final double turnValue = 1;
+		final double[] expectedBlends = { 1, -1 };
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+	
+	@Test
+	public void testGetBlendedMotorValues_LeftSmidgeonRightFull() {
+		final double moveValue = undeadband(0.05, 0.02);
+		final double turnValue = 1;
+		final double[] expectedBlends = {0.55, -0.475};
 		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
 		assertArrayEquals(expectedBlends, blends, 0.001);
 	}
@@ -53,9 +71,4 @@ public class DrivetrainSubsystemTest extends BaseTest {
 		}
 	}
 
-	//	@Test
-	//	public void testGetBlendedMotorValues_Left_Zero_Right_Full() {
-	//		final double moveValue = 0;
-	//		final double turnValue = 
-	//	}
 }

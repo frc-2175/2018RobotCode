@@ -18,9 +18,9 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	private WPI_TalonSRX rightSlaveOne;
 	private WPI_TalonSRX rightSlaveTwo;
 	private DifferentialDrive robotDrive;
-	private static VirtualSpeedController leftVirtualSpeedController = new VirtualSpeedController();;
+	private static VirtualSpeedController leftVirtualSpeedController = new VirtualSpeedController();
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
-	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController, rightVirtualSpeedController);;
+	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController, rightVirtualSpeedController);
 
 	public DrivetrainSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -57,7 +57,7 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	public static double[] getBlendedMotorValues(double moveValue, double turnValue) {
 		final double INPUT_THRESHOLD = 0.1;
 		
-		virtualRobotDrive.arcadeDrive(moveValue,  turnValue);
+		virtualRobotDrive.arcadeDrive(moveValue,  turnValue, false);
 		double leftArcadeValue = leftVirtualSpeedController.get();
 		double rightArcadeValue = rightVirtualSpeedController.get();
 		
