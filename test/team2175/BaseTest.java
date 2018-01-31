@@ -9,7 +9,7 @@ import team2175.mock.MockJNIWrapper;
 import team2175.mock.MockNetworkTablesJNI;
 import team2175.mock.MockSmartDashboard;
 
-public class BaseTest {
+public abstract class BaseTest {
 	@Before
 	public void beforeTest() {
 		new MockHAL();
