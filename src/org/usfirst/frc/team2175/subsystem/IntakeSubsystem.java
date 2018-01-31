@@ -56,4 +56,5 @@ public class IntakeSubsystem extends BaseSubsystem {
 		actuationPiston1.set(true);
 		actuationPiston2.set(true);
 	}
+
 }
