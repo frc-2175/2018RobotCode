@@ -55,6 +55,7 @@
         <pathelement path="${test.libs}" />
         <pathelement path="${build.dir}" />
         <pathelement path="${build.test.dir}" />
+        <pathelement path="${external.libs}" />
       </classpath>
 
       <formatter type="plain" />
