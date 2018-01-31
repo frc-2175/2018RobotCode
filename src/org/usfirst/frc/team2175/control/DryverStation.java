@@ -33,4 +33,8 @@ public class DryverStation {
 	public double getClimberAxisValue() {
 		return gamepad.getRawAxis(3);
 	}
+	
+	public double getElevatorAxisValue() {
+		return gamepad.getRawAxis(1);
+	}
 }
