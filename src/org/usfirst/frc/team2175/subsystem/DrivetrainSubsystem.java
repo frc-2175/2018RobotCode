@@ -70,7 +70,7 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 		double leftBlend = lerp(leftArcadeValue, leftCurvatureValue, lerpT);
 		double rightBlend = lerp(rightArcadeValue, rightCurvatureValue, lerpT);
 		
-		double[] blends = {leftBlend, rightBlend};
+		double[] blends = {leftBlend, -rightBlend};
 		return blends;
 	}
 	
