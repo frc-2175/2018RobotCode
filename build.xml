@@ -52,7 +52,6 @@
     <junit printsummary="yes" haltonfailure="no" errorproperty="isTestErrors" failureproperty="isTestFailures">
       <classpath>
         <pathelement path="${classpath}" />
-        <pathelement path="${userLibs}" />
         <pathelement path="${test.libs}" />
         <pathelement path="${build.dir}" />
         <pathelement path="${build.test.dir}" />
@@ -69,7 +68,7 @@
     </junit>
 
     <fail if="isTestErrors" message="Test errors exist" />
-    <fail if="isTestFailurs" message="Test failures exist" />
+    <fail if="isTestFailures" message="Test failures exist" />
   </target>
   
   <target name="compile-test" depends="compile" description="Compile the tests code.">
