@@ -8,6 +8,7 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 public class DrivetrainSubsystem extends BaseSubsystem{
 	private RobotInfo robotInfo;
@@ -56,7 +57,6 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	 */
 	public static double[] getBlendedMotorValues(double moveValue, double turnValue) {
 		final double INPUT_THRESHOLD = 0.1;
-		
 		virtualRobotDrive.arcadeDrive(moveValue,  turnValue, false);
 		double leftArcadeValue = leftVirtualSpeedController.get();
 		double rightArcadeValue = rightVirtualSpeedController.get();
@@ -65,7 +65,7 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 		double leftCurvatureValue = leftVirtualSpeedController.get();
 		double rightCurvatureValue = rightVirtualSpeedController.get();
 		
-		double lerpT = Math.abs(moveValue) / INPUT_THRESHOLD;
+		double lerpT = Math.abs(deadband(moveValue, RobotDriveBase.kDefaultDeadband)) / INPUT_THRESHOLD;
 		lerpT = clamp(lerpT, 0, 1);
 		double leftBlend = lerp(leftArcadeValue, leftCurvatureValue, lerpT);
 		double rightBlend = lerp(rightArcadeValue, rightCurvatureValue, lerpT);
@@ -95,5 +95,30 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	 */
 	public static double lerp(double a, double b, double t) {
 		return (1 - t) * a + t * b;
+	}
+	
+	// Copied from RobotDriveBase
+	public static double deadband(double value, double deadband) {
+		if (Math.abs(value) > deadband) {
+			if (value > 0.0) {
+				return (value - deadband) / (1.0 - deadband);
+			} else {
+				return (value + deadband) / (1.0 - deadband);
+			}
+		} else {
+			return 0.0;
+		}
+	}
+	
+	public static double undeadband(double value, double deadband) {
+		if (value < 0) {
+			double t = -value;
+			return DrivetrainSubsystem.lerp(-deadband, -1, t);
+		} else if (value > 0) {
+			double t = value;
+			return DrivetrainSubsystem.lerp(deadband, 1, t);
+		} else {
+			return 0;
+		}
 	}
 }
