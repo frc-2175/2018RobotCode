@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 import team2175.BaseTest;
 
 public class DrivetrainSubsystemTest extends BaseTest {
+	// Quadrant I
 	@Test
 	public void testGetBlendedMotorValues_LeftFullRightHalf() {
 		final double moveValue = DrivetrainSubsystem.undeadband(1, RobotDriveBase.kDefaultDeadband);
@@ -33,6 +34,72 @@ public class DrivetrainSubsystemTest extends BaseTest {
 		final double moveValue = DrivetrainSubsystem.undeadband(0.05, 0.02);
 		final double turnValue = 1;
 		final double[] expectedBlends = {0.55, -0.475};
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+	
+	// Quadrant II
+	@Test
+	public void testGetBlendedMotorValues_LeftFullRightNegativeHalf() {
+		final double moveValue = DrivetrainSubsystem.undeadband(1, RobotDriveBase.kDefaultDeadband);
+		final double turnValue = DrivetrainSubsystem.undeadband(-0.5, RobotDriveBase.kDefaultDeadband);
+		final double[] expectedBlends = {0.5, 1.5};
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+	
+	@Test
+	public void testGetBlendedMotorValues_LeftZeroRightNegativeFull() {
+		final double moveValue = 0;
+		final double turnValue = -1;
+		final double[] expectedBlends = { -1, 1 };
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+	
+	@Test
+	public void testGetBlendedMotorValues_LeftSmidgeonRightNegativeFull() {
+		final double moveValue = DrivetrainSubsystem.undeadband(0.05, 0.02);
+		final double turnValue = -1;
+		final double[] expectedBlends = {-0.475, 0.55};
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+	
+	// Quadrant III
+	@Test
+	public void testGetBlendedMotorValues_LeftNegativeFullRightNegativeHalf() {
+		final double moveValue = DrivetrainSubsystem.undeadband(-1, RobotDriveBase.kDefaultDeadband);
+		final double turnValue = DrivetrainSubsystem.undeadband(-0.5, RobotDriveBase.kDefaultDeadband);
+		final double[] expectedBlends = {-1.5, -0.5};
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+
+	@Test
+	public void testGetBlendedMotorValues_LeftNegativeSmidgeonRightNegativeFull() {
+		final double moveValue = DrivetrainSubsystem.undeadband(-0.05, 0.02);
+		final double turnValue = -1;
+		final double[] expectedBlends = {-0.55, 0.475};
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+	
+	// Quadrant IV
+	@Test
+	public void testGetBlendedMotorValues_LeftNegativeFullRightHalf() {
+		final double moveValue = -1;
+		final double turnValue = DrivetrainSubsystem.undeadband(0.5, RobotDriveBase.kDefaultDeadband);
+		final double[] expectedBlends = {-0.5, -1.5};
+		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
+		assertArrayEquals(expectedBlends, blends, 0.001);
+	}
+
+	@Test
+	public void testGetBlendedMotorValues_LeftNegativeSmidgeonRightFull() {
+		final double moveValue = DrivetrainSubsystem.undeadband(-0.05, 0.02);
+		final double turnValue = 1;
+		final double[] expectedBlends = {0.475, -0.55};
 		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
 		assertArrayEquals(expectedBlends, blends, 0.001);
 	}
