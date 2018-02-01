@@ -9,10 +9,11 @@ package org.usfirst.frc.team2175.robot;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.InfoFactory;
-import org.usfirst.frc.team2175.info.RobotInfo;
+import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -33,6 +34,7 @@ public class Robot extends TimedRobot {
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	private DefaultCommandFactory defaultCommandFactory;
+	private RobotLogger robotLogger;
 	
 
 	/**
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
@@ -102,5 +105,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+	
+	@Override
+	public void robotPeriodic() {
+		robotLogger.log();
 	}
 }
