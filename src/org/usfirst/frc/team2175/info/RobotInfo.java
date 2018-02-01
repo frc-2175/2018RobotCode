@@ -12,6 +12,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class RobotInfo {
+	public static interface ValueContainer {
+		public Object get();
+	}
+	
 	public static final String LEFT_MOTOR_MASTER = "drivetrain.motor.left.master";
 	public static final String LEFT_MOTOR_SLAVE1 = "drivetrain.motor.left.slave1";
 	public static final String LEFT_MOTOR_SLAVE2 = "drivetrain.motor.left.slave2";
@@ -56,8 +60,8 @@ public class RobotInfo {
 		put(INTAKE_RIGHT_MOTOR, new WPI_TalonSRX(11), new WPI_TalonSRX(11));
 		put(ELEVATOR_MOTOR, new WPI_TalonSRX(12),new WPI_TalonSRX(12));
 		put(ELEVATOR_MOTOR2, new WPI_TalonSRX(13), new WPI_TalonSRX(13));
-		put(INTAKE_PISTON1, new SolenoidWrapper(1), new SolenoidWrapper(2));
-		put(INTAKE_PISTON2, new SolenoidWrapper(3), new SolenoidWrapper(4));
+		put(INTAKE_PISTON1, () -> new SolenoidWrapper(1), () -> new SolenoidWrapper(1));
+		put(INTAKE_PISTON2, () -> new SolenoidWrapper(2), () -> new SolenoidWrapper(2));
 		put(LEFT_JOYSTICK, new Joystick(0), new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1), new Joystick(1));
 		put(GAMEPAD, new Joystick(2), new Joystick(2));
@@ -68,6 +72,14 @@ public class RobotInfo {
 			info.put(key, comp);
 		} else {
 			info.put(key, practice);
+		}
+	}
+	
+	private void put(String key, ValueContainer comp, ValueContainer practice) {
+		if(isComp) {
+			info.put(key, comp.get());
+		} else {
+			info.put(key, practice.get());
 		}
 	}
 	

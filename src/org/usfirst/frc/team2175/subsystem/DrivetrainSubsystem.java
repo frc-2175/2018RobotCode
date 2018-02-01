@@ -8,6 +8,7 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 public class DrivetrainSubsystem extends BaseSubsystem{
 	private RobotInfo robotInfo;
@@ -18,7 +19,9 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	private WPI_TalonSRX rightSlaveOne;
 	private WPI_TalonSRX rightSlaveTwo;
 	private DifferentialDrive robotDrive;
-	private DryverStation driverStation;
+	private static VirtualSpeedController leftVirtualSpeedController = new VirtualSpeedController();
+	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
+	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController, rightVirtualSpeedController);
 
 	public DrivetrainSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -33,7 +36,9 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 		rightSlaveOne.follow(rightMaster);
 		rightSlaveTwo.follow(rightMaster);
 		robotDrive = new DifferentialDrive(leftMaster, rightMaster);
-		driverStation = ServiceLocator.get(DryverStation.class);
+		leftVirtualSpeedController = new VirtualSpeedController();
+		rightVirtualSpeedController = new VirtualSpeedController();
+		virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController, rightVirtualSpeedController);
 	}
 
 	public void robotDrive(double xSpeed, double zRotation) {
@@ -50,25 +55,22 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	 * controllers
 	 * @return {left, right} 
 	 */
-	public double[] getBlendedMotorValues() {
+	public static double[] getBlendedMotorValues(double moveValue, double turnValue) {
 		final double INPUT_THRESHOLD = 0.1;
-		VirtualSpeedController leftSpeedController = new VirtualSpeedController();
-		VirtualSpeedController rightSpeedController = new VirtualSpeedController();
+		virtualRobotDrive.arcadeDrive(moveValue,  turnValue, false);
+		double leftArcadeValue = leftVirtualSpeedController.get();
+		double rightArcadeValue = rightVirtualSpeedController.get();
 		
-		robotDrive.arcadeDrive(driverStation.getMoveValue(),  driverStation.getTurnValue());
-		double leftArcadeValue = leftSpeedController.get();
-		double rightArcadeValue = rightSpeedController.get();
+		virtualRobotDrive.curvatureDrive(moveValue, turnValue, false);
+		double leftCurvatureValue = leftVirtualSpeedController.get();
+		double rightCurvatureValue = rightVirtualSpeedController.get();
 		
-		robotDrive.curvatureDrive(driverStation.getMoveValue(),  driverStation.getTurnValue(), false);
-		double leftCurvatureValue = leftSpeedController.get();
-		double rightCurvatureValue = rightSpeedController.get();
-		
-		double lerpT = Math.abs(driverStation.getMoveValue()) / INPUT_THRESHOLD;
-		lerpT = clamp(lerpT, 0, INPUT_THRESHOLD);
+		double lerpT = Math.abs(deadband(moveValue, RobotDriveBase.kDefaultDeadband)) / INPUT_THRESHOLD;
+		lerpT = clamp(lerpT, 0, 1);
 		double leftBlend = lerp(leftArcadeValue, leftCurvatureValue, lerpT);
 		double rightBlend = lerp(rightArcadeValue, rightCurvatureValue, lerpT);
 		
-		double[] blends = {leftBlend, rightBlend};
+		double[] blends = {leftBlend, -rightBlend};
 		return blends;
 	}
 	
@@ -79,7 +81,7 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	 * @param max the maximum to clamp on
 	 * @return min if val is less than min or max if val is greater than max
 	 */
-	public double clamp(double val, double min, double max) {
+	public static double clamp(double val, double min, double max) {
 		return val >= min && val <= max ? val : (val < min ? min : max);
 	}
 	
@@ -91,7 +93,32 @@ public class DrivetrainSubsystem extends BaseSubsystem{
 	 * @return an output based on the formula lerp(a, b, t) = 
 	 * (1-t)a + tb
 	 */
-	public double lerp(double a, double b, double t) {
+	public static double lerp(double a, double b, double t) {
 		return (1 - t) * a + t * b;
+	}
+	
+	// Copied from RobotDriveBase
+	public static double deadband(double value, double deadband) {
+		if (Math.abs(value) > deadband) {
+			if (value > 0.0) {
+				return (value - deadband) / (1.0 - deadband);
+			} else {
+				return (value + deadband) / (1.0 - deadband);
+			}
+		} else {
+			return 0.0;
+		}
+	}
+	
+	public static double undeadband(double value, double deadband) {
+		if (value < 0) {
+			double t = -value;
+			return DrivetrainSubsystem.lerp(-deadband, -1, t);
+		} else if (value > 0) {
+			double t = value;
+			return DrivetrainSubsystem.lerp(deadband, 1, t);
+		} else {
+			return 0;
+		}
 	}
 }

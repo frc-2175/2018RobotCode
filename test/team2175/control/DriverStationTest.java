@@ -4,7 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class DriverStationTest {
+import team2175.BaseTest;
+
+public class DriverStationTest extends BaseTest {
 	@Test
 	public void testDUMMY() {
 		assertTrue(true);
