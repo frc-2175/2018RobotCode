@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
 import org.usfirst.frc.team2175.control.DryverStation;
+import org.usfirst.frc.team2175.info.InfoFactory;
 import org.usfirst.frc.team2175.info.RobotInfo;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
@@ -43,9 +44,9 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-		new RobotInfo();
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
+		InfoFactory.makeAllInfos();
 		defaultCommandFactory = new DefaultCommandFactory();
 	}
 
