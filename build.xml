@@ -39,7 +39,8 @@
       <fileset file="${opencv.jar}" />
       <fileset file="${cscore.jar}" />
       <fileset file="${wpiutil.jar}" />
-      <fileset file="${external.libs}" />
+      <fileset dir="${lib.dir}" 
+          		includes = "*.jar"/>
       <fileset dir="${userLibs}"
                erroronmissingdir="false" />
     </path>
