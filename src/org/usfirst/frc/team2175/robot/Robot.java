@@ -45,16 +45,17 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
 		robotLogger = new RobotLogger();
-		robotLogger.log();
 		InfoFactory.makeAllInfos();
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
 		defaultCommandFactory = new DefaultCommandFactory();
+		robotLogger.log();
 	}
 
 	@Override
 	public void disabledInit() {
 		log.info("Robot program is disabled and ready.");
+		robotLogger.flush();
 	}
 
 	/**

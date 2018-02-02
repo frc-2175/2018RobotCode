@@ -49,6 +49,16 @@ public class RobotLogger {
 		loggers.add(loggable);
 	}
 
+	public void flush() {
+		for (BufferedWriter w : writers.values()) {
+			try {
+				w.flush();
+			} catch (IOException e) {
+				log.log(Level.WARNING, "Failed to flush", e);
+			}
+		}
+	}
+
 	public static String getLogFilename(Loggable l) {
 		return BASE_DIRECTORY + l.getLogType() + "-" + l.getId() + ".log";
 	}
