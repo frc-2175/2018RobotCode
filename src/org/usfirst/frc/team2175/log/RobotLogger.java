@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2175.log;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class RobotLogger {
 	private ArrayList<Loggable> loggers;
 	private final static Logger log = Logger.getLogger(RobotLogger.class.getName());
 	public final static String BASE_DIRECTORY = "/home/lvuser/log/";
+	private int matchNumber = 0;
 
 	public static class LogEntry {
 		double timestamp;
@@ -35,6 +37,9 @@ public class RobotLogger {
 	private HashMap<Loggable, BufferedWriter> writers;
 
 	public RobotLogger() {
+		File workingDirectory = new File(BASE_DIRECTORY);
+		workingDirectory.mkdirs();
+		
 		gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 				// .setDateFormat("yyyy-MM-ddTHH:mm:ss.SSSX")
 				.create();
@@ -43,6 +48,22 @@ public class RobotLogger {
 		ServiceLocator.register(this);
 
 		loggers = new ArrayList<>();
+		
+		File[] listedFiles = workingDirectory.listFiles();
+		for(File file : listedFiles) {
+			if(file.isDirectory()) {
+				try {
+					int current = Integer.parseInt(file.getName());
+					if(current > matchNumber) {
+						matchNumber = current;
+					}
+				} catch(NumberFormatException e) {
+					log.log(Level.WARNING, "Folder parsed did not contain an integer", e);
+				}
+			}
+		}
+		matchNumber++;
+		(new File(BASE_DIRECTORY + matchNumber)).mkdirs();
 	}
 
 	public void addLoggable(Loggable loggable) {
@@ -59,8 +80,8 @@ public class RobotLogger {
 		}
 	}
 
-	public static String getLogFilename(Loggable l) {
-		return BASE_DIRECTORY + l.getLogType() + "-" + l.getId() + ".log";
+	public String getLogFilename(Loggable l) {
+		return BASE_DIRECTORY + "/" + matchNumber + l.getLogType() + "-" + l.getId() + ".log";
 	}
 
 	public void logLoggable(Loggable l) throws IOException {
