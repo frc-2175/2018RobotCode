@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public interface Loggable {
 	public String getLogType();
-	public int getId();
+
+	public String getId();
+
 	public HashMap<String, Object> getValues();
 }

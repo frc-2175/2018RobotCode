@@ -43,7 +43,10 @@ public class RobotLogger {
 		ServiceLocator.register(this);
 
 		loggers = new ArrayList<>();
-		loggers.add(new TestLoggable());
+	}
+
+	public void addLoggable(Loggable loggable) {
+		loggers.add(loggable);
 	}
 
 	public static String getLogFilename(Loggable l) {

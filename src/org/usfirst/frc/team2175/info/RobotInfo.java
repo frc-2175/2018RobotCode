@@ -5,6 +5,9 @@ import java.util.Properties;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
+import org.usfirst.frc.team2175.log.LoggableSolenoid;
+import org.usfirst.frc.team2175.log.LoggableTalonSRX;
+import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.property.PropertiesLoader;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -15,7 +18,7 @@ public class RobotInfo {
 	public static interface ValueContainer {
 		public Object get();
 	}
-	
+
 	public static final String LEFT_MOTOR_MASTER = "drivetrain.motor.left.master";
 	public static final String LEFT_MOTOR_SLAVE1 = "drivetrain.motor.left.slave1";
 	public static final String LEFT_MOTOR_SLAVE2 = "drivetrain.motor.left.slave2";
@@ -33,19 +36,22 @@ public class RobotInfo {
 	public static final String INTAKE_LEFT_MOTOR = "intake.motor.left";
 	public static final String INTAKE_RIGHT_MOTOR = "intake.motor.right";
 	public static final String INTAKE_PISTON1 = "intake.piston1";
-	public static final String INTAKE_PISTON2 = "intake.piston2";	
+	public static final String INTAKE_PISTON2 = "intake.piston2";
 	private HashMap<String, Object> info;
 	private final boolean isComp;
 	private Properties botProperties;
-	
+
+	private RobotLogger robotLogger;
+
 	public RobotInfo() {
 		ServiceLocator.register(this);
 		info = new HashMap<>();
 		botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
 		isComp = Boolean.parseBoolean((String) botProperties.get("isComp"));
+		robotLogger = ServiceLocator.get(RobotLogger.class);
 		populate();
 	}
-	
+
 	private void populate() {
 		put(LEFT_MOTOR_MASTER, new WPI_TalonSRX(1), new WPI_TalonSRX(1));
 		put(LEFT_MOTOR_SLAVE1, new WPI_TalonSRX(2), new WPI_TalonSRX(2));
@@ -58,7 +64,7 @@ public class RobotInfo {
 		put(CLIMBER_RIGHT_MOTOR, new WPI_TalonSRX(9), new WPI_TalonSRX(9));
 		put(INTAKE_LEFT_MOTOR, new WPI_TalonSRX(10), new WPI_TalonSRX(10));
 		put(INTAKE_RIGHT_MOTOR, new WPI_TalonSRX(11), new WPI_TalonSRX(11));
-		put(ELEVATOR_MOTOR, new WPI_TalonSRX(12),new WPI_TalonSRX(12));
+		put(ELEVATOR_MOTOR, new WPI_TalonSRX(12), new WPI_TalonSRX(12));
 		put(ELEVATOR_MOTOR2, new WPI_TalonSRX(13), new WPI_TalonSRX(13));
 		put(INTAKE_PISTON1, () -> new SolenoidWrapper(1), () -> new SolenoidWrapper(1));
 		put(INTAKE_PISTON2, () -> new SolenoidWrapper(2), () -> new SolenoidWrapper(2));
@@ -66,23 +72,29 @@ public class RobotInfo {
 		put(RIGHT_JOYSTICK, new Joystick(1), new Joystick(1));
 		put(GAMEPAD, new Joystick(2), new Joystick(2));
 	}
-	
+
 	private void put(String key, Object comp, Object practice) {
-		if(isComp) {
-			info.put(key, comp);
-		} else {
-			info.put(key, practice);
-		}
+		Object choice = isComp ? comp : practice;
+		roboLog(key, choice);
+		info.put(key, choice);
 	}
-	
+
 	private void put(String key, ValueContainer comp, ValueContainer practice) {
-		if(isComp) {
-			info.put(key, comp.get());
-		} else {
-			info.put(key, practice.get());
+		Object choice = isComp ? comp.get() : practice.get();
+		roboLog(key, choice);
+		info.put(key, choice);
+	}
+
+	private void roboLog(String key, Object obj) {
+		if (obj.getClass() == SolenoidWrapper.class) {
+			robotLogger.addLoggable(new LoggableSolenoid(key, (SolenoidWrapper) obj));
+		} else if (obj.getClass() == WPI_TalonSRX.class) {
+			robotLogger.addLoggable(new LoggableTalonSRX(key, (WPI_TalonSRX) obj));
+		} else if (obj.getClass() == Joystick.class) {
+			robotLogger.addLoggable(new LoggableJoystick(key, (Joystick) obj));
 		}
 	}
-	
+
 	public <T> T get(String key) {
 		return (T) info.get(key);
 	}

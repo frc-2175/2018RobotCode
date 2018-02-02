@@ -4,29 +4,30 @@ import java.util.HashMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class LoggableTalonSRX extends WPI_TalonSRX implements Loggable {
+public class LoggableTalonSRX implements Loggable {
+	private HashMap<String, Object> fields;
+	private WPI_TalonSRX talon;
+	private String key;
 
-	public LoggableTalonSRX(int deviceNumber) {
-		super(deviceNumber);
+	public LoggableTalonSRX(String key, WPI_TalonSRX talon) {
+		fields = new HashMap<>();
+		this.talon = talon;
+		this.key = key;
 	}
-	
+
 	@Override
 	public String getLogType() {
 		return "talon";
 	}
 
 	@Override
-	public int getId() {
-		return this.getDeviceID();
+	public String getId() {
+		return key;
 	}
 
 	@Override
 	public HashMap<String, Object> getValues() {
-		HashMap<String, Object> fields = new HashMap<>();
-		fields.put("value", get());
-		fields.put("isInverted", getInverted());
-		fields.put("controlMode", getControlMode().name());
+		fields.put("value", talon.get());
 		return fields;
 	}
-
 }
