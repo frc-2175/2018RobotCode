@@ -81,7 +81,7 @@ public class RobotLogger {
 	}
 
 	public String getLogFilename(Loggable l) {
-		return BASE_DIRECTORY + "/" + matchNumber + l.getLogType() + "-" + l.getId() + ".log";
+		return BASE_DIRECTORY + "/" + matchNumber + "/" + l.getLogType() + "-" + l.getId() + ".log";
 	}
 
 	public void logLoggable(Loggable l) throws IOException {
