@@ -76,9 +76,9 @@ public class IntakeSubsystem extends BaseSubsystem {
 	public void handleInputs(double axisValue) {
 		if (axisValue < 0.01 && axisValue > -0.01) {
 			if (driverStation.getIsSpinInButtonPressed()) {
-				runRollerBarIn();
+				runIntakeIn();
 			} else if (driverStation.getIsSpinOutButtonPressed()){
-				runRollerBarOut();
+				runIntakeOut();
 			} else {
 				stopRollerBar();
 			}
