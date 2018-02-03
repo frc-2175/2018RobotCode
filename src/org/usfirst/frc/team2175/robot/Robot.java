@@ -12,7 +12,8 @@ import java.util.logging.Logger;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.InfoFactory;
-import org.usfirst.frc.team2175.info.RobotInfo;
+import org.usfirst.frc.team2175.log.LogServer;
+import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -33,44 +34,55 @@ public class Robot extends TimedRobot {
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	private DefaultCommandFactory defaultCommandFactory;
-	
+	private RobotLogger robotLogger;
+	private LogServer logServer;
 
 	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
 		defaultCommandFactory = new DefaultCommandFactory();
+		robotLogger.log();
+		logServer = new LogServer();
 	}
 
 	@Override
 	public void disabledInit() {
 		log.info("Robot program is disabled and ready.");
+		robotLogger.flush();
 	}
 	
+	@Override
+	public void testInit() {
+		logServer.runServer();		
+	}
+
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString line to get the auto name from the text box below the Gyro
+	 * between different autonomous modes using the dashboard. The sendable chooser
+	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+	 * remove all of the chooser code and uncomment the getString line to get the
+	 * auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional comparisons to
-	 * the switch structure below with additional strings. If using the
-	 * SendableChooser make sure to add them to the chooser code above as well.
+	 * <p>
+	 * You can add additional auto modes by adding additional comparisons to the
+	 * switch structure below with additional strings. If using the SendableChooser
+	 * make sure to add them to the chooser code above as well.
 	 */
 	@Override
 	public void autonomousInit() {
 		m_autoSelected = m_chooser.getSelected();
 		// m_autoSelected = SmartDashboard.getString("Auto Selector",
-		// 		kDefaultAuto);
+		// kDefaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
 
@@ -79,14 +91,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		robotLogger.log();
 		switch (m_autoSelected) {
-			case kCustomAuto:
-				// Put custom auto code here
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
+		case kCustomAuto:
+			// Put custom auto code here
+			break;
+		case kDefaultAuto:
+		default:
+			// Put default auto code here
+			break;
 		}
 	}
 
@@ -95,6 +108,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		robotLogger.log();
 	}
 
 	/**
