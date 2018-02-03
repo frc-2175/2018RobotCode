@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ public class RobotLogger {
 	private final static Logger log = Logger.getLogger(RobotLogger.class.getName());
 	public final static String BASE_DIRECTORY = "/home/lvuser/log/";
 	private int matchNumber = 0;
+	private final static int NUMBER_OF_FOLDERS_TO_KEEP = 10;
 
 	public static class LogEntry {
 		double timestamp;
@@ -64,6 +66,35 @@ public class RobotLogger {
 		}
 		matchNumber++;
 		(new File(BASE_DIRECTORY + matchNumber)).mkdirs();
+		
+		listedFiles = workingDirectory.listFiles();
+		Arrays.sort(listedFiles, (File fileOne, File fileTwo) -> {
+			try {
+				int fileOneNumber = Integer.parseInt(fileOne.getName());
+				int fileTwoNumber = Integer.parseInt(fileTwo.getName());
+				int result;
+				if(fileOneNumber > fileTwoNumber) {
+					result = 1;
+				} else if(fileOneNumber < fileTwoNumber) {
+					result = -1;
+				} else {
+					result = 0;
+				}
+				return result;
+			} catch(NumberFormatException e) {
+				log.log(Level.WARNING, "Failed to parse int from folder name", e);
+				return 0;
+			}
+		});
+		for(int i = 0; i < listedFiles.length - NUMBER_OF_FOLDERS_TO_KEEP; i++) {
+			File[] directoryContents = listedFiles[i].listFiles();
+			if(directoryContents != null) {
+				for(File file : directoryContents) {
+					file.delete();
+				}
+			}
+			listedFiles[i].delete();
+		}
 	}
 
 	public void addLoggable(Loggable loggable) {
