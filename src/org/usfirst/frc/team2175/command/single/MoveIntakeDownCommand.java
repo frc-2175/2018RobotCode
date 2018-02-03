@@ -19,5 +19,4 @@ public class MoveIntakeDownCommand extends BaseCommand{
 	protected boolean isFinished() {
 		return false;
 	}
-
 }
