@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="lib/CTRE_Phoenix-sources.jar"/>
 	<classpathentry kind="lib" path="lib/CTRE_Phoenix.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/javalin-1.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.InfoFactory;
+import org.usfirst.frc.team2175.log.LogServer;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
@@ -50,6 +51,7 @@ public class Robot extends TimedRobot {
 		SubsystemsFactory.makeAllSubsystems();
 		defaultCommandFactory = new DefaultCommandFactory();
 		robotLogger.log();
+		LogServer.runServer();
 	}
 
 	@Override
