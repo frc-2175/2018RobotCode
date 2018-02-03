@@ -2,11 +2,10 @@ package org.usfirst.frc.team2175.subsystem;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
+import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.RobotInfo;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.Solenoid;
 
 public class IntakeSubsystem extends BaseSubsystem {
 	private WPI_TalonSRX rollerBar;
@@ -17,11 +16,13 @@ public class IntakeSubsystem extends BaseSubsystem {
 	private RobotInfo robotInfo;
 	private double leftSpeed;
 	private double rightSpeed;
+	private DryverStation driverStation;
 	public IntakeSubsystem () {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
 		rollerBar = robotInfo.get(RobotInfo.ROLLER_BAR_MOTOR);
 		leftIntakeWheel = robotInfo.get(RobotInfo.INTAKE_LEFT_MOTOR);
 		rightIntakeWheel = robotInfo.get(RobotInfo.INTAKE_RIGHT_MOTOR);
+		driverStation = ServiceLocator.get(DryverStation.class);
 	}
 	public void turnCube(double axisValue) {
 		if (axisValue < 0) {
@@ -56,5 +57,18 @@ public class IntakeSubsystem extends BaseSubsystem {
 		actuationPiston1.set(true);
 		actuationPiston2.set(true);
 	}
+	public void handleInputs(double axisValue) {
+		if (axisValue < 0.01 && axisValue > -0.01) {
+			if (driverStation.getIsSpinInButtonPressed()) {
+				runRollerBarIn();
+			} else if (driverStation.getIsSpinOutButtonPressed()){
+				runRollerBarOut();
+			} else {
+				stopRollerBar();
+			}
+		} else {
+			turnCube(axisValue);
+		}
+	} 
 
 }

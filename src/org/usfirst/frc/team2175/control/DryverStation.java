@@ -37,4 +37,12 @@ public class DryverStation {
 	public double getElevatorAxisValue() {
 		return gamepad.getRawAxis(1);
 	}
+	
+	public boolean getIsSpinInButtonPressed() {
+		return gamepad.getRawButton(3);
+	}
+	
+	public boolean getIsSpinOutButtonPressed() {
+		return gamepad.getRawButton(4);
+	}
 }

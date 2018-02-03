@@ -4,11 +4,11 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
-public class CubeTurningDefaultCommand extends BaseCommand{
+public class IntakeDefaultCommand extends BaseCommand{
 	private IntakeSubsystem intakeSubsystem;
 	private DryverStation driverStation;
 	
-	public CubeTurningDefaultCommand() {
+	public IntakeDefaultCommand() {
 			intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
 			driverStation = ServiceLocator.get(DryverStation.class);
 			requires(intakeSubsystem);

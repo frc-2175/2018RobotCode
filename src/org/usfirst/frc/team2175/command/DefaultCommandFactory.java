@@ -2,7 +2,7 @@ package org.usfirst.frc.team2175.command;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.single.ArcadeDriveDefaultCommand;
-import org.usfirst.frc.team2175.command.single.CubeTurningDefaultCommand;
+import org.usfirst.frc.team2175.command.single.IntakeDefaultCommand;
 import org.usfirst.frc.team2175.command.single.ElevatorDefaultCommand;
 import org.usfirst.frc.team2175.command.single.SpinClimberDefaultCommand;
 import org.usfirst.frc.team2175.subsystem.ClimberSubsystem;
@@ -27,7 +27,7 @@ public class DefaultCommandFactory {
 	private void constructDefaultCommands() {
 		drivetrainSubsystem.setDefaultCommand(new ArcadeDriveDefaultCommand());
 		climberSubsystem.setDefaultCommand(new SpinClimberDefaultCommand());
-		intakeSubsystem.setDefaultCommand(new CubeTurningDefaultCommand());
+		intakeSubsystem.setDefaultCommand(new IntakeDefaultCommand());
 		elevatorSubsystem.setDefaultCommand(new ElevatorDefaultCommand());
 	}
 	
