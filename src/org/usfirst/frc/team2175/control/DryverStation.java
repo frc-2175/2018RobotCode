@@ -27,15 +27,15 @@ public class DryverStation {
 	}
 
 	public double getIntakeAxisValue() {
-		return gamepad.getRawAxis(0);
+		return gamepad.getRawAxis(2);
 	}
 
 	public double getClimberAxisValue() {
-		return gamepad.getRawAxis(3);
+		return gamepad.getRawAxis(6);
 	}
 	
 	public double getElevatorAxisValue() {
-		return gamepad.getRawAxis(1);
+		return gamepad.getRawAxis(4);
 	}
 	
 	public boolean getIsSpinInButtonPressed() {
