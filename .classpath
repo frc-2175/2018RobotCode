@@ -14,21 +14,21 @@
 	<classpathentry kind="lib" path="lib/jmockit.jar"/>
 	<classpathentry kind="lib" path="lib/CTRE_Phoenix-sources.jar"/>
 	<classpathentry kind="lib" path="lib/CTRE_Phoenix.jar"/>
-	<classpathentry kind="lib" path="lib/gson-2.8.2.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/annotations-13.0.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/javalin-1.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/javax.servlet-api-3.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-http-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-io-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-security-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-server-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-servlet-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-util-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-webapp-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/jetty-xml-9.4.8.v20171121.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/kotlin-stdlib-1.2.10.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/kotlin-stdlib-jre7-1.2.10.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/kotlin-stdlib-jre8-1.2.10.jar"/>
-	<classpathentry kind="lib" path="lib/javalin/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/maven/annotations-13.0.jar"/>
+	<classpathentry kind="lib" path="lib/maven/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/maven/javalin-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/maven/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-http-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-io-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-security-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-server-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-servlet-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-util-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-webapp-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/jetty-xml-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/maven/kotlin-stdlib-1.2.10.jar"/>
+	<classpathentry kind="lib" path="lib/maven/kotlin-stdlib-jre7-1.2.10.jar"/>
+	<classpathentry kind="lib" path="lib/maven/kotlin-stdlib-jre8-1.2.10.jar"/>
+	<classpathentry kind="lib" path="lib/maven/slf4j-api-1.7.25.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
