@@ -57,6 +57,17 @@ public class IntakeSubsystem extends BaseSubsystem {
 		actuationPiston1.set(true);
 		actuationPiston2.set(true);
 	}
+	public void runIntakeIn() {
+		runRollerBarIn();
+		leftIntakeWheel.set(-0.7);
+		rightIntakeWheel.set(0.7);
+	}
+	
+	public void runIntakeOut() {
+		runRollerBarOut();
+		leftIntakeWheel.set(0.7);
+		rightIntakeWheel.set(-0.7);
+	}
 	public void handleInputs(double axisValue) {
 		if (axisValue < 0.01 && axisValue > -0.01) {
 			if (driverStation.getIsSpinInButtonPressed()) {
