@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	private DefaultCommandFactory defaultCommandFactory;
 	private RobotLogger robotLogger;
+	private LogServer logServer;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -51,13 +52,18 @@ public class Robot extends TimedRobot {
 		SubsystemsFactory.makeAllSubsystems();
 		defaultCommandFactory = new DefaultCommandFactory();
 		robotLogger.log();
-		LogServer.runServer();
+		logServer = new LogServer();
 	}
 
 	@Override
 	public void disabledInit() {
 		log.info("Robot program is disabled and ready.");
 		robotLogger.flush();
+	}
+	
+	@Override
+	public void testInit() {
+		logServer.runServer();		
 	}
 
 	/**

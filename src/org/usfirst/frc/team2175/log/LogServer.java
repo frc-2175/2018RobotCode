@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import io.javalin.Javalin;
 
 public class LogServer {
+	public boolean isRunning;
 	
 	public static class ServerRunnable implements Runnable {
 		@Override
@@ -49,8 +50,11 @@ public class LogServer {
 		}
 	}
 	
-	public static void runServer() {
-		(new Thread(new ServerRunnable())).start();
+	public void runServer() {
+		if(!isRunning) {
+			(new Thread(new ServerRunnable())).start();
+			isRunning = true;
+		}
 	}
 	
 }
