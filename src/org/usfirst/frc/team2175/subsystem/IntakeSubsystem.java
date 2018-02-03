@@ -4,8 +4,11 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.RobotInfo;
+import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class IntakeSubsystem extends BaseSubsystem {
 	private WPI_TalonSRX rollerBar;
@@ -14,11 +17,13 @@ public class IntakeSubsystem extends BaseSubsystem {
 	private SolenoidWrapper actuationPiston1;
 	private SolenoidWrapper actuationPiston2;
 	private RobotInfo robotInfo;
+	private SmartDashboardInfo smartDashboardInfo;
 	private double leftSpeed;
 	private double rightSpeed;
 	private DryverStation driverStation;
 	public IntakeSubsystem () {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
+		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		rollerBar = robotInfo.get(RobotInfo.ROLLER_BAR_MOTOR);
 		leftIntakeWheel = robotInfo.get(RobotInfo.INTAKE_LEFT_MOTOR);
 		rightIntakeWheel = robotInfo.get(RobotInfo.INTAKE_RIGHT_MOTOR);
@@ -36,7 +41,7 @@ public class IntakeSubsystem extends BaseSubsystem {
 		rightIntakeWheel.set(rightSpeed);
 	}
 	public void runRollerBarIn() {
-		rollerBar.set(0.7);
+		rollerBar.set(smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_IN_SPEED));
 	}
 	public void runRollerBarOut() {
 		rollerBar.set(-0.5);

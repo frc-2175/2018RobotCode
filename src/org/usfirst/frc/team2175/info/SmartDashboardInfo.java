@@ -12,6 +12,7 @@ public class SmartDashboardInfo {
 	private final boolean isComp;
 	private final Properties botProperties;
 	public static final String TEST_KEY = "test.key";
+	public static final String INTAKE_ROLLER_IN_SPEED = "intake.roller.in.speed";
 	
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -22,6 +23,7 @@ public class SmartDashboardInfo {
 	
 	private void populate() {
 		putNumber(TEST_KEY, 1.1, 1.2);
+		putNumber(INTAKE_ROLLER_IN_SPEED, 0.7, 0.7);
 	}
 	
 	public void putBoolean(String key, boolean comp, boolean practice) {
