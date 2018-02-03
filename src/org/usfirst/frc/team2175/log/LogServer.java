@@ -8,6 +8,7 @@ public class LogServer {
 		public void run() {
 			Javalin app = Javalin.start(7000);
 	        app.get("/", ctx -> ctx.result("Hello World"));
+	        System.out.println("The server is started!");
 		}
 	}
 	
