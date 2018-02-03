@@ -1,6 +1,7 @@
-package org.usfirst.frc.team2175.command.single;
+package org.usfirst.frc.team2175.command.autonomous;
 
 import org.usfirst.frc.team2175.ServiceLocator;
+import org.usfirst.frc.team2175.command.single.BaseCommand;
 import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
 public class SpinIntakeInCommand extends BaseCommand {
