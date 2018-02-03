@@ -81,5 +81,9 @@ public class IntakeSubsystem extends BaseSubsystem {
 			turnCube(axisValue);
 		}
 	} 
-
+	public void stopAllMotors() {
+		stopRollerBar();
+		leftIntakeWheel.set(0);
+		rightIntakeWheel.set(0);
+	}
 }

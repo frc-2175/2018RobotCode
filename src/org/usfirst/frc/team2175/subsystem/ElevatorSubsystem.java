@@ -29,4 +29,8 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	public void runElevator(double axisValue) {
 		elevatorOne.set(axisValue);
 	}
+	
+	public void stopElevator() {
+		elevatorOne.set(0);
+	}
 }
