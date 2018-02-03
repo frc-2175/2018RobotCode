@@ -40,7 +40,7 @@
       <fileset file="${cscore.jar}" />
       <fileset file="${wpiutil.jar}" />
       <fileset dir="${lib.dir}" 
-          		includes = "*.jar"/>
+          		includes = "*.jar,javalin/*.jar"/>
       <fileset dir="${userLibs}"
                erroronmissingdir="false" />
     </path>
