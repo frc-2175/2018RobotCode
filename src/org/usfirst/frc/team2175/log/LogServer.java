@@ -15,7 +15,10 @@ public class LogServer {
 	public static class ServerRunnable implements Runnable {
 		@Override
 		public void run() {
-			Javalin app = Javalin.start(7000);
+			Javalin app = Javalin.create()
+					.enableCorsForAllOrigins()
+					.port(7000)
+					.start();
 			Gson gson = new Gson();
 	        app.get("/", ctx -> {
 	        	File baseDirectory = new File(RobotLogger.BASE_DIRECTORY);
