@@ -20,4 +20,9 @@ public class LowerIntakeCommand extends BaseCommand {
 	protected boolean isFinished() {
 		return false;
 	}
+	
+	@Override
+	protected void end() {
+		intakeSubsystem.stopAllMotors();
+	}
 }

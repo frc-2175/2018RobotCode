@@ -20,4 +20,9 @@ public class RaiseIntakeHalfCommand extends BaseCommand {
 	protected boolean isFinished() {
 		return false;
 	}
+	
+	@Override
+	protected void end() {
+		intakeSubsystem.stopAllMotors();
+	}
 }
