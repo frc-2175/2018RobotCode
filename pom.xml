@@ -1,3 +1,9 @@
+<!--
+To reinstall dependencies, just run `mvn dependency:copy-dependencies`.
+
+DO NOT RUN ANY OTHER MAVEN COMMANDS. Who knows what would happen?
+-->
+
 <project>
     <!-- model version - always 4.0.0 for Maven 2.x POMs -->
     <modelVersion>4.0.0</modelVersion>
