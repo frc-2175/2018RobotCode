@@ -44,7 +44,7 @@ public class IntakeSubsystem extends BaseSubsystem {
 		rollerBar.set(smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_IN_SPEED));
 	}
 	public void runRollerBarOut() {
-		rollerBar.set(-0.5);
+		rollerBar.set(smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_OUT_SPEED));
 	} 
 	public void stopRollerBar() {
 		rollerBar.set(0);
@@ -64,14 +64,14 @@ public class IntakeSubsystem extends BaseSubsystem {
 	}
 	public void runIntakeIn() {
 		runRollerBarIn();
-		leftIntakeWheel.set(-0.7);
-		rightIntakeWheel.set(0.7);
+		leftIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED));
+		rightIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED));
 	}
 	
 	public void runIntakeOut() {
 		runRollerBarOut();
-		leftIntakeWheel.set(0.7);
-		rightIntakeWheel.set(-0.7);
+		leftIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
+		rightIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
 	}
 	public void handleInputs(double axisValue) {
 		if (axisValue < 0.01 && axisValue > -0.01) {
