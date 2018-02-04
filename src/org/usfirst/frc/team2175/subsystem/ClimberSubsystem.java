@@ -6,24 +6,24 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class ClimberSubsystem extends BaseSubsystem {
-	private WPI_TalonSRX leftMotor;
-	private WPI_TalonSRX rightMotor;
+	private WPI_TalonSRX masterMotor;
+	private WPI_TalonSRX slaveMotor;
 	private RobotInfo robotInfo;
 	public ClimberSubsystem () {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
-		leftMotor = robotInfo.get(RobotInfo.CLIMBER_LEFT_MOTOR);
-		rightMotor = robotInfo.get(RobotInfo.CLIMBER_RIGHT_MOTOR);
+		masterMotor = robotInfo.get(RobotInfo.CLIMBER_MASTER);
+		slaveMotor = robotInfo.get(RobotInfo.CLIMBER_SLAVE);
 		
-		rightMotor.follow(leftMotor);
+		slaveMotor.follow(masterMotor);
 	}
 	public void turnClimberOn () {
-		leftMotor.set(0.7);
+		masterMotor.set(0.7);
 	}
 	public void turnClimberOff () {
-		leftMotor.set(0);
+		masterMotor.set(0);
 	}
 	public void spinClimber(double axisValue) {
-		leftMotor.set(axisValue);
+		masterMotor.set(axisValue);
 	}
 	
 }
