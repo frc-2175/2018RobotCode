@@ -62,7 +62,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     public static double[] getBlendedMotorValues(double moveValue,
             double turnValue) {
         final double INPUT_THRESHOLD = 0.1;
-        virtualRobotDrive.curvatureDrive(moveValue, turnValue, true);
+        virtualRobotDrive.arcadeDrive(moveValue, turnValue, false);
         double leftArcadeValue = leftVirtualSpeedController.get();
         double rightArcadeValue = rightVirtualSpeedController.get();
 

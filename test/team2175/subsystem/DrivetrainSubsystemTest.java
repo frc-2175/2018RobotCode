@@ -31,7 +31,7 @@ public class DrivetrainSubsystemTest extends BaseTest {
 	
 	@Test
 	public void testGetBlendedMotorValues_LeftSmidgeonRightFull() {
-		final double moveValue = DrivetrainSubsystem.undeadband(0.05, 0.02);
+		final double moveValue = DrivetrainSubsystem.undeadband(0.05, RobotDriveBase.kDefaultDeadband);
 		final double turnValue = 1;
 		final double[] expectedBlends = {0.55, -0.475};
 		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
@@ -59,7 +59,7 @@ public class DrivetrainSubsystemTest extends BaseTest {
 	
 	@Test
 	public void testGetBlendedMotorValues_LeftSmidgeonRightNegativeFull() {
-		final double moveValue = DrivetrainSubsystem.undeadband(0.05, 0.02);
+		final double moveValue = DrivetrainSubsystem.undeadband(0.05, RobotDriveBase.kDefaultDeadband);
 		final double turnValue = -1;
 		final double[] expectedBlends = {-0.475, 0.55};
 		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
@@ -78,7 +78,7 @@ public class DrivetrainSubsystemTest extends BaseTest {
 
 	@Test
 	public void testGetBlendedMotorValues_LeftNegativeSmidgeonRightNegativeFull() {
-		final double moveValue = DrivetrainSubsystem.undeadband(-0.05, 0.02);
+		final double moveValue = DrivetrainSubsystem.undeadband(-0.05, RobotDriveBase.kDefaultDeadband);
 		final double turnValue = -1;
 		final double[] expectedBlends = {-0.55, 0.475};
 		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
@@ -97,7 +97,7 @@ public class DrivetrainSubsystemTest extends BaseTest {
 
 	@Test
 	public void testGetBlendedMotorValues_LeftNegativeSmidgeonRightFull() {
-		final double moveValue = DrivetrainSubsystem.undeadband(-0.05, 0.02);
+		final double moveValue = DrivetrainSubsystem.undeadband(-0.05, RobotDriveBase.kDefaultDeadband);
 		final double turnValue = 1;
 		final double[] expectedBlends = {0.475, -0.55};
 		final double[] blends = DrivetrainSubsystem.getBlendedMotorValues(moveValue, turnValue);
