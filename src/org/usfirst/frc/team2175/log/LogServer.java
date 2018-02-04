@@ -1,5 +1,4 @@
 package org.usfirst.frc.team2175.log;
-import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,10 +15,14 @@ public class LogServer {
 		@Override
 		public void run() {
 			Javalin app = Javalin.create()
-					.enableCorsForAllOrigins()
 					.port(7000)
 					.start();
 			Gson gson = new Gson();
+			
+			app.before(ctx -> {
+				ctx.header("Access-Control-Allow-Origin", "*");
+			});
+			
 	        app.get("/", ctx -> {
 	        	File baseDirectory = new File(RobotLogger.BASE_DIRECTORY);
 	        	ArrayList<String> directoryContents = new ArrayList<>();
@@ -29,17 +32,24 @@ public class LogServer {
 	        		}
 	        	}
 	        	String json = gson.toJson(directoryContents);
+	        	
 	        	ctx.header("Content-Type", "application/json");
 	        	ctx.result(json);
 	        });
 	        
 	        app.get("/:name", ctx -> {
 	        	File logFileFolder = new File(RobotLogger.BASE_DIRECTORY + "/" + ctx.param("name"));
+	        	if (!logFileFolder.exists()) {
+	        		ctx.status(404);
+	        		return;
+	        	}
+	        	
 	        	ArrayList<String> directoryContents = new ArrayList<>();
 	        	for(File file : logFileFolder.listFiles()) {
 	        		directoryContents.add(file.getName());
 	        	}
 	        	String json = gson.toJson(directoryContents);
+	        	
 	        	ctx.header("Content-Type", "application/json");
 	        	ctx.result(json);
 	        });
@@ -48,6 +58,11 @@ public class LogServer {
 	        	File logFile = new File(RobotLogger.BASE_DIRECTORY 
 	        			+ "/" + ctx.param("foldername") 
 	        			+ "/" + ctx.param("filename"));
+	        	if (!logFile.exists()) {
+	        		ctx.status(404);
+	        		return;
+	        	}
+	        	
 	        	ctx.result(new String(Files.readAllBytes(Paths.get(logFile.getAbsolutePath()))));
 	        });
 		}
