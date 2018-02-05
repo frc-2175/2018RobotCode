@@ -61,6 +61,11 @@ public class Robot extends TimedRobot {
         log.info("Robot program is disabled and ready.");
         robotLogger.flush();
     }
+    
+    @Override
+    public void disabledPeriodic() {
+    	Scheduler.getInstance().run();
+    }
 
     @Override
     public void testInit() {
@@ -102,6 +107,7 @@ public class Robot extends TimedRobot {
             // Put default auto code here
             break;
         }
+        Scheduler.getInstance().run();
     }
 
     /**
