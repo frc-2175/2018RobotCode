@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.ConfigurationFactory;
 import org.usfirst.frc.team2175.ServiceLocator;
 
 import com.google.gson.FieldNamingPolicy;
@@ -20,10 +21,35 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class RobotLogger {
 	private ArrayList<Loggable> loggers;
-	private final static Logger log = Logger.getLogger(RobotLogger.class.getName());
+	private static final Logger log;
 	public final static String BASE_DIRECTORY = "/home/lvuser/log/";
-	private int matchNumber = 0;
+	private static int matchNumber = 0;
 	private final static int NUMBER_OF_FOLDERS_TO_KEEP = 10;
+	
+	static {
+		File workingDirectory = new File(BASE_DIRECTORY);
+		File[] listedFiles = workingDirectory.listFiles();
+		for(File file : listedFiles) {
+			if(file.isDirectory()) {
+				try {
+					int current = Integer.parseInt(file.getName());
+					if(current > matchNumber) {
+						matchNumber = current;
+					}
+				} catch(NumberFormatException e) {
+					System.out.println("Folder parsed did not contain an integer");
+					e.printStackTrace();
+				}
+			}
+		}
+		matchNumber++;
+		(new File(BASE_DIRECTORY + matchNumber)).mkdirs();
+		
+		ConfigurationFactory.setConfigurationFactory(new LoggingConfigurationFactory(BASE_DIRECTORY + "/" + matchNumber));
+		log = LogManager.getLogger(RobotLogger.class.getName());
+	}
+	
+	public static void loadClass() {}
 
 	public static class LogEntry {
 		double timestamp;
@@ -39,35 +65,17 @@ public class RobotLogger {
 	private HashMap<Loggable, BufferedWriter> writers;
 
 	public RobotLogger() {
-		File workingDirectory = new File(BASE_DIRECTORY);
-		workingDirectory.mkdirs();
+		ServiceLocator.register(this);
 		
 		gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 				// .setDateFormat("yyyy-MM-ddTHH:mm:ss.SSSX")
 				.create();
 		writers = new HashMap<>();
 
-		ServiceLocator.register(this);
-
 		loggers = new ArrayList<>();
 		
+		File workingDirectory = new File(BASE_DIRECTORY);
 		File[] listedFiles = workingDirectory.listFiles();
-		for(File file : listedFiles) {
-			if(file.isDirectory()) {
-				try {
-					int current = Integer.parseInt(file.getName());
-					if(current > matchNumber) {
-						matchNumber = current;
-					}
-				} catch(NumberFormatException e) {
-					log.log(Level.WARNING, "Folder parsed did not contain an integer", e);
-				}
-			}
-		}
-		matchNumber++;
-		(new File(BASE_DIRECTORY + matchNumber)).mkdirs();
-		
-		listedFiles = workingDirectory.listFiles();
 		Arrays.sort(listedFiles, (File fileOne, File fileTwo) -> {
 			try {
 				int fileOneNumber = Integer.parseInt(fileOne.getName());
@@ -82,7 +90,8 @@ public class RobotLogger {
 				}
 				return result;
 			} catch(NumberFormatException e) {
-				log.log(Level.WARNING, "Failed to parse int from folder name", e);
+				System.out.println("Failed to parse int from folder name" );
+				e.printStackTrace();
 				return 0;
 			}
 		});
@@ -106,7 +115,7 @@ public class RobotLogger {
 			try {
 				w.flush();
 			} catch (IOException e) {
-				log.log(Level.WARNING, "Failed to flush", e);
+				log.error("Failed to flush", e);
 			}
 		}
 	}
@@ -131,7 +140,7 @@ public class RobotLogger {
 			try {
 				logLoggable(logger);
 			} catch (IOException e) {
-				log.log(Level.SEVERE, "Failed to log " + getLogFilename(logger), e);
+				log.error("Failed to log " + getLogFilename(logger), e);
 			}
 		}
 	}

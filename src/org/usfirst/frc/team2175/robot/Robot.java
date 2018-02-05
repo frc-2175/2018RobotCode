@@ -7,8 +7,9 @@
 
 package org.usfirst.frc.team2175.robot;
 
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.InfoFactory;
@@ -28,7 +29,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	private final static Logger log = Logger.getLogger(Robot.class.getName());
+	static {
+		RobotLogger.loadClass();
+	}
+	
+	private final static Logger log = LogManager.getLogger();
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
@@ -46,6 +51,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		
 		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
 		new DryverStation();
@@ -53,6 +59,8 @@ public class Robot extends TimedRobot {
 		defaultCommandFactory = new DefaultCommandFactory();
 		robotLogger.log();
 		logServer = new LogServer();
+		
+		log.info("It works?");
 	}
 
 	@Override
