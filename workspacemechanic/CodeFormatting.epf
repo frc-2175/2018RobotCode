@@ -1,0 +1,43 @@
+# @title CodeFormatting
+# @description The autoformatter settings
+# @task_type RECONCILE
+#
+# Created by the Workspace Mechanic Preference Recorder
+#Mon Feb 05 18:21:10 CST 2018
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.insert_new_line_in_empty_enum_declaration=do not insert
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.parentheses_positions_in_if_while_statement=separate_lines_if_wrapped
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.parentheses_positions_in_lambda_declaration=separate_lines_if_wrapped
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_enum_declaration=0
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_constructor_declaration=4
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_arguments_in_qualified_allocation_expression=20
+file_export_version=3.0
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_method_declaration=0
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.insert_new_line_in_empty_method_body=do not insert
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.parentheses_positions_in_switch_statement=separate_lines_if_wrapped
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_superclass_in_type_declaration=0
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_selector_in_method_invocation=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.keep_imple_if_on_one_line=true
+/project/2018RobotCode/org.eclipse.jdt.ui/formatter_profile=_FRC 2175
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_resources_in_try=84
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_binary_expression=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.parentheses_positions_in_method_delcaration=separate_lines_if_wrapped
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_expressions_in_array_initializer=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_compact_if=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.insert_new_line_in_empty_annotation_declaration=do not insert
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.insert_new_line_in_empty_enum_constant=do not insert
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.parentheses_positions_in_for_statment=separate_lines_if_wrapped
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_union_type_in_multicatch=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_conditional_expression=84
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.insert_new_line_in_empty_block=do not insert
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_expressions_in_for_loop_header=4
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_arguments_in_explicit_constructor_call=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_arguments_in_allocation_expression=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.parentheses_positions_in_try_clause=separate_lines_if_wrapped
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.insert_new_line_in_empty_anonymous_type_declaration=do not insert
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_enum_constants=16
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_assignment=4
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_parameters_in_constructor_declaration=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.insert_new_line_in_empty_type_declaration=do not insert
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.parentheses_positions_in_catch_clause=separate_lines_if_wrapped
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_arguments_in_method_invocation=20
+/project/2018RobotCode/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_type_declaration=0
