@@ -1,11 +1,12 @@
 package org.usfirst.frc.team2175.subsystem;
 
+import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
+import org.usfirst.frc.team2175.SolenoidWrapper;
 import org.usfirst.frc.team2175.VirtualSpeedController;
 import org.usfirst.frc.team2175.info.RobotInfo;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
@@ -14,12 +15,13 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
 	private RobotInfo robotInfo;
-	private WPI_TalonSRX leftMaster;
-	private WPI_TalonSRX leftSlaveOne;
-	private WPI_TalonSRX leftSlaveTwo;
-	private WPI_TalonSRX rightMaster;
-	private WPI_TalonSRX rightSlaveOne;
-	private WPI_TalonSRX rightSlaveTwo;
+	private MotorWrapper leftMaster;
+	private MotorWrapper leftSlaveOne;
+	private MotorWrapper leftSlaveTwo;
+	private MotorWrapper rightMaster;
+	private MotorWrapper rightSlaveOne;
+	private MotorWrapper rightSlaveTwo;
+	private SolenoidWrapper driveShifters;
 	private DifferentialDrive robotDrive;
 	private static VirtualSpeedController leftVirtualSpeedController = new VirtualSpeedController();
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
@@ -35,11 +37,12 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		rightMaster = robotInfo.get(RobotInfo.RIGHT_MOTOR_MASTER);
 		rightSlaveOne = robotInfo.get(RobotInfo.RIGHT_MOTOR_SLAVE1);
 		rightSlaveTwo = robotInfo.get(RobotInfo.RIGHT_MOTOR_SLAVE2);
+		driveShifters = new SolenoidWrapper(0);
 		leftSlaveOne.follow(leftMaster);
 		leftSlaveTwo.follow(leftMaster);
 		rightSlaveOne.follow(rightMaster);
 		rightSlaveTwo.follow(rightMaster);
-		robotDrive = new DifferentialDrive(leftMaster, rightMaster);
+		robotDrive = new DifferentialDrive(leftMaster.getMotor(), rightMaster.getMotor());
 		leftVirtualSpeedController = new VirtualSpeedController();
 		rightVirtualSpeedController = new VirtualSpeedController();
 		virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController, rightVirtualSpeedController);
@@ -151,19 +154,9 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	}
 
 	public void resetAllSensors() {
-
-	}
-
-	public double getLeftEncVal() {
-		return 0;
-	}
-
-	public double getRightEncVal() {
-		return 0;
-	}
-
-	public double getGyroAngle() {
-		return 0;
+		leftMaster.setSelectedSensorPosition(0, 0, 0);
+		rightMaster.setSelectedSensorPosition(0, 0, 0);
+		navx.reset();
 	}
 
 	double thetaNeeded;
@@ -198,5 +191,13 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public double getNDX() {
 		return nDx;
+	}
+
+	public void arcadeDrive(double moveValue, double turnValue) {
+		robotDrive.arcadeDrive(moveValue, turnValue);
+	}
+
+	public void shift(boolean high) {
+		driveShifters.set(high);
 	}
 }

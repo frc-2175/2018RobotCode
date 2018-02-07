@@ -9,12 +9,14 @@ package org.usfirst.frc.team2175.robot;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
 import org.usfirst.frc.team2175.command.autonomous.KurveDriveRightSideOfSwitch;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.InfoFactory;
 import org.usfirst.frc.team2175.log.LogServer;
 import org.usfirst.frc.team2175.log.RobotLogger;
+import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -32,25 +34,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	private final static Logger log = Logger.getLogger(Robot.class.getName());
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
 	private Command m_autoSelected;
 	private SendableChooser<Command> m_chooser = new SendableChooser<>();
 	private DefaultCommandFactory defaultCommandFactory;
+	private DrivetrainSubsystem drivetrainSubsystem;
 	private RobotLogger robotLogger;
 	private LogServer logServer;
 
 	@Override
 	public void robotInit() {
-		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
-		SmartDashboard.putData("Auto choices", m_chooser);
 		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
+		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
+		SmartDashboard.putData("Auto choices", m_chooser);
 		defaultCommandFactory = new DefaultCommandFactory();
 		robotLogger.log();
 		logServer = new LogServer();
+		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
+
 	}
 
 	@Override
@@ -71,9 +74,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+		drivetrainSubsystem.resetAllSensors();
 		m_autoSelected = m_chooser.getSelected();
 		m_autoSelected.start();
-		System.out.println("Auto selected: " + m_autoSelected);
 	}
 
 	@Override
@@ -84,6 +87,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		drivetrainSubsystem.resetAllSensors();
 		if (!m_autoSelected.isCompleted()) {
 			m_autoSelected.cancel();
 		}
