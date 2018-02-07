@@ -10,6 +10,7 @@ package org.usfirst.frc.team2175.robot;
 import java.util.logging.Logger;
 
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
+import org.usfirst.frc.team2175.command.autonomous.KurveDriveRightSideOfSwitch;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.InfoFactory;
 import org.usfirst.frc.team2175.log.LogServer;
@@ -17,6 +18,7 @@ import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,100 +31,71 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-    private final static Logger log = Logger.getLogger(Robot.class.getName());
-    private static final String kDefaultAuto = "Default";
-    private static final String kCustomAuto = "My Auto";
-    private String m_autoSelected;
-    private SendableChooser<String> m_chooser = new SendableChooser<>();
-    private DefaultCommandFactory defaultCommandFactory;
-    private RobotLogger robotLogger;
-    private LogServer logServer;
+	private final static Logger log = Logger.getLogger(Robot.class.getName());
+	private static final String kDefaultAuto = "Default";
+	private static final String kCustomAuto = "My Auto";
+	private Command m_autoSelected;
+	private SendableChooser<Command> m_chooser = new SendableChooser<>();
+	private DefaultCommandFactory defaultCommandFactory;
+	private RobotLogger robotLogger;
+	private LogServer logServer;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    @Override
-    public void robotInit() {
-        m_chooser.addDefault("Default Auto", kDefaultAuto);
-        m_chooser.addObject("My Auto", kCustomAuto);
-        SmartDashboard.putData("Auto choices", m_chooser);
-        robotLogger = new RobotLogger();
-        InfoFactory.makeAllInfos();
-        new DryverStation();
-        SubsystemsFactory.makeAllSubsystems();
-        defaultCommandFactory = new DefaultCommandFactory();
-        robotLogger.log();
-        logServer = new LogServer();
-    }
+	@Override
+	public void robotInit() {
+		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
+		SmartDashboard.putData("Auto choices", m_chooser);
+		robotLogger = new RobotLogger();
+		InfoFactory.makeAllInfos();
+		new DryverStation();
+		SubsystemsFactory.makeAllSubsystems();
+		defaultCommandFactory = new DefaultCommandFactory();
+		robotLogger.log();
+		logServer = new LogServer();
+	}
 
-    @Override
-    public void disabledInit() {
-        log.info("Robot program is disabled and ready.");
-        robotLogger.flush();
-    }
-    
-    @Override
-    public void disabledPeriodic() {
-    	Scheduler.getInstance().run();
-    }
+	@Override
+	public void disabledInit() {
+		log.info("Robot program is disabled and ready.");
+		robotLogger.flush();
+	}
 
-    @Override
-    public void testInit() {
-        logServer.runServer();
-    }
+	@Override
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
-    /**
-     * This autonomous (along with the chooser code above) shows how to select
-     * between different autonomous modes using the dashboard. The sendable
-     * chooser code works with the Java SmartDashboard. If you prefer the
-     * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-     * getString line to get the auto name from the text box below the Gyro
-     *
-     * <p>
-     * You can add additional auto modes by adding additional comparisons to the
-     * switch structure below with additional strings. If using the
-     * SendableChooser make sure to add them to the chooser code above as well.
-     */
-    @Override
-    public void autonomousInit() {
-        m_autoSelected = m_chooser.getSelected();
-        // m_autoSelected = SmartDashboard.getString("Auto Selector",
-        // kDefaultAuto);
-        System.out.println("Auto selected: " + m_autoSelected);
-    }
+	@Override
+	public void testInit() {
+		logServer.runServer();
+	}
 
-    /**
-     * This function is called periodically during autonomous.
-     */
-    @Override
-    public void autonomousPeriodic() {
-        robotLogger.log();
-        switch (m_autoSelected) {
-        case kCustomAuto:
-            // Put custom auto code here
-            break;
-        case kDefaultAuto:
-        default:
-            // Put default auto code here
-            break;
-        }
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void autonomousInit() {
+		m_autoSelected = m_chooser.getSelected();
+		m_autoSelected.start();
+		System.out.println("Auto selected: " + m_autoSelected);
+	}
 
-    /**
-     * This function is called periodically during operator control.
-     */
-    @Override
-    public void teleopPeriodic() {
-        robotLogger.log();
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void autonomousPeriodic() {
+		robotLogger.log();
+		Scheduler.getInstance().run();
+	}
 
-    /**
-     * This function is called periodically during test mode.
-     */
-    @Override
-    public void testPeriodic() {
-    }
+	@Override
+	public void teleopInit() {
+		if (!m_autoSelected.isCompleted()) {
+			m_autoSelected.cancel();
+		}
+	}
+
+	@Override
+	public void teleopPeriodic() {
+		robotLogger.log();
+		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void testPeriodic() {
+	}
 }

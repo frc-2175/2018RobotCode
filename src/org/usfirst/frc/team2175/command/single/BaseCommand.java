@@ -7,4 +7,8 @@ public abstract class BaseCommand extends Command {
 	protected void interrupted() {
 		end();
 	}
+
+	protected double abs(double val) {
+		return Math.abs(val);
+	}
 }
