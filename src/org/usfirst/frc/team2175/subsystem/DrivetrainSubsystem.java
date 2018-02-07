@@ -4,8 +4,11 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.VirtualSpeedController;
 import org.usfirst.frc.team2175.info.RobotInfo;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
@@ -24,6 +27,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
             new VirtualSpeedController();
     private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(
             leftVirtualSpeedController, rightVirtualSpeedController);
+    private AHRS navx;
 
     public DrivetrainSubsystem() {
         robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -42,6 +46,12 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         rightVirtualSpeedController = new VirtualSpeedController();
         virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
                 rightVirtualSpeedController);
+        leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        leftMaster.setSelectedSensorPosition(0, 0, 0);
+        rightMaster.setSelectedSensorPosition(0, 0, 0);
+        navx = new AHRS(SPI.Port.kMXP);
+        navx.reset();
     }
 
     public void robotDrive(double xSpeed, double zRotation) {
@@ -134,5 +144,17 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         } else {
             return 0;
         }
+    }
+    
+    public double getLeftEncoderValues() {
+    	return -leftMaster.getSelectedSensorPosition(0);
+    }
+    
+    public double getRightEncoderValues() {
+    	return rightMaster.getSelectedSensorPosition(0);
+    }
+    
+    public double getGryroValue() {
+    	return navx.getAngle();
     }
 }

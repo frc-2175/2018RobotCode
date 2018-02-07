@@ -1,8 +1,6 @@
-package org.usfirst.frc.team2175.info;
+package org.usfirst.frc.team2175.log;
 
 import java.util.HashMap;
-
-import org.usfirst.frc.team2175.log.Loggable;
 
 import edu.wpi.first.wpilibj.Joystick;
 

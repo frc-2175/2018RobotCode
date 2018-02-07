@@ -5,6 +5,8 @@ import java.util.Properties;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
+import org.usfirst.frc.team2175.log.LoggableJoystick;
+import org.usfirst.frc.team2175.log.LoggableJoystickButton;
 import org.usfirst.frc.team2175.log.LoggableSolenoid;
 import org.usfirst.frc.team2175.log.LoggableTalonSRX;
 import org.usfirst.frc.team2175.log.RobotLogger;
@@ -13,6 +15,7 @@ import org.usfirst.frc.team2175.property.PropertiesLoader;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class RobotInfo {
     public static interface ValueContainer {
@@ -91,16 +94,21 @@ public class RobotInfo {
         roboLog(key, choice);
         info.put(key, choice);
     }
+    
+    private void put(String key, Object value) {
+    	roboLog(key, value);
+    }
 
     private void roboLog(String key, Object obj) {
         if (obj.getClass() == SolenoidWrapper.class) {
             robotLogger.addLoggable(
                     new LoggableSolenoid(key, (SolenoidWrapper) obj));
         } else if (obj.getClass() == WPI_TalonSRX.class) {
-            robotLogger
-                    .addLoggable(new LoggableTalonSRX(key, (WPI_TalonSRX) obj));
+            robotLogger.addLoggable(new LoggableTalonSRX(key, (WPI_TalonSRX) obj));
         } else if (obj.getClass() == Joystick.class) {
             robotLogger.addLoggable(new LoggableJoystick(key, (Joystick) obj));
+        } else if (obj.getClass() == JoystickButton.class) {
+        	robotLogger.addLoggable(new LoggableJoystickButton(key, (JoystickButton) obj));
         }
     }
 
