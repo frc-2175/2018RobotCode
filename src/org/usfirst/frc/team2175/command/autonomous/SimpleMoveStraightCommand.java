@@ -23,7 +23,7 @@ public class SimpleMoveStraightCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return drivetrainSubsystem.getLeftEncVal() > Math.sqrt(nDy * nDy + nDx * nDx);
+		return drivetrainSubsystem.getLeftEncoderValues() > Math.sqrt(nDy * nDy + nDx * nDx);
 	}
 
 	@Override
