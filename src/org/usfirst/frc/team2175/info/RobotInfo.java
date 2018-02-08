@@ -101,6 +101,7 @@ public class RobotInfo {
 
 	private void put(String key, Object value) {
 		roboLog(key, value);
+		info.put(key, value);
 	}
 
 	private void roboLog(String key, Object obj) {
