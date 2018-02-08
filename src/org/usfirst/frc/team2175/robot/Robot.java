@@ -34,73 +34,72 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-    private final static Logger log = Logger.getLogger(Robot.class.getName());
-    private Command m_autoSelected;
-    private SendableChooser<Command> m_chooser = new SendableChooser<>();
-    private DefaultCommandFactory defaultCommandFactory;
-    private DrivetrainSubsystem drivetrainSubsystem;
-    private RobotLogger robotLogger;
-    private LogServer logServer;
+	private final static Logger log = Logger.getLogger(Robot.class.getName());
+	private Command m_autoSelected;
+	private SendableChooser<Command> m_chooser = new SendableChooser<>();
+	private DrivetrainSubsystem drivetrainSubsystem;
+	private RobotLogger robotLogger;
+	private LogServer logServer;
 
-    @Override
-    public void robotInit() {
-        robotLogger = new RobotLogger();
-        InfoFactory.makeAllInfos();
-        new DryverStation();
-        SubsystemsFactory.makeAllSubsystems();
-        m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
-        SmartDashboard.putData("Auto choices", m_chooser);
-        defaultCommandFactory = new DefaultCommandFactory();
-        robotLogger.log();
-        logServer = new LogServer();
-        drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
-        new JoystickEventMapper();
-    }
+	@Override
+	public void robotInit() {
+		robotLogger = new RobotLogger();
+		InfoFactory.makeAllInfos();
+		new DryverStation();
+		SubsystemsFactory.makeAllSubsystems();
+		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
+		SmartDashboard.putData("Auto choices", m_chooser);
+		new DefaultCommandFactory();
+		robotLogger.log();
+		logServer = new LogServer();
+		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
+		new JoystickEventMapper();
+	}
 
-    @Override
-    public void disabledInit() {
-        log.info("Robot program is disabled and ready.");
-        robotLogger.flush();
-    }
+	@Override
+	public void disabledInit() {
+		log.info("Robot program is disabled and ready.");
+		robotLogger.flush();
+	}
 
-    @Override
-    public void disabledPeriodic() {
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
-    @Override
-    public void testInit() {
-        logServer.runServer();
-    }
+	@Override
+	public void autonomousInit() {
+		drivetrainSubsystem.resetAllSensors();
+		m_autoSelected = m_chooser.getSelected();
+		m_autoSelected.start();
+	}
 
-    @Override
-    public void autonomousInit() {
-        drivetrainSubsystem.resetAllSensors();
-        m_autoSelected = m_chooser.getSelected();
-        m_autoSelected.start();
-    }
+	@Override
+	public void autonomousPeriodic() {
+		robotLogger.log();
+		Scheduler.getInstance().run();
+	}
 
-    @Override
-    public void autonomousPeriodic() {
-        robotLogger.log();
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void teleopInit() {
+		drivetrainSubsystem.resetAllSensors();
+		if (m_autoSelected != null && !m_autoSelected.isCompleted()) {
+			m_autoSelected.cancel();
+		}
+	}
 
-    @Override
-    public void teleopInit() {
-        drivetrainSubsystem.resetAllSensors();
-        if (m_autoSelected != null && !m_autoSelected.isCompleted()) {
-            m_autoSelected.cancel();
-        }
-    }
+	@Override
+	public void teleopPeriodic() {
+		robotLogger.log();
+		Scheduler.getInstance().run();
+	}
 
-    @Override
-    public void teleopPeriodic() {
-        robotLogger.log();
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void testInit() {
+		logServer.runServer();
+	}
 
-    @Override
-    public void testPeriodic() {
-    }
+	@Override
+	public void testPeriodic() {
+	}
 }
