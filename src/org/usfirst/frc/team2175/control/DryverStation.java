@@ -18,6 +18,7 @@ public class DryverStation {
 	private JoystickButton intakeActuateFullButton;
 	private JoystickButton intakeActuateHalfButton;
 	private JoystickButton intakeActuateNoneButton;
+	private final double DEADBAND = 0.15;
 
 	public DryverStation() {
 		ServiceLocator.register(this);
@@ -35,14 +36,13 @@ public class DryverStation {
 	}
 
 	public double getMoveValue() {
-		return deadband(leftJoystick.getY(), smartDashboardInfo.getNumber(SmartDashboardInfo.POSITIVE_DEADBAND),
-				smartDashboardInfo.getNumber(SmartDashboardInfo.NEGATIVE_DEADBAND));
+		return deadband(leftJoystick.getY());
 	}
 
 	public double getTurnValue() {
-		return rightJoystick.getX();
+		return deadband(rightJoystick.getX());
 	}
-
+	
 	public double getIntakeAxisValue() {
 		return gamepad.getRawAxis(2);
 	}
@@ -63,14 +63,16 @@ public class DryverStation {
 		return gamepad.getRawButton(4);
 	}
 
-	public static double deadband(double value, double positiveDeadband, double negativeDeadband) {
-		if (value > positiveDeadband) {
-			return (value - positiveDeadband) / (1.0 - positiveDeadband);
-		} else if (value < negativeDeadband) {
-			return (value - negativeDeadband) / (1.0 + negativeDeadband);
-		} else {
-			return 0;
-		}
+	protected double deadband(double value) {
+		if (Math.abs(value) > DEADBAND) {
+	      if (value > 0.0) {
+	        return (value - DEADBAND) / (1.0 - DEADBAND);
+	      } else {
+	        return (value + DEADBAND) / (1.0 - DEADBAND);
+	      }
+	    } else {
+	      return 0.0;
+	    }
 	}
 
 	public JoystickButton getShiftButton() {
