@@ -63,7 +63,7 @@ public class KurveDriveCommand extends BaseCommand {
 				double nDy = dy - 2 * radius * Math.sin(Math.signum(rightEnc) * abs(gyroVal));
 				double nDx = dx - 2 * radius * Math.signum(abs(rightEnc) - abs(leftEnc)) * (Math.cos(theta) - 1);
 				if (abs(abs(nDy / nDx) - abs((Math.sin(theta + pi / 24) - Math.sin(theta))
-						/ (-Math.cos(theta + pi / 24) + Math.cos(theta)))) < pi / 12) {
+					/ (-Math.cos(theta + pi / 24) + Math.cos(theta)))) < pi / 12) {
 					thetaNeeded = theta;
 					drivetrainSubsystem.setThetaNeeded(theta);
 					drivetrainSubsystem.setNDY(nDy);

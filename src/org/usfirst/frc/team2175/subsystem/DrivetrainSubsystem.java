@@ -26,7 +26,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private static VirtualSpeedController leftVirtualSpeedController = new VirtualSpeedController();
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
-			rightVirtualSpeedController);
+		rightVirtualSpeedController);
 	private AHRS navx;
 
 	public DrivetrainSubsystem() {

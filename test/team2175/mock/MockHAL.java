@@ -10,5 +10,5 @@ public class MockHAL extends MockUp<HAL> {
 	public static int report(int resource, int instanceNumber, int context, String feature) {
 		return 0;
 	}
-	
+
 }

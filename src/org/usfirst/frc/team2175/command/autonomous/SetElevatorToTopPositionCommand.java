@@ -9,16 +9,19 @@ public class SetElevatorToTopPositionCommand extends BaseCommand {
 
 	public SetElevatorToTopPositionCommand() {
 		elevatorSubsystem = ServiceLocator.get(ElevatorSubsystem.class);
-		
+
 	}
+
 	@Override
 	protected void execute() {
 		elevatorSubsystem.runElevatorUp();
 	}
+
 	@Override
 	protected boolean isFinished() {
 		return false;
 	}
+
 	@Override
 	protected void end() {
 		elevatorSubsystem.stopElevator();

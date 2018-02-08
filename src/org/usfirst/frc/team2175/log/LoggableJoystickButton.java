@@ -8,13 +8,12 @@ public class LoggableJoystickButton implements Loggable {
 	private JoystickButton joystickButton;
 	private String key;
 	private HashMap<String, Object> fields;
-	
+
 	public LoggableJoystickButton(String key, JoystickButton joystickButton) {
 		this.joystickButton = joystickButton;
 		this.key = key;
 	}
-	
-	
+
 	@Override
 	public String getLogType() {
 		return "joystick-button";

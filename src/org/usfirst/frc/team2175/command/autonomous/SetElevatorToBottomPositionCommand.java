@@ -9,16 +9,19 @@ public class SetElevatorToBottomPositionCommand extends BaseCommand {
 
 	public SetElevatorToBottomPositionCommand() {
 		elevatorSubsystem = ServiceLocator.get(ElevatorSubsystem.class);
-		
+
 	}
+
 	@Override
 	protected void execute() {
 		elevatorSubsystem.runElevatorDown();
 	}
+
 	@Override
 	protected boolean isFinished() {
 		return false;
 	}
+
 	@Override
 	protected void end() {
 		elevatorSubsystem.stopElevator();

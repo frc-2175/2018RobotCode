@@ -42,7 +42,7 @@ public class DryverStation {
 	public double getTurnValue() {
 		return deadband(rightJoystick.getX());
 	}
-	
+
 	public double getIntakeAxisValue() {
 		return gamepad.getRawAxis(2);
 	}
@@ -65,14 +65,14 @@ public class DryverStation {
 
 	protected double deadband(double value) {
 		if (Math.abs(value) > DEADBAND) {
-	      if (value > 0.0) {
-	        return (value - DEADBAND) / (1.0 - DEADBAND);
-	      } else {
-	        return (value + DEADBAND) / (1.0 - DEADBAND);
-	      }
-	    } else {
-	      return 0.0;
-	    }
+			if (value > 0.0) {
+				return (value - DEADBAND) / (1.0 - DEADBAND);
+			} else {
+				return (value + DEADBAND) / (1.0 - DEADBAND);
+			}
+		} else {
+			return 0.0;
+		}
 	}
 
 	public JoystickButton getShiftButton() {

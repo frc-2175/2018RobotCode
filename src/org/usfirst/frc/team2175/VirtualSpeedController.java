@@ -4,8 +4,10 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class VirtualSpeedController implements SpeedController {
 	private double output;
+
 	@Override
-	public void pidWrite(double output) {}
+	public void pidWrite(double output) {
+	}
 
 	@Override
 	public void set(double speed) {
@@ -18,7 +20,8 @@ public class VirtualSpeedController implements SpeedController {
 	}
 
 	@Override
-	public void setInverted(boolean isInverted) {}
+	public void setInverted(boolean isInverted) {
+	}
 
 	@Override
 	public boolean getInverted() {
@@ -26,9 +29,11 @@ public class VirtualSpeedController implements SpeedController {
 	}
 
 	@Override
-	public void disable() {}
+	public void disable() {
+	}
 
 	@Override
-	public void stopMotor() {}
-	
+	public void stopMotor() {
+	}
+
 }

@@ -6,21 +6,21 @@ import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
 public class SpinIntakeInCommand extends BaseCommand {
 	private IntakeSubsystem intakeSubsystem;
-	
+
 	public SpinIntakeInCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
 	}
-	
-	@Override 
+
+	@Override
 	protected void initialize() {
 		intakeSubsystem.runIntakeIn();
 	}
-	
+
 	@Override
 	protected boolean isFinished() {
 		return false;
 	}
-	
+
 	@Override
 	protected void end() {
 		intakeSubsystem.stopAllMotors();

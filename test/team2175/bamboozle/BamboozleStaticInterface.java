@@ -16,7 +16,8 @@ public class BamboozleStaticInterface implements Timer.StaticInterface {
 	}
 
 	@Override
-	public void delay(double seconds) {}
+	public void delay(double seconds) {
+	}
 
 	@Override
 	public Interface newTimer() {
