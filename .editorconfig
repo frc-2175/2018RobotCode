@@ -1,0 +1,7 @@
+# This file exists so GitHub will display our code with four-space tabs
+
+root = true
+
+[*.java]
+indent_style = tab
+indent_size = 4
