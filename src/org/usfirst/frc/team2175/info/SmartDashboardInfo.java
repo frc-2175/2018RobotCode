@@ -32,7 +32,7 @@ public class SmartDashboardInfo {
 
 	private void populate() {
 		putNumber(TEST_KEY, 1.1, 1.2);
-		putNumber(INTAKE_ROLLER_IN_SPEED, 0.7, 0.7);
+		putNumber(INTAKE_ROLLER_IN_SPEED, -0.7, -0.7);
 		putNumber(INTAKE_ROLLER_OUT_SPEED, 0.5, 0.5);
 		putNumber(RUN_INTAKE_IN_SPEED, -0.7, 0.7);
 		putNumber(RUN_INTAKE_OUT_SPEED, 0.7, -0.7);

@@ -72,13 +72,13 @@ public class IntakeSubsystem extends BaseSubsystem {
 
 	public void runIntakeIn() {
 		runRollerBarIn();
-		leftIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED));
+		leftIntakeWheel.set(-smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED));
 		rightIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED));
 	}
 
 	public void runIntakeOut() {
 		runRollerBarOut();
-		leftIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
+		leftIntakeWheel.set(-smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
 		rightIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
 	}
 

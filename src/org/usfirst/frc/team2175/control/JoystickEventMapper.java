@@ -15,8 +15,8 @@ public class JoystickEventMapper {
 		driverStation.getShiftButton().whileHeld(new ShiftCommand());
 		driverStation.getIntakeSpinInButton().whileHeld(new SpinIntakeInCommand());
 		driverStation.getIntakeSpinOutButton().whileHeld(new SpinIntakeOutCommand());
-		driverStation.getIntakeActuateFullButton().whenPressed(new MoveIntakeUpCommand());
+		driverStation.getIntakeActuateFullButton().whenPressed(new MoveIntakeDownCommand());
 		driverStation.getIntakeActuateHalfButton().whenPressed(new MoveIntakeMiddleCommand());
-		driverStation.getIntakeActuateNoneButton().whenPressed(new MoveIntakeDownCommand());
+		driverStation.getIntakeActuateNoneButton().whenPressed(new MoveIntakeUpCommand());
 	}
 }
