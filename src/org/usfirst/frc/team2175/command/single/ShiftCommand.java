@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2175.control;
+package org.usfirst.frc.team2175.command.single;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;

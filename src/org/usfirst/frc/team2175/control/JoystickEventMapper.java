@@ -4,6 +4,7 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.single.MoveIntakeDownCommand;
 import org.usfirst.frc.team2175.command.single.MoveIntakeMiddleCommand;
 import org.usfirst.frc.team2175.command.single.MoveIntakeUpCommand;
+import org.usfirst.frc.team2175.command.single.ShiftCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeInCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeOutCommand;
 
