@@ -7,6 +7,10 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 public class ArcadeDriveDefaultCommand extends BaseCommand {
 	private DrivetrainSubsystem drivetrainSubsystem;
 	private DryverStation driverStation;
+	private double possibleChangePerSecond = .2;
+	private double topSpeed = 1;
+	private double lastTime;
+	private double currentMoveValue;
 
 	public ArcadeDriveDefaultCommand() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
@@ -15,8 +19,29 @@ public class ArcadeDriveDefaultCommand extends BaseCommand {
 	}
 
 	@Override
+	protected void initialize() {
+		lastTime = System.currentTimeMillis();
+		currentMoveValue = 0;
+	}
+
+	@Override
 	protected void execute() {
-		drivetrainSubsystem.robotDrive(driverStation.getMoveValue(), driverStation.getTurnValue());
+		double possibleChangeFromTime = (System.currentTimeMillis() - lastTime) / 1000 * possibleChangePerSecond;
+
+		double targetSpeed = driverStation.getMoveValue() * topSpeed;
+
+		double valueChange = targetSpeed - currentMoveValue;
+		double wantedMoveValue;
+		if (Math.abs(valueChange) > possibleChangeFromTime) {
+			wantedMoveValue = currentMoveValue + Math.signum(valueChange) * possibleChangeFromTime;
+		} else {
+			wantedMoveValue = targetSpeed;
+		}
+
+		drivetrainSubsystem.robotDrive(wantedMoveValue, driverStation.getTurnValue());
+
+		currentMoveValue = wantedMoveValue;
+		lastTime = System.currentTimeMillis();
 	}
 
 	@Override
