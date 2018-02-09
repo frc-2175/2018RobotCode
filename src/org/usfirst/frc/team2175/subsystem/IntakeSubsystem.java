@@ -82,20 +82,6 @@ public class IntakeSubsystem extends BaseSubsystem {
 		rightIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
 	}
 
-	public void handleInputs(double axisValue) {
-		if (axisValue < 0.01 && axisValue > -0.01) {
-			if (driverStation.getIsSpinInButtonPressed()) {
-				runIntakeIn();
-			} else if (driverStation.getIsSpinOutButtonPressed()) {
-				runIntakeOut();
-			} else {
-				stopRollerBar();
-			}
-		} else {
-			turnCube(axisValue);
-		}
-	}
-
 	public void stopAllMotors() {
 		stopRollerBar();
 		leftIntakeWheel.set(0);

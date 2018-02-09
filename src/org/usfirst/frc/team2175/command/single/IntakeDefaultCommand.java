@@ -16,7 +16,7 @@ public class IntakeDefaultCommand extends BaseCommand {
 
 	@Override
 	protected void execute() {
-		intakeSubsystem.handleInputs(driverStation.getIntakeAxisValue());
+		intakeSubsystem.turnCube(driverStation.getIntakeAxisValue());
 	}
 
 	@Override
