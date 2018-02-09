@@ -8,6 +8,7 @@ public class SpinIntakeOutCommand extends BaseCommand {
 
 	public SpinIntakeOutCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
+		requires(intakeSubsystem);
 	}
 
 	@Override

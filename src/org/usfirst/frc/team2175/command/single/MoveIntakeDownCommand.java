@@ -8,6 +8,7 @@ public class MoveIntakeDownCommand extends BaseCommand {
 
 	public MoveIntakeDownCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
+		requires(intakeSubsystem);
 	}
 
 	@Override
