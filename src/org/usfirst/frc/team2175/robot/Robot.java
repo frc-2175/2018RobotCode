@@ -16,6 +16,7 @@ import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.control.JoystickEventMapper;
 import org.usfirst.frc.team2175.info.InfoFactory;
 import org.usfirst.frc.team2175.log.LogServer;
+import org.usfirst.frc.team2175.log.LoggingConfig;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
@@ -43,6 +44,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+		new LoggingConfig();
 		ServiceLocator.register(this);
 		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
