@@ -18,7 +18,8 @@ public class DryverStation {
 	private JoystickButton intakeActuateFullButton;
 	private JoystickButton intakeActuateHalfButton;
 	private JoystickButton intakeActuateNoneButton;
-	private final double DEADBAND = 0.15;
+	private final double JOYSTICK_DEADBAND = 0.15;
+	private final double GAMEPAD_DEADBAND = 0.1;
 
 	public DryverStation() {
 		ServiceLocator.register(this);
@@ -36,23 +37,23 @@ public class DryverStation {
 	}
 
 	public double getMoveValue() {
-		return deadband(leftJoystick.getY());
+		return deadband(leftJoystick.getY(), true);
 	}
 
 	public double getTurnValue() {
-		return deadband(rightJoystick.getX());
+		return deadband(rightJoystick.getX(), true);
 	}
 
 	public double getIntakeAxisValue() {
-		return gamepad.getRawAxis(2);
+		return deadband(gamepad.getRawAxis(2), false);
 	}
 
 	public double getClimberAxisValue() {
-		return gamepad.getRawAxis(6);
+		return deadband(gamepad.getRawAxis(6), false);
 	}
 
 	public double getElevatorAxisValue() {
-		return -gamepad.getRawAxis(1);
+		return deadband(-gamepad.getRawAxis(1), false);
 	}
 
 	public boolean getIsSpinInButtonPressed() {
@@ -63,12 +64,13 @@ public class DryverStation {
 		return gamepad.getRawButton(4);
 	}
 
-	protected double deadband(double value) {
-		if (Math.abs(value) > DEADBAND) {
+	protected double deadband(double value, boolean isJoystickDeadband) {
+		double deadband = (isJoystickDeadband) ? JOYSTICK_DEADBAND : GAMEPAD_DEADBAND;
+		if (Math.abs(value) > deadband) {
 			if (value > 0.0) {
-				return (value - DEADBAND) / (1.0 - DEADBAND);
+				return (value - deadband) / (1.0 - deadband);
 			} else {
-				return (value + DEADBAND) / (1.0 - DEADBAND);
+				return (value + deadband) / (1.0 - deadband);
 			}
 		} else {
 			return 0.0;
