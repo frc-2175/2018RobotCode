@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		new LoggingConfig();
+		LoggingConfig.initialize();
 		ServiceLocator.register(this);
 		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
