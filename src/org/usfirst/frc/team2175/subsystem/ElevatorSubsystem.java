@@ -13,7 +13,7 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	private SmartDashboardInfo smartDashboardInfo;
 	public static final double SPROCKET_DIAMETER_INCHES = 2.688;
 	public static final double TICKS_PER_REVOLUTION = 1024;
-	public static final double INCHES_PER_TICK = Math.PI * SPROCKET_DIAMETER_INCHES / TICKS_PER_REVOLUTION;
+	public static final double INCHES_PER_TICK = Math.PI * SPROCKET_DIAMETER_INCHES / TICKS_PER_REVOLUTION * 2;
 	public static final double MAX_ELEVATOR_TRAVEL = 78.0357;
 
 	public ElevatorSubsystem() {
@@ -54,6 +54,6 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	}
 
 	private double getInchesTraveled() {
-		return INCHES_PER_TICK * elevatorMotor.getSelectedSensorPosition(0) * 2;
+		return INCHES_PER_TICK * elevatorMotor.getSelectedSensorPosition(0);
 	}
 }
