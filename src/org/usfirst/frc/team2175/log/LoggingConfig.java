@@ -12,7 +12,7 @@ public class LoggingConfig {
 	/** Set to root package, and must match one set in logging.properties. */
 	public static final String ROOT_LOGGER_NAME = "org.usfirst.frc.team2175";
 
-	public static final String PROPERTY_FILE_PATH = "/home/lvuser/properties/logging.properties";
+	public static final String PROPERTY_FILE_PATH = "/home/lvuser/logging.properties";
 
 	public static void initialize() {
 		initializeFileLog(PROPERTY_FILE_PATH);
