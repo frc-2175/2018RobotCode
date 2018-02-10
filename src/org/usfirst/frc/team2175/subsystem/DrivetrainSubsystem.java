@@ -211,6 +211,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	}
 
 	public double getPSIValue() {
-		return psiSensor.getVoltage();
+		return 250 * psiSensor.getVoltage() / 5 - 25;
 	}
 }

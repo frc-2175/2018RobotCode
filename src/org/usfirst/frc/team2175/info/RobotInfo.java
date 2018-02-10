@@ -6,6 +6,7 @@ import java.util.Properties;
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
+import org.usfirst.frc.team2175.log.LoggableAnalogInput;
 import org.usfirst.frc.team2175.log.LoggableJoystick;
 import org.usfirst.frc.team2175.log.LoggableJoystickButton;
 import org.usfirst.frc.team2175.log.LoggableSolenoid;
@@ -76,7 +77,7 @@ public class RobotInfo {
 		put(INTAKE_PISTON1, () -> new SolenoidWrapper(0, 1), () -> new SolenoidWrapper(0, 1));
 		put(INTAKE_PISTON2, () -> new SolenoidWrapper(2, 3), () -> new SolenoidWrapper(2, 3));
 		put(DRIVE_SHIFTERS, () -> new SolenoidWrapper(4), () -> new SolenoidWrapper(4));
-		put(PSI_SENSOR, new AnalogInput(0), new AnalogInput(0));
+		put(PSI_SENSOR, () -> new AnalogInput(0), () -> new AnalogInput(0));
 		put(LEFT_JOYSTICK, new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1));
 		put(GAMEPAD, new Joystick(2));
@@ -116,6 +117,8 @@ public class RobotInfo {
 			robotLogger.addLoggable(new LoggableJoystick(key, (Joystick) obj));
 		} else if (obj.getClass() == JoystickButton.class) {
 			robotLogger.addLoggable(new LoggableJoystickButton(key, (JoystickButton) obj));
+		} else if (obj.getClass() == AnalogInput.class) {
+			robotLogger.addLoggable(new LoggableAnalogInput(key, (AnalogInput) obj));
 		}
 	}
 
