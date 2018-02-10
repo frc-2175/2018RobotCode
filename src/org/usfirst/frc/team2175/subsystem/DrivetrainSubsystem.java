@@ -140,7 +140,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return rightMaster.getSelectedSensorPosition(0);
 	}
 
-	public double getGryroValue() {
+	public double getGyroValue() {
 		return navx.getAngle();
 	}
 

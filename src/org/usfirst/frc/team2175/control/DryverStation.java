@@ -24,10 +24,13 @@ public class DryverStation {
 	public DryverStation() {
 		ServiceLocator.register(this);
 		RobotInfo robotInfo = ServiceLocator.get(RobotInfo.class);
+
 		leftJoystick = robotInfo.get(RobotInfo.LEFT_JOYSTICK);
 		rightJoystick = robotInfo.get(RobotInfo.RIGHT_JOYSTICK);
 		gamepad = robotInfo.get(RobotInfo.GAMEPAD);
+
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
+
 		shiftButton = new JoystickButton(leftJoystick, 1);
 		intakeSpinInButton = new JoystickButton(gamepad, 3);
 		intakeSpinOutButton = new JoystickButton(gamepad, 4);
