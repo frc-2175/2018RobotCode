@@ -40,23 +40,23 @@ public class DryverStation {
 	}
 
 	public double getMoveValue() {
-		return deadband(leftJoystick.getY(), true);
+		return deadband(leftJoystick.getY(), JOYSTICK_DEADBAND);
 	}
 
 	public double getTurnValue() {
-		return deadband(rightJoystick.getX(), true);
+		return deadband(rightJoystick.getX(), JOYSTICK_DEADBAND);
 	}
 
 	public double getIntakeAxisValue() {
-		return deadband(gamepad.getRawAxis(2), false);
+		return deadband(gamepad.getRawAxis(2), GAMEPAD_DEADBAND);
 	}
 
 	public double getClimberAxisValue() {
-		return deadband(gamepad.getRawAxis(6), false);
+		return deadband(gamepad.getRawAxis(6), GAMEPAD_DEADBAND);
 	}
 
 	public double getElevatorAxisValue() {
-		return deadband(-gamepad.getRawAxis(1), false);
+		return deadband(-gamepad.getRawAxis(1), GAMEPAD_DEADBAND);
 	}
 
 	public boolean getIsSpinInButtonPressed() {
@@ -67,8 +67,7 @@ public class DryverStation {
 		return gamepad.getRawButton(4);
 	}
 
-	protected double deadband(double value, boolean isJoystickDeadband) {
-		double deadband = (isJoystickDeadband) ? JOYSTICK_DEADBAND : GAMEPAD_DEADBAND;
+	protected double deadband(double value, double deadband) {
 		if (Math.abs(value) > deadband) {
 			if (value > 0.0) {
 				return (value - deadband) / (1.0 - deadband);
