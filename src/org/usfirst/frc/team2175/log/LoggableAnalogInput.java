@@ -28,6 +28,8 @@ public class LoggableAnalogInput implements Loggable {
 	@Override
 	public HashMap<String, Object> getValues() {
 		fields.put("voltage", analogInput.getVoltage());
+		// Equation from http://www.revrobotics.com/content/docs/REV-11-1107-DS.pdf
+		fields.put("psi", 250 * analogInput.getVoltage() / 5 - 25);
 		return fields;
 	}
 

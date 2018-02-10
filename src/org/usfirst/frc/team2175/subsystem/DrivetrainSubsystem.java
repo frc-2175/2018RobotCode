@@ -211,6 +211,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	}
 
 	public double getPSIValue() {
+		// Equation from http://www.revrobotics.com/content/docs/REV-11-1107-DS.pdf
 		return 250 * psiSensor.getVoltage() / 5 - 25;
 	}
 }
