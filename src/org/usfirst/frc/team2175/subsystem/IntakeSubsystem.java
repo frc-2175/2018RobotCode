@@ -3,7 +3,6 @@ package org.usfirst.frc.team2175.subsystem;
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
-import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.info.RobotInfo;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
@@ -17,7 +16,8 @@ public class IntakeSubsystem extends BaseSubsystem {
 	private SmartDashboardInfo smartDashboardInfo;
 	private double leftSpeed;
 	private double rightSpeed;
-	private DryverStation driverStation;
+	private double barSpeed;
+	private double turnValue;
 
 	public IntakeSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -27,31 +27,20 @@ public class IntakeSubsystem extends BaseSubsystem {
 		rightIntakeWheel = robotInfo.get(RobotInfo.INTAKE_RIGHT_MOTOR);
 		actuationPiston1 = robotInfo.get(RobotInfo.INTAKE_PISTON1);
 		actuationPiston2 = robotInfo.get(RobotInfo.INTAKE_PISTON2);
-		driverStation = ServiceLocator.get(DryverStation.class);
+
+		leftSpeed = 0;
+		rightSpeed = 0;
+		barSpeed = 0;
+		turnValue = 0;
+	}
+
+	@Override
+	public void periodic() {
+		runSystems();
 	}
 
 	public void turnCube(double axisValue) {
-		if (axisValue < 0) {
-			leftSpeed = axisValue;
-			rightSpeed = axisValue / 2;
-		} else {
-			leftSpeed = axisValue / 2;
-			rightSpeed = axisValue;
-		}
-		leftIntakeWheel.set(leftSpeed);
-		rightIntakeWheel.set(rightSpeed);
-	}
-
-	public void runRollerBarIn() {
-		rollerBar.set(smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_IN_SPEED));
-	}
-
-	public void runRollerBarOut() {
-		rollerBar.set(smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_OUT_SPEED));
-	}
-
-	public void stopRollerBar() {
-		rollerBar.set(0);
+		this.turnValue = axisValue;
 	}
 
 	public void moveUp() {
@@ -71,20 +60,26 @@ public class IntakeSubsystem extends BaseSubsystem {
 	}
 
 	public void runIntakeIn() {
-		runRollerBarIn();
-		leftIntakeWheel.set(-smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED));
-		rightIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED));
+		leftSpeed = -smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED);
+		rightSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED);
+		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_IN_SPEED);
 	}
 
 	public void runIntakeOut() {
-		runRollerBarOut();
-		leftIntakeWheel.set(-smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
-		rightIntakeWheel.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED));
+		leftSpeed = -smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED);
+		rightSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED);
+		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_OUT_SPEED);
 	}
 
-	public void stopAllMotors() {
-		stopRollerBar();
-		leftIntakeWheel.set(0);
-		rightIntakeWheel.set(0);
+	public void runSystems() {
+		leftIntakeWheel.set(leftSpeed + turnValue);
+		rightIntakeWheel.set(rightSpeed + turnValue);
+		rollerBar.set(barSpeed);
+	}
+
+	public void stopMotors() {
+		leftSpeed = 0;
+		rightSpeed = 0;
+		barSpeed = 0;
 	}
 }

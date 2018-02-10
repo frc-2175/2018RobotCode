@@ -21,7 +21,6 @@ public class IntakeDefaultCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

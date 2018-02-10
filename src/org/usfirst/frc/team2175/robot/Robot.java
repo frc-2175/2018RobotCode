@@ -49,11 +49,11 @@ public class Robot extends TimedRobot {
 		SubsystemsFactory.makeAllSubsystems();
 		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
 		SmartDashboard.putData("Auto choices", m_chooser);
-		new DefaultCommandFactory();
 		robotLogger.log();
 		logServer = new LogServer();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		new JoystickEventMapper();
+		new DefaultCommandFactory();
 	}
 
 	@Override
