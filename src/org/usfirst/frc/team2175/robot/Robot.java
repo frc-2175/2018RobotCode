@@ -57,6 +57,11 @@ public class Robot extends TimedRobot {
 	}
 
 	@Override
+	public void robotPeriodic() {
+		SmartDashboard.putNumber("AutoPopulate/PSI Value", drivetrainSubsystem.getPSIValue());
+	}
+
+	@Override
 	public void disabledInit() {
 		log.info("Robot program is disabled and ready.");
 		robotLogger.flush();
