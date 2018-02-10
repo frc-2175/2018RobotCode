@@ -68,7 +68,7 @@ public class RobotLogger {
 			}
 		}
 		matchNumber++;
-		(new File(BASE_DIRECTORY + matchNumber)).mkdirs();
+		new File(BASE_DIRECTORY + matchNumber).mkdirs();
 
 		listedFiles = workingDirectory.listFiles();
 		Arrays.sort(listedFiles, (File fileOne, File fileTwo) -> {
@@ -141,7 +141,7 @@ public class RobotLogger {
 
 	public void moveLogFile() {
 		try {
-			Files.copy(Paths.get("/home/lvuser/log/frc2175.log"),
+			Files.copy(Paths.get("/home/lvuser/logTemp/frc2175.log"),
 				Paths.get(BASE_DIRECTORY + "/" + matchNumber + "/event.log"), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			log.log(Level.SEVERE, "Could not copy log files over to log viewer directory!!!", e);

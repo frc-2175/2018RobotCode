@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2175.log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class LoggingConfig {
 	public static final String PROPERTY_FILE_PATH = "/home/lvuser/logging.properties";
 
 	public static void initialize() {
+		new File("/home/lvuser/logTemp").mkdirs();
 		initializeFileLog(PROPERTY_FILE_PATH);
 	}
 
