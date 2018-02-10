@@ -28,7 +28,7 @@ public class ArcadeDriveDefaultCommand extends BaseCommand {
 	protected void execute() {
 		double possibleChangeFromTime = (System.currentTimeMillis() - lastTime) / 1000 * possibleChangePerSecond;
 
-		double targetSpeed = driverStation.getMoveValue() * topSpeed;
+		double targetSpeed = DrivetrainSubsystem.clamp(driverStation.getMoveValue(), -topSpeed, topSpeed);
 
 		double valueChange = targetSpeed - currentMoveValue;
 		double wantedMoveValue;
