@@ -22,6 +22,6 @@ public class SpinIntakeOutCommand extends BaseCommand {
 
 	@Override
 	protected void end() {
-		intakeSubsystem.stopMotors();
+		intakeSubsystem.clearValues();
 	}
 }

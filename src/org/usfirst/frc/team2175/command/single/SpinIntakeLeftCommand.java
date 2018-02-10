@@ -3,16 +3,16 @@ package org.usfirst.frc.team2175.command.single;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
-public class SpinIntakeInCommand extends BaseCommand {
+public class SpinIntakeLeftCommand extends BaseCommand {
 	private IntakeSubsystem intakeSubsystem;
 
-	public SpinIntakeInCommand() {
+	public SpinIntakeLeftCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
 	}
 
 	@Override
 	protected void execute() {
-		intakeSubsystem.runIntakeIn();
+		intakeSubsystem.turnCube(false);
 	}
 
 	@Override
@@ -20,8 +20,4 @@ public class SpinIntakeInCommand extends BaseCommand {
 		return false;
 	}
 
-	@Override
-	protected void end() {
-		intakeSubsystem.clearValues();
-	}
 }

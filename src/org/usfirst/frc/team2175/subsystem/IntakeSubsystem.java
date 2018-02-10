@@ -17,7 +17,8 @@ public class IntakeSubsystem extends BaseSubsystem {
 	private double leftSpeed;
 	private double rightSpeed;
 	private double barSpeed;
-	private double turnValue;
+	private double leftTurn;
+	private double rightTurn;
 
 	public IntakeSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -28,19 +29,21 @@ public class IntakeSubsystem extends BaseSubsystem {
 		actuationPiston1 = robotInfo.get(RobotInfo.INTAKE_PISTON1);
 		actuationPiston2 = robotInfo.get(RobotInfo.INTAKE_PISTON2);
 
-		leftSpeed = 0;
-		rightSpeed = 0;
-		barSpeed = 0;
-		turnValue = 0;
+		clearValues();
 	}
 
 	@Override
 	public void periodic() {
 		runSystems();
+		clearValues();
 	}
 
-	public void turnCube(double axisValue) {
-		this.turnValue = axisValue;
+	public void turnCube(boolean isLeft) {
+		if (isLeft) {
+			leftTurn = -0.5;
+		} else {
+			rightTurn = 0.5;
+		}
 	}
 
 	public void moveUp() {
@@ -72,14 +75,16 @@ public class IntakeSubsystem extends BaseSubsystem {
 	}
 
 	public void runSystems() {
-		leftIntakeWheel.set(leftSpeed + turnValue);
-		rightIntakeWheel.set(rightSpeed + turnValue);
+		leftIntakeWheel.set(leftSpeed + leftTurn + rightTurn);
+		rightIntakeWheel.set(rightSpeed + leftTurn + rightTurn);
 		rollerBar.set(barSpeed);
 	}
 
-	public void stopMotors() {
+	public void clearValues() {
 		leftSpeed = 0;
 		rightSpeed = 0;
 		barSpeed = 0;
+		leftTurn = 0;
+		rightTurn = 0;
 	}
 }

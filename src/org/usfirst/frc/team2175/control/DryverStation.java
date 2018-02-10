@@ -18,6 +18,8 @@ public class DryverStation {
 	private JoystickButton intakeActuateFullButton;
 	private JoystickButton intakeActuateHalfButton;
 	private JoystickButton intakeActuateNoneButton;
+	private JoystickButton intakeSpinLeftButton;
+	private JoystickButton intakeSpinRightButton;
 	private final double JOYSTICK_DEADBAND = 0.15;
 	private final double GAMEPAD_DEADBAND = 0.1;
 
@@ -37,6 +39,8 @@ public class DryverStation {
 		intakeActuateHalfButton = new JoystickButton(gamepad, 7);
 		intakeActuateFullButton = new JoystickButton(gamepad, 8);
 		intakeActuateNoneButton = new JoystickButton(gamepad, 5);
+		intakeSpinLeftButton = new JoystickButton(gamepad, 2);
+		intakeSpinRightButton = new JoystickButton(gamepad, 1);
 	}
 
 	public double getMoveValue() {
@@ -45,10 +49,6 @@ public class DryverStation {
 
 	public double getTurnValue() {
 		return deadband(rightJoystick.getX(), JOYSTICK_DEADBAND);
-	}
-
-	public double getIntakeAxisValue() {
-		return deadband(gamepad.getRawAxis(2), GAMEPAD_DEADBAND);
 	}
 
 	public double getClimberAxisValue() {
@@ -102,4 +102,13 @@ public class DryverStation {
 	public JoystickButton getIntakeActuateNoneButton() {
 		return intakeActuateNoneButton;
 	}
+
+	public JoystickButton getIntakeSpinLeftButton() {
+		return intakeSpinLeftButton;
+	}
+
+	public JoystickButton getIntakeSpinRightButton() {
+		return intakeSpinRightButton;
+	}
+
 }
