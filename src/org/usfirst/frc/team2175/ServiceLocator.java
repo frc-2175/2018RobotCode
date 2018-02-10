@@ -3,8 +3,10 @@ package org.usfirst.frc.team2175;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import org.usfirst.frc.team2175.log.RobotLogger;
+
 public class ServiceLocator {
-	private static final Logger log = Logger.getLogger(ServiceLocator.class.getName());
+	private static final Logger log = RobotLogger.getLogger(ServiceLocator.class);
 
 	private static final HashMap<Class<?>, Object> MAP = new HashMap<>();
 

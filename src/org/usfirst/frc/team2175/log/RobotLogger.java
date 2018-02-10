@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -134,6 +137,24 @@ public class RobotLogger {
 				log.log(Level.SEVERE, "Failed to log " + getLogFilename(logger), e);
 			}
 		}
+	}
+
+	public void moveLogFile() {
+		try {
+			Files.copy(Paths.get("/home/lvuser/log/frc2175.log"),
+				Paths.get(BASE_DIRECTORY + "/" + matchNumber + "/event.log"), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			log.log(Level.SEVERE, "Could not copy log files over to log viewer directory!!!", e);
+		}
+	}
+
+	public static <T> Logger getLogger(Class<T> clazz) {
+		return Logger.getLogger(clazz.getName());
+	}
+
+	public static Logger getLogger(Object obj) {
+		return Logger.getLogger(obj.getClass().getName());
+
 	}
 
 }

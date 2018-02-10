@@ -34,7 +34,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	private final static Logger log = Logger.getLogger(Robot.class.getName());
+	private final Logger log = RobotLogger.getLogger(this);
 	private Command m_autoSelected;
 	private SendableChooser<Command> m_chooser = new SendableChooser<>();
 	private DrivetrainSubsystem drivetrainSubsystem;
@@ -43,6 +43,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+		ServiceLocator.register(this);
 		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
 		new DryverStation();
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		log.info("Robot program is disabled and ready.");
+		robotLogger.moveLogFile();
 		robotLogger.flush();
 	}
 
@@ -101,6 +103,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void testInit() {
+		robotLogger.moveLogFile();
 		logServer.runServer();
 	}
 

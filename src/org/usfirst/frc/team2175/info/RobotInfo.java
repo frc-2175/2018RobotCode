@@ -2,6 +2,7 @@ package org.usfirst.frc.team2175.info;
 
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
@@ -22,6 +23,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class RobotInfo {
+	private Logger log = RobotLogger.getLogger(this);
+
 	public static interface ValueContainer {
 		public Object get();
 	}
@@ -52,6 +55,7 @@ public class RobotInfo {
 	private RobotLogger robotLogger;
 
 	public RobotInfo() {
+		log.info(getClass().getName() + "was constructed");
 		ServiceLocator.register(this);
 		info = new HashMap<>();
 		botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
