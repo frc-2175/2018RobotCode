@@ -13,8 +13,13 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	private SmartDashboardInfo smartDashboardInfo;
 	public static final double SPROCKET_DIAMETER_INCHES = 2.688;
 	public static final double TICKS_PER_REVOLUTION = 1024;
+	/**
+	 * The ratio of inches that the second elevator stage travels to the number of
+	 * encoder occurred
+	 */
 	public static final double INCHES_PER_TICK = Math.PI * SPROCKET_DIAMETER_INCHES / TICKS_PER_REVOLUTION * 2;
 	public static final double MAX_ELEVATOR_TRAVEL = 78.0357;
+	public static final double MIN_ELEVATOR_HEIGHT_SLOW_ACCELERATION = 45;
 
 	public ElevatorSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -53,7 +58,30 @@ public class ElevatorSubsystem extends BaseSubsystem {
 		elevatorMotor.set(0);
 	}
 
+	/**
+	 * @return the inches traveled based on the {@link #INCHES_PER_TICK} value
+	 */
 	private double getInchesTraveled() {
 		return INCHES_PER_TICK * elevatorMotor.getSelectedSensorPosition(0);
+	}
+
+	/**
+	 * @return a usable t value in
+	 *         <li>{@link org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem#lerp(double, double, double)
+	 *         lerp(a, b, t)}</li>
+	 */
+	public double getElevatorTValue() {
+		double t = DrivetrainSubsystem.clamp(getInchesTraveled(), MIN_ELEVATOR_HEIGHT_SLOW_ACCELERATION,
+			MAX_ELEVATOR_TRAVEL);
+		return (t - MIN_ELEVATOR_HEIGHT_SLOW_ACCELERATION)
+			/ (MAX_ELEVATOR_TRAVEL - MIN_ELEVATOR_HEIGHT_SLOW_ACCELERATION);
+	}
+
+	/**
+	 * @return whether the inches traveled is above the minimum elevator height for
+	 *         slow acceleration
+	 */
+	public boolean getShouldAccelerateSlowly() {
+		return getInchesTraveled() > MIN_ELEVATOR_HEIGHT_SLOW_ACCELERATION;
 	}
 }
