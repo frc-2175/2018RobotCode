@@ -24,6 +24,7 @@ public class SmartDashboardInfo {
 	public static final String NEGATIVE_DEADBAND = "driverstation.deadband.negative";
 	public static final String INTAKE_TURN_CUBE_SPEED = "intake.turncube.speed";
 	public static final String ELEVATOR_PRECISION_MODE = "elevator.precisionmode";
+	public static final String TURN_CORRECTION = "straight.drive.turn.correction";
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -44,6 +45,7 @@ public class SmartDashboardInfo {
 		putNumber(NEGATIVE_DEADBAND, -0.05, -0.01);
 		putNumber(INTAKE_TURN_CUBE_SPEED, 0.5, 0.5);
 		putNumber(ELEVATOR_PRECISION_MODE, 0.5, 0.5);
+		putNumber(TURN_CORRECTION, 45, 45);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {

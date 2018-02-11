@@ -5,6 +5,7 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
 import org.usfirst.frc.team2175.VirtualSpeedController;
 import org.usfirst.frc.team2175.info.RobotInfo;
+import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.kauailabs.navx.frc.AHRS;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
 	private RobotInfo robotInfo;
+	private SmartDashboardInfo smartDashboardInfo;
 	private MotorWrapper leftMaster;
 	private MotorWrapper leftSlaveOne;
 	private MotorWrapper leftSlaveTwo;
@@ -28,6 +30,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
 		rightVirtualSpeedController);
+
+	private static double TURN_CORRECTION;
 	private AHRS navx;
 	private AnalogInput psiSensor;
 
@@ -59,6 +63,9 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 		navx = new AHRS(SPI.Port.kMXP);
 		navx.reset();
+
+		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
+		TURN_CORRECTION = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
 
 		psiSensor = robotInfo.get(RobotInfo.PSI_SENSOR);
 	}
@@ -158,10 +165,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		robotDrive.tankDrive(blendedValues[0], blendedValues[1]);
 	}
 
-	public void autonDrive(double leftSpeed, double rightSpeed) {
-		robotDrive.tankDrive(leftSpeed, rightSpeed);
-	}
-
 	public void resetAllSensors() {
 		leftMaster.setSelectedSensorPosition(0, 0, 0);
 		rightMaster.setSelectedSensorPosition(0, 0, 0);
@@ -213,5 +216,17 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	public double getPSIValue() {
 		// Equation from http://www.revrobotics.com/content/docs/REV-11-1107-DS.pdf
 		return 250 * psiSensor.getVoltage() / 5 - 25;
+	}
+
+	public void straightArcadeDrive(double moveValue) {
+		if (Math.abs(getGyroValue()) <= .25) {
+			arcadeDrive(moveValue, 0);
+		} else {
+			arcadeDrive(moveValue, -(getGyroValue() / TURN_CORRECTION));
+		}
+	}
+
+	public void autonDrive(double leftSpeed, double rightSpeed) {
+		robotDrive.tankDrive(leftSpeed, rightSpeed);
 	}
 }
