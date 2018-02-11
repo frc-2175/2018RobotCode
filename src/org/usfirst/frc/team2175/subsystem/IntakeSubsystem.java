@@ -45,6 +45,10 @@ public class IntakeSubsystem extends BaseSubsystem {
 		}
 	}
 
+	public void turnCube(double axisValue) {
+		turnSpeed = axisValue * smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_SPEED);
+	}
+
 	public void moveUp() {
 		actuationPiston1.set(false);
 		actuationPiston2.set(false);

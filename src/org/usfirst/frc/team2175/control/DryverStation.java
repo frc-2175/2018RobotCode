@@ -18,8 +18,6 @@ public class DryverStation {
 	private JoystickButton intakeActuateFullButton;
 	private JoystickButton intakeActuateHalfButton;
 	private JoystickButton intakeActuateNoneButton;
-	private JoystickButton intakeSpinLeftButton;
-	private JoystickButton intakeSpinRightButton;
 	private final double JOYSTICK_DEADBAND = 0.15;
 	private final double GAMEPAD_DEADBAND = 0.1;
 
@@ -34,13 +32,11 @@ public class DryverStation {
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 
 		shiftButton = new JoystickButton(leftJoystick, 1);
-		intakeSpinInButton = new JoystickButton(gamepad, 3);
-		intakeSpinOutButton = new JoystickButton(gamepad, 4);
-		intakeActuateHalfButton = new JoystickButton(gamepad, 7);
-		intakeActuateFullButton = new JoystickButton(gamepad, 8);
-		intakeActuateNoneButton = new JoystickButton(gamepad, 5);
-		intakeSpinLeftButton = new JoystickButton(gamepad, 2);
-		intakeSpinRightButton = new JoystickButton(gamepad, 1);
+		intakeSpinInButton = new JoystickButton(gamepad, 7);
+		intakeSpinOutButton = new JoystickButton(gamepad, 8);
+		intakeActuateHalfButton = new JoystickButton(gamepad, 1);
+		intakeActuateFullButton = new JoystickButton(gamepad, 4);
+		intakeActuateNoneButton = new JoystickButton(gamepad, 2);
 	}
 
 	public double getMoveValue() {
@@ -62,6 +58,10 @@ public class DryverStation {
 	public double getElevatorPrecisionAxisValue() {
 		return deadband(-gamepad.getRawAxis(3), GAMEPAD_DEADBAND)
 			* smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_PRECISION_MODE);
+	}
+
+	public double getTurnCubeAxisValue() {
+		return deadband(-gamepad.getRawAxis(4), GAMEPAD_DEADBAND);
 	}
 
 	public boolean getIsSpinInButtonPressed() {
@@ -107,13 +107,4 @@ public class DryverStation {
 	public JoystickButton getIntakeActuateNoneButton() {
 		return intakeActuateNoneButton;
 	}
-
-	public JoystickButton getIntakeSpinLeftButton() {
-		return intakeSpinLeftButton;
-	}
-
-	public JoystickButton getIntakeSpinRightButton() {
-		return intakeSpinRightButton;
-	}
-
 }
