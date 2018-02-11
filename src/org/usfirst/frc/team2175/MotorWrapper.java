@@ -55,6 +55,14 @@ public class MotorWrapper {
 		}
 	}
 
+	public void setInverted(boolean isInverted) {
+		if (isTalon) {
+			talon.setInverted(isInverted);
+		} else {
+			victor.setInverted(isInverted);
+		}
+	}
+
 	public SpeedController getMotor() {
 		return isTalon ? talon : victor;
 	}

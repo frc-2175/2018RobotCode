@@ -8,7 +8,6 @@ public class SpinIntakeOutCommand extends BaseCommand {
 
 	public SpinIntakeOutCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
-		requires(intakeSubsystem);
 	}
 
 	@Override
@@ -23,6 +22,6 @@ public class SpinIntakeOutCommand extends BaseCommand {
 
 	@Override
 	protected void end() {
-		intakeSubsystem.stopAllMotors();
+		intakeSubsystem.clearValues();
 	}
 }

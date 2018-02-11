@@ -1,22 +1,18 @@
 package org.usfirst.frc.team2175.command.single;
 
 import org.usfirst.frc.team2175.ServiceLocator;
-import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
-public class IntakeDefaultCommand extends BaseCommand {
+public class SpinIntakeLeftCommand extends BaseCommand {
 	private IntakeSubsystem intakeSubsystem;
-	private DryverStation driverStation;
 
-	public IntakeDefaultCommand() {
+	public SpinIntakeLeftCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
-		driverStation = ServiceLocator.get(DryverStation.class);
-		requires(intakeSubsystem);
 	}
 
 	@Override
 	protected void execute() {
-		intakeSubsystem.turnCube(driverStation.getTurnCubeAxisValue());
+		intakeSubsystem.turnCube(false);
 	}
 
 	@Override
@@ -24,4 +20,8 @@ public class IntakeDefaultCommand extends BaseCommand {
 		return false;
 	}
 
+	@Override
+	protected void end() {
+		intakeSubsystem.clearTurnSpeed();
+	}
 }

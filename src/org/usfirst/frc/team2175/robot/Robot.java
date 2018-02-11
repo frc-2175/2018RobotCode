@@ -16,6 +16,7 @@ import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.control.JoystickEventMapper;
 import org.usfirst.frc.team2175.info.InfoFactory;
 import org.usfirst.frc.team2175.log.LogServer;
+import org.usfirst.frc.team2175.log.LoggingConfig;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
@@ -34,7 +35,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	private final static Logger log = Logger.getLogger(Robot.class.getName());
+	private final Logger log = RobotLogger.getLogger(this);
 	private Command m_autoSelected;
 	private SendableChooser<Command> m_chooser = new SendableChooser<>();
 	private DrivetrainSubsystem drivetrainSubsystem;
@@ -43,22 +44,30 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+		LoggingConfig.initialize();
+		ServiceLocator.register(this);
 		robotLogger = new RobotLogger();
 		InfoFactory.makeAllInfos();
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
 		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
 		SmartDashboard.putData("Auto choices", m_chooser);
-		new DefaultCommandFactory();
 		robotLogger.log();
 		logServer = new LogServer();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		new JoystickEventMapper();
+		new DefaultCommandFactory();
+	}
+
+	@Override
+	public void robotPeriodic() {
+		SmartDashboard.putNumber("AutoPopulate/PSI Value", drivetrainSubsystem.getPSIValue());
 	}
 
 	@Override
 	public void disabledInit() {
 		log.info("Robot program is disabled and ready.");
+		robotLogger.moveLogFile();
 		robotLogger.flush();
 	}
 
@@ -96,6 +105,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void testInit() {
+		robotLogger.moveLogFile();
 		logServer.runServer();
 	}
 

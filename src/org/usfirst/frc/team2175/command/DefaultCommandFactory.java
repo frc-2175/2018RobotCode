@@ -27,8 +27,8 @@ public class DefaultCommandFactory {
 	private void constructDefaultCommands() {
 		drivetrainSubsystem.setDefaultCommand(new ArcadeDriveDefaultCommand());
 		climberSubsystem.setDefaultCommand(new SpinClimberDefaultCommand());
-		intakeSubsystem.setDefaultCommand(new IntakeDefaultCommand());
 		elevatorSubsystem.setDefaultCommand(new ElevatorDefaultCommand());
+		intakeSubsystem.setDefaultCommand(new IntakeDefaultCommand());
 	}
 
 }

@@ -9,6 +9,7 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
@@ -28,6 +29,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
 		rightVirtualSpeedController);
 	private AHRS navx;
+	private AnalogInput psiSensor;
 
 	public DrivetrainSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -38,20 +40,27 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		rightSlaveOne = robotInfo.get(RobotInfo.RIGHT_MOTOR_SLAVE1);
 		rightSlaveTwo = robotInfo.get(RobotInfo.RIGHT_MOTOR_SLAVE2);
 		driveShifters = robotInfo.get(RobotInfo.DRIVE_SHIFTERS);
+
 		leftSlaveOne.follow(leftMaster);
 		leftSlaveTwo.follow(leftMaster);
 		rightSlaveOne.follow(rightMaster);
 		rightSlaveTwo.follow(rightMaster);
+
 		robotDrive = new DifferentialDrive(leftMaster.getMotor(), rightMaster.getMotor());
+
 		leftVirtualSpeedController = new VirtualSpeedController();
 		rightVirtualSpeedController = new VirtualSpeedController();
 		virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController, rightVirtualSpeedController);
+
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		leftMaster.setSelectedSensorPosition(0, 0, 0);
 		rightMaster.setSelectedSensorPosition(0, 0, 0);
+
 		navx = new AHRS(SPI.Port.kMXP);
 		navx.reset();
+
+		psiSensor = robotInfo.get(RobotInfo.PSI_SENSOR);
 	}
 
 	public void stopAllMotors() {
@@ -140,7 +149,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return rightMaster.getSelectedSensorPosition(0);
 	}
 
-	public double getGryroValue() {
+	public double getGyroValue() {
 		return navx.getAngle();
 	}
 
@@ -199,5 +208,10 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public void shift(boolean high) {
 		driveShifters.set(high);
+	}
+
+	public double getPSIValue() {
+		// Equation from http://www.revrobotics.com/content/docs/REV-11-1107-DS.pdf
+		return 250 * psiSensor.getVoltage() / 5 - 25;
 	}
 }

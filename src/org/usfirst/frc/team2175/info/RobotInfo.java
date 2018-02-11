@@ -2,10 +2,12 @@ package org.usfirst.frc.team2175.info;
 
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
+import org.usfirst.frc.team2175.log.LoggableAnalogInput;
 import org.usfirst.frc.team2175.log.LoggableJoystick;
 import org.usfirst.frc.team2175.log.LoggableJoystickButton;
 import org.usfirst.frc.team2175.log.LoggableSolenoid;
@@ -16,10 +18,13 @@ import org.usfirst.frc.team2175.property.PropertiesLoader;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class RobotInfo {
+	private Logger log = RobotLogger.getLogger(this);
+
 	public static interface ValueContainer {
 		public Object get();
 	}
@@ -42,6 +47,7 @@ public class RobotInfo {
 	public static final String INTAKE_PISTON1 = "intake.piston1";
 	public static final String INTAKE_PISTON2 = "intake.piston2";
 	public static final String DRIVE_SHIFTERS = "drive.shifters";
+	public static final String PSI_SENSOR = "psi.sensor";
 	private HashMap<String, Object> info;
 	private final boolean isComp;
 	private Properties botProperties;
@@ -49,6 +55,7 @@ public class RobotInfo {
 	private RobotLogger robotLogger;
 
 	public RobotInfo() {
+		log.info(getClass().getName() + "was constructed");
 		ServiceLocator.register(this);
 		info = new HashMap<>();
 		botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
@@ -74,6 +81,7 @@ public class RobotInfo {
 		put(INTAKE_PISTON1, () -> new SolenoidWrapper(0, 1), () -> new SolenoidWrapper(0, 1));
 		put(INTAKE_PISTON2, () -> new SolenoidWrapper(2, 3), () -> new SolenoidWrapper(2, 3));
 		put(DRIVE_SHIFTERS, () -> new SolenoidWrapper(4), () -> new SolenoidWrapper(4));
+		put(PSI_SENSOR, () -> new AnalogInput(0), () -> new AnalogInput(0));
 		put(LEFT_JOYSTICK, new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1));
 		put(GAMEPAD, new Joystick(2));
@@ -113,6 +121,8 @@ public class RobotInfo {
 			robotLogger.addLoggable(new LoggableJoystick(key, (Joystick) obj));
 		} else if (obj.getClass() == JoystickButton.class) {
 			robotLogger.addLoggable(new LoggableJoystickButton(key, (JoystickButton) obj));
+		} else if (obj.getClass() == AnalogInput.class) {
+			robotLogger.addLoggable(new LoggableAnalogInput(key, (AnalogInput) obj));
 		}
 	}
 

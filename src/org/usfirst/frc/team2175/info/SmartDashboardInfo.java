@@ -22,6 +22,8 @@ public class SmartDashboardInfo {
 	public static final String ELEVATOR_MAX_DOWN_SPEED = "elevator.speed.max.down";
 	public static final String POSITIVE_DEADBAND = "driverstation.deadband.positive";
 	public static final String NEGATIVE_DEADBAND = "driverstation.deadband.negative";
+	public static final String INTAKE_TURN_CUBE_SPEED = "intake.turncube.speed";
+	public static final String ELEVATOR_PRECISION_MODE = "elevator.precisionmode";
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -32,14 +34,16 @@ public class SmartDashboardInfo {
 
 	private void populate() {
 		putNumber(TEST_KEY, 1.1, 1.2);
-		putNumber(INTAKE_ROLLER_IN_SPEED, 0.7, 0.7);
-		putNumber(INTAKE_ROLLER_OUT_SPEED, 0.5, 0.5);
-		putNumber(RUN_INTAKE_IN_SPEED, -0.7, 0.7);
-		putNumber(RUN_INTAKE_OUT_SPEED, 0.7, -0.7);
+		putNumber(INTAKE_ROLLER_IN_SPEED, -0.5, -0.5);
+		putNumber(INTAKE_ROLLER_OUT_SPEED, 0.4, 0.4);
+		putNumber(RUN_INTAKE_IN_SPEED, 0.7, 0.7);
+		putNumber(RUN_INTAKE_OUT_SPEED, -0.7, -0.7);
 		putNumber(ELEVATOR_MAX_UP_SPEED, 0.8, 0.8);
 		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.6, 0.6);
 		putNumber(POSITIVE_DEADBAND, 0.1, 0.1);
 		putNumber(NEGATIVE_DEADBAND, -0.05, -0.01);
+		putNumber(INTAKE_TURN_CUBE_SPEED, 0.5, 0.5);
+		putNumber(ELEVATOR_PRECISION_MODE, 0.5, 0.5);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {

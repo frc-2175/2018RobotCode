@@ -47,7 +47,7 @@ public class KurveDriveCommand extends BaseCommand {
 	protected void execute() {
 		double leftEnc = drivetrainSubsystem.getLeftEncoderValues();
 		double rightEnc = drivetrainSubsystem.getRightEncoderValues();
-		double gyroVal = drivetrainSubsystem.getGryroValue() * Math.PI / 180;
+		double gyroVal = drivetrainSubsystem.getGyroValue() * Math.PI / 180;
 
 		if (secondTime) {
 			if (dx > 0) {
@@ -83,7 +83,7 @@ public class KurveDriveCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return abs(abs(drivetrainSubsystem.getGryroValue()) - abs(thetaNeeded)) < Math.PI / 6;
+		return abs(abs(drivetrainSubsystem.getGyroValue()) - abs(thetaNeeded)) < Math.PI / 6;
 	}
 
 	@Override
