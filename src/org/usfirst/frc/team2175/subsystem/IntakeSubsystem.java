@@ -17,8 +17,7 @@ public class IntakeSubsystem extends BaseSubsystem {
 	private double leftSpeed;
 	private double rightSpeed;
 	private double barSpeed;
-	private double leftTurn;
-	private double rightTurn;
+	private double turnSpeed;
 
 	public IntakeSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
@@ -40,9 +39,9 @@ public class IntakeSubsystem extends BaseSubsystem {
 
 	public void turnCube(boolean isLeft) {
 		if (isLeft) {
-			leftTurn = -0.5;
+			turnSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_SPEED);
 		} else {
-			rightTurn = 0.5;
+			turnSpeed = -smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_SPEED);
 		}
 	}
 
@@ -75,8 +74,8 @@ public class IntakeSubsystem extends BaseSubsystem {
 	}
 
 	public void runSystems() {
-		leftIntakeWheel.set(leftSpeed + leftTurn + rightTurn);
-		rightIntakeWheel.set(rightSpeed + leftTurn + rightTurn);
+		leftIntakeWheel.set(leftSpeed + turnSpeed);
+		rightIntakeWheel.set(rightSpeed - turnSpeed);
 		rollerBar.set(barSpeed);
 	}
 
@@ -84,7 +83,10 @@ public class IntakeSubsystem extends BaseSubsystem {
 		leftSpeed = 0;
 		rightSpeed = 0;
 		barSpeed = 0;
-		leftTurn = 0;
-		rightTurn = 0;
+		turnSpeed = 0;
+	}
+
+	public void clearTurnSpeed() {
+		turnSpeed = 0;
 	}
 }

@@ -20,4 +20,8 @@ public class SpinIntakeLeftCommand extends BaseCommand {
 		return false;
 	}
 
+	@Override
+	protected void end() {
+		intakeSubsystem.clearValues();
+	}
 }
