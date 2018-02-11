@@ -11,6 +11,7 @@ public class IntakeDefaultCommand extends BaseCommand {
 	public IntakeDefaultCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);
 		driverStation = ServiceLocator.get(DryverStation.class);
+		requires(intakeSubsystem);
 	}
 
 	@Override

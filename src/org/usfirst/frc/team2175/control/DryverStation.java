@@ -32,11 +32,11 @@ public class DryverStation {
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 
 		shiftButton = new JoystickButton(leftJoystick, 1);
-		intakeSpinInButton = new JoystickButton(gamepad, 7);
-		intakeSpinOutButton = new JoystickButton(gamepad, 8);
+		intakeSpinInButton = new JoystickButton(gamepad, 8);
+		intakeSpinOutButton = new JoystickButton(gamepad, 7);
 		intakeActuateHalfButton = new JoystickButton(gamepad, 1);
-		intakeActuateFullButton = new JoystickButton(gamepad, 4);
-		intakeActuateNoneButton = new JoystickButton(gamepad, 2);
+		intakeActuateFullButton = new JoystickButton(gamepad, 2);
+		intakeActuateNoneButton = new JoystickButton(gamepad, 4);
 	}
 
 	public double getMoveValue() {
@@ -61,7 +61,7 @@ public class DryverStation {
 	}
 
 	public double getTurnCubeAxisValue() {
-		return deadband(-gamepad.getRawAxis(4), GAMEPAD_DEADBAND);
+		return deadband(gamepad.getRawAxis(2), GAMEPAD_DEADBAND);
 	}
 
 	public boolean getIsSpinInButtonPressed() {

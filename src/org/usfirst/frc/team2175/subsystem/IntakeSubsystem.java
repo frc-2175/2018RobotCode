@@ -78,7 +78,7 @@ public class IntakeSubsystem extends BaseSubsystem {
 	}
 
 	public void runSystems() {
-		leftIntakeWheel.set(leftSpeed + turnSpeed);
+		leftIntakeWheel.set(leftSpeed - turnSpeed);
 		rightIntakeWheel.set(rightSpeed - turnSpeed);
 		rollerBar.set(barSpeed);
 	}
