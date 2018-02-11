@@ -60,7 +60,8 @@ public class DryverStation {
 	}
 
 	public double getElevatorPrecisionAxisValue() {
-		return deadband(-gamepad.getRawAxis(3), GAMEPAD_DEADBAND);
+		return deadband(-gamepad.getRawAxis(3), GAMEPAD_DEADBAND)
+			* smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_PRECISION_MODE);
 	}
 
 	public boolean getIsSpinInButtonPressed() {

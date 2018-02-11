@@ -22,6 +22,6 @@ public class SpinIntakeRightCommand extends BaseCommand {
 
 	@Override
 	protected void end() {
-		intakeSubsystem.clearValues();
+		intakeSubsystem.clearTurnSpeed();
 	}
 }
