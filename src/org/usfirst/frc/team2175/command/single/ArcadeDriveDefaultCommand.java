@@ -10,10 +10,10 @@ public class ArcadeDriveDefaultCommand extends BaseCommand {
 	private DryverStation driverStation;
 	private ElevatorSubsystem elevatorSubsystem;
 	private double possibleChangePerSecond;
-	private final double MIN_CHANGE_PER_SECOND = 1;
-	private final double MAX_CHANGE_PER_SECOND = 2;
-	private final double MAX_TOP_SPEED = 1;
-	private final double MIN_TOP_SPEED = 0.7;
+	private final double HIGH_CHANGE_PER_SECOND = 1;
+	private final double LOW_CHANGE_PER_SECOND = 2;
+	private final double LOW_TOP_SPEED = 1;
+	private final double HIGH_TOP_SPEED = 0.7;
 	private double topSpeed = 1;
 	private double lastTime;
 	private double currentMoveValue;
@@ -36,10 +36,10 @@ public class ArcadeDriveDefaultCommand extends BaseCommand {
 		// Set the possible change per second to the lerped value of the max change per
 		// second
 		// and the min change per second based on the T value from the ElevatorSubsystem
-		possibleChangePerSecond = DrivetrainSubsystem.lerp(MAX_CHANGE_PER_SECOND, MIN_CHANGE_PER_SECOND,
+		possibleChangePerSecond = DrivetrainSubsystem.lerp(LOW_CHANGE_PER_SECOND, HIGH_CHANGE_PER_SECOND,
 			elevatorSubsystem.getElevatorTValue());
 
-		topSpeed = DrivetrainSubsystem.lerp(MAX_TOP_SPEED, MIN_TOP_SPEED, elevatorSubsystem.getElevatorTValue());
+		topSpeed = DrivetrainSubsystem.lerp(LOW_TOP_SPEED, HIGH_TOP_SPEED, elevatorSubsystem.getElevatorTValue());
 
 		double possibleChangeFromTime = (System.currentTimeMillis() - lastTime) / 1000 * possibleChangePerSecond;
 
