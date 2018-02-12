@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
+import org.usfirst.frc.team2175.command.autonomous.DriveCurveAutonomous;
 import org.usfirst.frc.team2175.command.autonomous.KurveDriveRightSideOfSwitch;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.control.JoystickEventMapper;
@@ -19,6 +20,7 @@ import org.usfirst.frc.team2175.log.LogServer;
 import org.usfirst.frc.team2175.log.LoggingConfig;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
+import org.usfirst.frc.team2175.subsystem.ElevatorSubsystem;
 import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -39,6 +41,7 @@ public class Robot extends TimedRobot {
 	private Command m_autoSelected;
 	private SendableChooser<Command> m_chooser = new SendableChooser<>();
 	private DrivetrainSubsystem drivetrainSubsystem;
+	private ElevatorSubsystem elevatorSubsystem;
 	private RobotLogger robotLogger;
 	private LogServer logServer;
 
@@ -51,10 +54,12 @@ public class Robot extends TimedRobot {
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
 		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
+		m_chooser.addDefault("DriveCurve", new DriveCurveAutonomous());
 		SmartDashboard.putData("Auto choices", m_chooser);
 		robotLogger.log();
 		logServer = new LogServer();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
+		elevatorSubsystem = ServiceLocator.get(ElevatorSubsystem.class);
 		new JoystickEventMapper();
 		new DefaultCommandFactory();
 	}
@@ -62,6 +67,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() {
 		SmartDashboard.putNumber("AutoPopulate/PSI Value", drivetrainSubsystem.getPSIValue());
+		SmartDashboard.putNumber("LeftEncoder", drivetrainSubsystem.getLeftEncoderValues());
+		SmartDashboard.putNumber("LeftEncoder", drivetrainSubsystem.getRightEncoderValues());
+		SmartDashboard.putNumber("Elevator Encoder", elevatorSubsystem.getInchesTraveled());
+		SmartDashboard.putNumber("gyro", drivetrainSubsystem.getGyroValue());
 	}
 
 	@Override
