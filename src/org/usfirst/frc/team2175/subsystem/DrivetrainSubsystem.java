@@ -227,6 +227,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	}
 
 	public void autonDrive(double leftSpeed, double rightSpeed) {
-		robotDrive.tankDrive(leftSpeed, rightSpeed);
+		robotDrive.tankDrive(-leftSpeed, -rightSpeed);
 	}
 }
