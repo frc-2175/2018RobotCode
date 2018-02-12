@@ -11,7 +11,6 @@ public class ElevatorDefaultCommand extends BaseCommand {
 	private DryverStation driverStation;
 	private double precisionValue;
 	private double fullSpeedValue;
-	private double moveValue;
 
 	public ElevatorDefaultCommand() {
 		elevatorSubsystem = ServiceLocator.get(ElevatorSubsystem.class);
@@ -23,8 +22,8 @@ public class ElevatorDefaultCommand extends BaseCommand {
 	protected void execute() {
 		precisionValue = driverStation.getElevatorPrecisionAxisValue();
 		fullSpeedValue = driverStation.getElevatorFullSpeedAxisValue();
-		moveValue = clamp(precisionValue + fullSpeedValue, -1, 1);
-		elevatorSubsystem.runElevator(driverStation.getElevatorFullSpeedAxisValue());
+		double moveValue = clamp(precisionValue + fullSpeedValue, -1, 1);
+		elevatorSubsystem.runElevator(moveValue);
 	}
 
 	@Override
