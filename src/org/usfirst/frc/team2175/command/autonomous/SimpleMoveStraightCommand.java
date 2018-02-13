@@ -7,13 +7,11 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 public class SimpleMoveStraightCommand extends BaseCommand {
 
 	private DrivetrainSubsystem drivetrainSubsystem;
-	private double neededSpeed;
+	private double distance;
 
 	public SimpleMoveStraightCommand() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
-		double nDy = drivetrainSubsystem.getNDY();
-		double nDx = drivetrainSubsystem.getNDX();
-		neededSpeed = Math.sqrt(nDy * nDy + nDx * nDx);
+		distance = drivetrainSubsystem.getDistance();
 	}
 
 	@Override
@@ -28,7 +26,7 @@ public class SimpleMoveStraightCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return drivetrainSubsystem.getLeftEncoderValues() >= neededSpeed;
+		return drivetrainSubsystem.getLeftEncoderValues() >= distance;
 	}
 
 	@Override

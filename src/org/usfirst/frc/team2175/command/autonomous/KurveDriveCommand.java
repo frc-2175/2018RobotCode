@@ -11,6 +11,7 @@ public class KurveDriveCommand extends BaseCommand {
 
 	private double thetaNeeded;
 
+	private final double maxSpeed = 0.9;
 	private boolean secondTime;
 	private double ratio;
 	private double dy;
@@ -35,11 +36,9 @@ public class KurveDriveCommand extends BaseCommand {
 	@Override
 	protected void initialize() {
 		drivetrainSubsystem.resetAllSensors();
+		radiusDetermined = secondTime;
 		if (secondTime) {
-			radiusDetermined = true;
 			thetaNeeded = drivetrainSubsystem.getThetaNeeded();
-		} else {
-			radiusDetermined = false;
 		}
 	}
 
@@ -51,11 +50,12 @@ public class KurveDriveCommand extends BaseCommand {
 
 		if (secondTime) {
 			if (dx > 0) {
-				drivetrainSubsystem.autonDrive(.7 / ratio, .7);
+				drivetrainSubsystem.autonDrive(maxSpeed / ratio, maxSpeed);
 			} else {
-				drivetrainSubsystem.autonDrive(.7, .7 / ratio);
+				drivetrainSubsystem.autonDrive(maxSpeed, maxSpeed / ratio);
 			}
-		} else if (!radiusDetermined && (gyroVal > Math.PI / 4 || abs(leftEnc) > 600 || abs(rightEnc) > 600)) {
+
+		} else if (!radiusDetermined && (gyroVal > Math.PI / 6)) {
 			radius = (leftEnc > rightEnc) ? leftEnc / gyroVal : rightEnc / gyroVal;
 			radiusDetermined = true;
 			double pi = Math.PI;
@@ -66,8 +66,7 @@ public class KurveDriveCommand extends BaseCommand {
 					/ (-Math.cos(theta + pi / 24) + Math.cos(theta)))) < pi / 12) {
 					thetaNeeded = theta;
 					drivetrainSubsystem.setThetaNeeded(theta);
-					drivetrainSubsystem.setNDY(nDy);
-					drivetrainSubsystem.setNDX(nDx);
+					drivetrainSubsystem.setDistance(Math.sqrt(nDy * nDy + nDx + nDx));
 					break;
 				}
 			}

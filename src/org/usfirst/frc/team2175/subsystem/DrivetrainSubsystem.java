@@ -185,26 +185,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return distance;
 	}
 
-	double nDy;
-
-	public void setNDY(double nDy) {
-		this.nDy = nDy;
-	}
-
-	public double getNDY() {
-		return nDy;
-	}
-
-	double nDx;
-
-	public void setNDX(double nDx) {
-		this.nDx = nDx;
-	}
-
-	public double getNDX() {
-		return nDx;
-	}
-
 	public void arcadeDrive(double moveValue, double turnValue) {
 		robotDrive.arcadeDrive(moveValue, turnValue);
 	}
@@ -228,5 +208,15 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public void autonDrive(double leftSpeed, double rightSpeed) {
 		robotDrive.tankDrive(-leftSpeed, -rightSpeed);
+	}
+
+	private double distance;
+
+	public void setDistance(double d) {
+		distance = d;
+	}
+
+	public double getDistance() {
+		return distance;
 	}
 }
