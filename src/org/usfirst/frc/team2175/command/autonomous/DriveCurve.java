@@ -26,6 +26,8 @@ public class DriveCurve extends BaseCommand {
 			leftSpeed = wheelRatio * maxSpeed;
 			rightSpeed = maxSpeed;
 		}
+
+		requires(drivetrainSubsystem);
 	}
 
 	@Override
