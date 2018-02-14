@@ -40,7 +40,7 @@ public class DryverStation {
 	}
 
 	public double getMoveValue() {
-		return deadband(leftJoystick.getY(), JOYSTICK_DEADBAND);
+		return deadband(-leftJoystick.getY(), JOYSTICK_DEADBAND);
 	}
 
 	public double getTurnValue() {

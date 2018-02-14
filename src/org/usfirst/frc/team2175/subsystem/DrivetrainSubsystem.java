@@ -161,7 +161,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	}
 
 	public void robotDrive(double xSpeed, double zRotation) {
-		double[] blendedValues = getBlendedMotorValues(xSpeed, -zRotation);
+		double[] blendedValues = getBlendedMotorValues(-xSpeed, -zRotation);
 		robotDrive.tankDrive(blendedValues[0], blendedValues[1]);
 	}
 
