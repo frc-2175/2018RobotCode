@@ -4,6 +4,7 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.info.RobotInfo;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -106,5 +107,31 @@ public class DryverStation {
 
 	public JoystickButton getIntakeActuateNoneButton() {
 		return intakeActuateNoneButton;
+	}
+
+	public boolean isSwitchLeft() {
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if (gameData.length() > 0) {
+			if (gameData.charAt(0) == 'L') {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	public boolean isScaleLeft() {
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if (gameData.length() > 0) {
+			if (gameData.charAt(1) == 'L') {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
 	}
 }
