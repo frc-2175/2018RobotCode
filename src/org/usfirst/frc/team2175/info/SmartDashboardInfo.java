@@ -25,6 +25,8 @@ public class SmartDashboardInfo {
 	public static final String INTAKE_TURN_CUBE_SPEED = "intake.turncube.speed";
 	public static final String ELEVATOR_PRECISION_MODE = "elevator.precisionmode";
 	public static final String TURN_CORRECTION = "straight.drive.turn.correction";
+	public static final String DRIVE_CURVE_MAX_SPEED = "drivecurve.maxspeed";
+	public static final String DRIVE_STRAIGHT_ACCELERATION_RATE = "drivestraight.acceleration";
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -46,6 +48,8 @@ public class SmartDashboardInfo {
 		putNumber(INTAKE_TURN_CUBE_SPEED, 0.5, 0.5);
 		putNumber(ELEVATOR_PRECISION_MODE, 0.5, 0.5);
 		putNumber(TURN_CORRECTION, 45, 45);
+		putNumber(DRIVE_CURVE_MAX_SPEED, 0.7, 0.7);
+		putNumber(DRIVE_STRAIGHT_ACCELERATION_RATE, 1, 1);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {
