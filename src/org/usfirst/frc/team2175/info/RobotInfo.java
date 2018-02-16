@@ -123,6 +123,9 @@ public class RobotInfo {
 			robotLogger.addLoggable(new LoggableJoystickButton(key, (JoystickButton) obj));
 		} else if (obj.getClass() == AnalogInput.class) {
 			robotLogger.addLoggable(new LoggableAnalogInput(key, (AnalogInput) obj));
+		} else if (obj.getClass() == MotorWrapper.class) {
+			MotorWrapper mw = (MotorWrapper) obj;
+			roboLog(key, mw.getMotor());
 		}
 	}
 

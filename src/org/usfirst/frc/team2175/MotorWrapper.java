@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class MotorWrapper {
 	private WPI_TalonSRX talon;
 	private WPI_VictorSPX victor;
-	private boolean isTalon;
+	public final boolean isTalon;
 
 	public MotorWrapper(WPI_TalonSRX talon) {
 		this.talon = talon;

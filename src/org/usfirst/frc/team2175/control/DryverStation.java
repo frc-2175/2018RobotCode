@@ -49,7 +49,8 @@ public class DryverStation {
 	}
 
 	public double getClimberAxisValue() {
-		return deadband(gamepad.getRawAxis(6), GAMEPAD_DEADBAND);
+		return 0;
+		// return deadband(gamepad.getRawAxis(6), GAMEPAD_DEADBAND);
 	}
 
 	public double getElevatorFullSpeedAxisValue() {

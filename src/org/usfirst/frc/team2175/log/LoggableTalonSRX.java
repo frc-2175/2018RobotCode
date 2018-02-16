@@ -27,7 +27,7 @@ public class LoggableTalonSRX implements Loggable {
 
 	@Override
 	public HashMap<String, Object> getValues() {
-		fields.put("value", talon.get());
+		fields.put("current", talon.getOutputCurrent());
 		return fields;
 	}
 }
