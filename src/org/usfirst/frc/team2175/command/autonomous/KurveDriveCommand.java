@@ -48,41 +48,44 @@ public class KurveDriveCommand extends BaseCommand {
 		double rightEnc = drivetrainSubsystem.getRightEncoderDistance();
 		double gyroVal = Math.toRadians(drivetrainSubsystem.getGyroValue());
 
-		if (secondTime) {
-			if (dx > 0) {
-				drivetrainSubsystem.autonDrive(maxSpeed / ratio, maxSpeed);
-			} else {
-				drivetrainSubsystem.autonDrive(maxSpeed, maxSpeed / ratio);
-			}
-
-		} else if (!radiusDetermined && (gyroVal > Math.PI / 6)) {
-			radius = (leftEnc > rightEnc) ? leftEnc / gyroVal : rightEnc / gyroVal;
-			radiusDetermined = true;
+		if (!secondTime && !radiusDetermined && (gyroVal > Math.PI / 6)) {
+			radius = ((leftEnc > rightEnc) ? leftEnc : rightEnc) / gyroVal;
 			double pi = Math.PI;
+
+			// Test every angle to see if it slopes like nDy / nDx
 			for (double theta = 0; theta <= 2 * pi; theta += pi / 12) {
+
+				// Determine slope in between turns
 				double nDy = dy - 2 * radius * Math.sin(Math.signum(rightEnc) * abs(gyroVal));
 				double nDx = dx - 2 * radius * Math.signum(abs(rightEnc) - abs(leftEnc)) * (Math.cos(theta) - 1);
-				if (abs(abs(nDy / nDx) - abs((Math.sin(theta + pi / 24) - Math.sin(theta))
-					/ (-Math.cos(theta + pi / 24) + Math.cos(theta)))) < pi / 12) {
+				double middleSlope = abs(nDy / nDx);
+
+				// Determine slope of radius turn
+				double arcYChange = Math.sin(theta + pi / 24) - Math.sin(theta);
+				double arcXChange = -Math.cos(theta + pi / 24) + Math.cos(theta);
+
+				// If angle is close enough
+				if (abs(middleSlope - abs(arcYChange / arcXChange)) < pi / 12) {
 					thetaNeeded = theta;
 					drivetrainSubsystem.setThetaNeeded(theta);
 					drivetrainSubsystem.setDistance(Math.sqrt(nDy * nDy + nDx + nDx));
+
+					radiusDetermined = true;
 					break;
 				}
 			}
 		}
-
-		if (dx > 0) {
-			drivetrainSubsystem.autonDrive(.7, .7 / ratio);
+		if (dx > 0 ^ secondTime) {
+			drivetrainSubsystem.autonDrive(dy * maxSpeed / ratio, dy * maxSpeed);
 		} else {
-			drivetrainSubsystem.autonDrive(.7 / ratio, .7);
+			drivetrainSubsystem.autonDrive(dy * maxSpeed, dy * maxSpeed / ratio);
 		}
 
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return abs(abs(drivetrainSubsystem.getGyroValue()) - abs(thetaNeeded)) < Math.PI / 6;
+		return abs(drivetrainSubsystem.getGyroValue()) - abs(thetaNeeded) < Math.PI / 6;
 	}
 
 	@Override
