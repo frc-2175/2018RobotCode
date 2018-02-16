@@ -34,24 +34,23 @@ public class MotorWrapper {
 		(isTalon ? talon : victor).follow((IMotorController) masterMotor.getMotor());
 	}
 
-	public void configSelectedFeedbackSensor(FeedbackDevice ctreMagencoderRelative, int i, int j) {
+	public void configSelectedFeedbackSensor(FeedbackDevice device, int pidIdx, int timeoutMs) {
 		if (isTalon) {
-			talon.configSelectedFeedbackSensor(ctreMagencoderRelative, i, j);
+			talon.configSelectedFeedbackSensor(device, pidIdx, timeoutMs);
 		}
 	}
 
-	public void setSelectedSensorPosition(int i, int j, int k) {
+	public void setSelectedSensorPosition(int sensorPos, int pidIdx, int timeoutMs) {
 		if (isTalon) {
-			talon.setSelectedSensorPosition(i, j, k);
+			talon.setSelectedSensorPosition(sensorPos, pidIdx, timeoutMs);
 		}
 	}
 
-	public int getSelectedSensorPosition(int i) {
-
+	public int getSelectedSensorPosition(int pidIdx) {
 		if (isTalon) {
-			return talon.getSelectedSensorPosition(i);
+			return talon.getSelectedSensorPosition(pidIdx);
 		} else {
-			return victor.getSelectedSensorPosition(i);
+			return victor.getSelectedSensorPosition(pidIdx);
 		}
 	}
 

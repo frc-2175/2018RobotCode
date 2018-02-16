@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
 	public void robotPeriodic() {
 		SmartDashboard.putNumber("AutoPopulate/PSI Value", drivetrainSubsystem.getPSIValue());
 		SmartDashboard.putNumber("LeftEncoder", drivetrainSubsystem.getLeftEncoderValues());
-		SmartDashboard.putNumber("LeftEncoder", drivetrainSubsystem.getRightEncoderValues());
+		SmartDashboard.putNumber("RightEncoder", drivetrainSubsystem.getRightEncoderValues());
 		SmartDashboard.putNumber("Elevator Encoder", elevatorSubsystem.getInchesTraveled());
 		SmartDashboard.putNumber("gyro", drivetrainSubsystem.getGyroValue());
 	}
