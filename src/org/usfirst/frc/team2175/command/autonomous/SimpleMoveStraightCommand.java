@@ -26,7 +26,7 @@ public class SimpleMoveStraightCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return drivetrainSubsystem.getLeftEncoderValues() >= distance;
+		return drivetrainSubsystem.getLeftEncoderDistance() >= distance;
 	}
 
 	@Override

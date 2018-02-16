@@ -150,12 +150,12 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		}
 	}
 
-	public double getLeftEncoderValues() {
-		return -leftMaster.getSelectedSensorPosition(0);
+	public double getLeftEncoderDistance() {
+		return -leftMaster.getSelectedSensorPosition(0) * INCHES_PER_TICK;
 	}
 
-	public double getRightEncoderValues() {
-		return rightMaster.getSelectedSensorPosition(0);
+	public double getRightEncoderDistance() {
+		return rightMaster.getSelectedSensorPosition(0) * INCHES_PER_TICK;
 	}
 
 	public double getGyroValue() {
@@ -181,10 +181,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public double getThetaNeeded() {
 		return thetaNeeded;
-	}
-
-	public double toTicks(double distance) {
-		return distance;
 	}
 
 	public void arcadeDrive(double moveValue, double turnValue) {

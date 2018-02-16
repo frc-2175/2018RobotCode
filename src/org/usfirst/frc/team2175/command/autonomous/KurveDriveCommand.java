@@ -44,9 +44,9 @@ public class KurveDriveCommand extends BaseCommand {
 
 	@Override
 	protected void execute() {
-		double leftEnc = drivetrainSubsystem.getLeftEncoderValues();
-		double rightEnc = drivetrainSubsystem.getRightEncoderValues();
-		double gyroVal = drivetrainSubsystem.getGyroValue() * Math.PI / 180;
+		double leftEnc = drivetrainSubsystem.getLeftEncoderDistance();
+		double rightEnc = drivetrainSubsystem.getRightEncoderDistance();
+		double gyroVal = Math.toRadians(drivetrainSubsystem.getGyroValue());
 
 		if (secondTime) {
 			if (dx > 0) {
