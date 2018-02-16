@@ -24,6 +24,7 @@ public class IntakeSubsystem extends BaseSubsystem {
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		rollerBar = robotInfo.get(RobotInfo.ROLLER_BAR_MOTOR);
 		leftIntakeWheel = robotInfo.get(RobotInfo.INTAKE_LEFT_MOTOR);
+		leftIntakeWheel.setInverted(true);
 		rightIntakeWheel = robotInfo.get(RobotInfo.INTAKE_RIGHT_MOTOR);
 		actuationPiston1 = robotInfo.get(RobotInfo.INTAKE_PISTON1);
 		actuationPiston2 = robotInfo.get(RobotInfo.INTAKE_PISTON2);
@@ -66,20 +67,23 @@ public class IntakeSubsystem extends BaseSubsystem {
 	}
 
 	public void runIntakeIn() {
-		leftSpeed = -smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED);
+		leftSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED);
 		rightSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_IN_SPEED);
 		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_IN_SPEED);
 	}
 
 	public void runIntakeOut() {
-		leftSpeed = -smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED);
+		leftSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED);
 		rightSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED);
 		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_OUT_SPEED);
 	}
 
 	public void runSystems() {
-		leftIntakeWheel.set(leftSpeed - turnSpeed);
-		rightIntakeWheel.set(rightSpeed - turnSpeed);
+		double left = (turnSpeed < 0) ? leftSpeed - turnSpeed : leftSpeed;
+		double right = (turnSpeed > 0) ? rightSpeed + turnSpeed : rightSpeed;
+		leftIntakeWheel.set(left);
+		rightIntakeWheel.set(right);
+
 		rollerBar.set(barSpeed);
 	}
 
