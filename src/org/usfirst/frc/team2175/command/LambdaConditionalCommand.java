@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2175.command.autonomous;
+package org.usfirst.frc.team2175.command;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.ConditionalCommand;

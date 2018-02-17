@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SmartDashboardInfo {
 	private static final String PREFIX = "AutoPopulate/";
 	private final boolean isComp;
-	private final Properties botProperties;
-	public static final String TEST_KEY = "test.key";
 	public static final String INTAKE_ROLLER_IN_SPEED = "intake.roller.in.speed";
 	public static final String INTAKE_ROLLER_OUT_SPEED = "intake.roller.out.speed";
 	public static final String RUN_INTAKE_IN_SPEED = "run.intake.in.speed";
@@ -30,13 +28,12 @@ public class SmartDashboardInfo {
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
-		botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
+		Properties botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
 		isComp = Boolean.parseBoolean((String) botProperties.get("isComp"));
 		populate();
 	}
 
 	private void populate() {
-		putNumber(TEST_KEY, 1.1, 1.2);
 		putNumber(INTAKE_ROLLER_IN_SPEED, -0.5, -0.5);
 		putNumber(INTAKE_ROLLER_OUT_SPEED, 0.4, 0.4);
 		putNumber(RUN_INTAKE_IN_SPEED, 0.7, 0.7);

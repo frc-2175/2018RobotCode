@@ -45,7 +45,7 @@ public class DriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		drivetrainSubsystem.autonDrive(moveValue, moveValue);
+		drivetrainSubsystem.tankDrive(moveValue, moveValue);
 		distanceTraveled = drivetrainSubsystem.getDistance();
 	}
 

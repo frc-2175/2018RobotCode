@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		drivetrainSubsystem.resetAllSensors();
-		if (m_autoSelected != null && !m_autoSelected.isCompleted()) {
+		if (m_autoSelected != null) {
 			m_autoSelected.cancel();
 		}
 	}

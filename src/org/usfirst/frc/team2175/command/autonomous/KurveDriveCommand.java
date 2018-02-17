@@ -76,9 +76,9 @@ public class KurveDriveCommand extends BaseCommand {
 			}
 		}
 		if (dx > 0 ^ secondTime) {
-			drivetrainSubsystem.autonDrive(dy * maxSpeed / ratio, dy * maxSpeed);
+			drivetrainSubsystem.tankDrive(dy * maxSpeed / ratio, dy * maxSpeed);
 		} else {
-			drivetrainSubsystem.autonDrive(dy * maxSpeed, dy * maxSpeed / ratio);
+			drivetrainSubsystem.tankDrive(dy * maxSpeed, dy * maxSpeed / ratio);
 		}
 
 	}

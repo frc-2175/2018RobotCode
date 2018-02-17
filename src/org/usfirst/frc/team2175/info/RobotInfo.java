@@ -50,7 +50,6 @@ public class RobotInfo {
 	public static final String PSI_SENSOR = "psi.sensor";
 	private HashMap<String, Object> info;
 	private final boolean isComp;
-	private Properties botProperties;
 
 	private RobotLogger robotLogger;
 
@@ -58,14 +57,13 @@ public class RobotInfo {
 		log.info(getClass().getName() + "was constructed");
 		ServiceLocator.register(this);
 		info = new HashMap<>();
-		botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
+		Properties botProperties = PropertiesLoader.loadProperties("/home/lvuser/bot.properties");
 		isComp = Boolean.parseBoolean((String) botProperties.get("isComp"));
 		robotLogger = ServiceLocator.get(RobotLogger.class);
 		populate();
 	}
 
 	private void populate() {
-
 		put(LEFT_MOTOR_MASTER, talon(new WPI_TalonSRX(1)));
 		put(LEFT_MOTOR_SLAVE1, victor(new WPI_VictorSPX(11)), talon(new WPI_TalonSRX(11)));
 		put(LEFT_MOTOR_SLAVE2, victor(new WPI_VictorSPX(12)), talon(new WPI_TalonSRX(12)));

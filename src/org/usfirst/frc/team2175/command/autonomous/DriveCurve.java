@@ -39,9 +39,9 @@ public class DriveCurve extends BaseCommand {
 	@Override
 	public void execute() {
 		if (radians > 0) {
-			drivetrainSubsystem.autonDrive(leftSpeed, rightSpeed);
+			drivetrainSubsystem.tankDrive(leftSpeed, rightSpeed);
 		} else {
-			drivetrainSubsystem.autonDrive(-leftSpeed, -rightSpeed);
+			drivetrainSubsystem.tankDrive(-leftSpeed, -rightSpeed);
 		}
 	}
 

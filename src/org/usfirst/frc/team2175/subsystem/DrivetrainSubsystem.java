@@ -33,7 +33,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024);
 
-	private static double TURN_CORRECTION;
 	private AHRS navx;
 	private AnalogInput psiSensor;
 
@@ -67,13 +66,12 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		navx.reset();
 
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
-		TURN_CORRECTION = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
 
 		psiSensor = robotInfo.get(RobotInfo.PSI_SENSOR);
 	}
 
 	public void stopAllMotors() {
-		robotDrive(0, 0);
+		blendedDrive(0, 0);
 	}
 
 	/**
@@ -99,6 +97,11 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 		double[] blends = { leftBlend, -rightBlend };
 		return blends;
+	}
+
+	public void blendedDrive(double xSpeed, double zRotation) {
+		double[] blendedValues = getBlendedMotorValues(-xSpeed, -zRotation);
+		robotDrive.tankDrive(blendedValues[0], blendedValues[1]);
 	}
 
 	/**
@@ -158,13 +161,11 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return rightMaster.getSelectedSensorPosition(0) * INCHES_PER_TICK;
 	}
 
+	/**
+	 * Positive values = clockwise
+	 */
 	public double getGyroValue() {
 		return navx.getAngle();
-	}
-
-	public void robotDrive(double xSpeed, double zRotation) {
-		double[] blendedValues = getBlendedMotorValues(-xSpeed, -zRotation);
-		robotDrive.tankDrive(blendedValues[0], blendedValues[1]);
 	}
 
 	public void resetAllSensors() {
@@ -183,12 +184,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return thetaNeeded;
 	}
 
-	public void arcadeDrive(double moveValue, double turnValue) {
-		robotDrive.arcadeDrive(moveValue, turnValue);
-	}
-
-	public void shift(boolean high) {
-		driveShifters.set(high);
+	public void shift(boolean isHigh) {
+		driveShifters.set(isHigh);
 	}
 
 	public double getPSIValue() {
@@ -196,15 +193,16 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return 250 * psiSensor.getVoltage() / 5 - 25;
 	}
 
-	public void straightArcadeDrive(double moveValue) {
-		if (Math.abs(getGyroValue()) <= .25) {
-			arcadeDrive(moveValue, 0);
-		} else {
-			arcadeDrive(moveValue, -(getGyroValue() / TURN_CORRECTION));
-		}
+	public void arcadeDrive(double moveValue, double turnValue) {
+		robotDrive.arcadeDrive(moveValue, turnValue);
 	}
 
-	public void autonDrive(double leftSpeed, double rightSpeed) {
+	public void straightArcadeDrive(double moveValue) {
+		double turnCorrection = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
+		arcadeDrive(moveValue, -(getGyroValue() / turnCorrection));
+	}
+
+	public void tankDrive(double leftSpeed, double rightSpeed) {
 		robotDrive.tankDrive(-leftSpeed, -rightSpeed);
 	}
 
@@ -216,9 +214,5 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public double getDistance() {
 		return distance;
-	}
-
-	public double inchesToTicks(double inches) {
-		return inches / INCHES_PER_TICK;
 	}
 }

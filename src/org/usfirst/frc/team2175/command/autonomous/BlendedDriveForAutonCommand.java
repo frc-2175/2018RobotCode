@@ -1,20 +1,21 @@
-package org.usfirst.frc.team2175.command.single;
+package org.usfirst.frc.team2175.command.autonomous;
 
 import org.usfirst.frc.team2175.ServiceLocator;
+import org.usfirst.frc.team2175.command.single.BaseCommand;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
-public class ArcadeDriveForAutonCommand extends BaseCommand {
+public class BlendedDriveForAutonCommand extends BaseCommand {
 	private DrivetrainSubsystem drivetrainsubsystem;
 	private final double move;
 	private final double turn;
 
-	public ArcadeDriveForAutonCommand(double move, double turn) {
+	public BlendedDriveForAutonCommand(double move, double turn) {
 		this.move = move;
 		this.turn = turn;
 		drivetrainsubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 	}
 
-	public ArcadeDriveForAutonCommand(double move) {
+	public BlendedDriveForAutonCommand(double move) {
 		this(move, 0);
 	}
 
@@ -24,8 +25,8 @@ public class ArcadeDriveForAutonCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void initialize() {
-		drivetrainsubsystem.robotDrive(move, turn);
+	protected void execute() {
+		drivetrainsubsystem.blendedDrive(move, turn);
 	}
 
 	@Override

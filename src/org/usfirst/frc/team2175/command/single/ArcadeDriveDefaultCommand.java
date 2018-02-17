@@ -16,7 +16,7 @@ public class ArcadeDriveDefaultCommand extends BaseCommand {
 
 	@Override
 	protected void execute() {
-		drivetrainSubsystem.robotDrive(driverStation.getMoveValue(), driverStation.getTurnValue());
+		drivetrainSubsystem.blendedDrive(driverStation.getMoveValue(), driverStation.getTurnValue());
 	}
 
 	@Override

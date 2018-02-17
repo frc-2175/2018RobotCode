@@ -19,8 +19,8 @@ public class DryverStation {
 	private JoystickButton intakeActuateFullButton;
 	private JoystickButton intakeActuateHalfButton;
 	private JoystickButton intakeActuateNoneButton;
-	private final double JOYSTICK_DEADBAND = 0.15;
-	private final double GAMEPAD_DEADBAND = 0.1;
+	private static final double JOYSTICK_DEADBAND = 0.15;
+	private static final double GAMEPAD_DEADBAND = 0.1;
 
 	public DryverStation() {
 		ServiceLocator.register(this);
