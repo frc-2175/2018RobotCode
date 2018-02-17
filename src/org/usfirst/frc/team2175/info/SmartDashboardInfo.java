@@ -25,6 +25,7 @@ public class SmartDashboardInfo {
 	public static final String TURN_CORRECTION = "turn.correction";
 	public static final String DRIVE_CURVE_MAX_SPEED = "drivecurve.maxspeed";
 	public static final String DRIVE_STRAIGHT_ACCELERATION_RATE = "drivestraight.acceleration";
+	public static final String INTAKE_SLOW_SPEED = "intake.speed.slow";
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -34,10 +35,17 @@ public class SmartDashboardInfo {
 	}
 
 	private void populate() {
+<<<<<<< Updated upstream
 		putNumber(ROLLER_IN_SPEED, -0.5, -0.5);
 		putNumber(ROLLER_OUT_SPEED, 0.4, 0.4);
 		putNumber(INTAKE_IN_SPEED, 0.7, 0.7);
 		putNumber(INTAKE_OUT_SPEED, -0.7, -0.7);
+=======
+		putNumber(INTAKE_ROLLER_IN_SPEED, -0.5, -0.5);
+		putNumber(INTAKE_ROLLER_OUT_SPEED, 0.4, 0.4);
+		putNumber(RUN_INTAKE_IN_SPEED, 0.7, 0.7);
+		putNumber(RUN_INTAKE_OUT_SPEED, -1, -1);
+>>>>>>> Stashed changes
 		putNumber(ELEVATOR_MAX_UP_SPEED, 0.8, 0.8);
 		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.6, 0.6);
 		putNumber(POSITIVE_DEADBAND, 0.1, 0.1);
@@ -47,6 +55,7 @@ public class SmartDashboardInfo {
 		putNumber(TURN_CORRECTION, 45, 45);
 		putNumber(DRIVE_CURVE_MAX_SPEED, 0.7, 0.7);
 		putNumber(DRIVE_STRAIGHT_ACCELERATION_RATE, 1, 1);
+		putNumber(INTAKE_SLOW_SPEED, 0.4, 0.4);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {
