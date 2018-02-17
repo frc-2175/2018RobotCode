@@ -77,19 +77,12 @@ public class IntakeSubsystem extends BaseSubsystem {
 		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.ROLLER_IN_SPEED);
 	}
 
-<<<<<<< Updated upstream
-	public void runIntakeOut() {
-		leftSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_OUT_SPEED);
-		rightSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_OUT_SPEED);
-		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.ROLLER_OUT_SPEED);
-=======
 	public void runIntakeOut(boolean slow) {
 		leftSpeed = slow ? smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_SLOW_SPEED)
-			: smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED);
+			: smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_OUT_SPEED);
 		rightSpeed = slow ? smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_SLOW_SPEED)
-			: smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_INTAKE_OUT_SPEED);
-		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_ROLLER_OUT_SPEED);
->>>>>>> Stashed changes
+			: smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_OUT_SPEED);
+		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.ROLLER_OUT_SPEED);
 	}
 
 	public void clearValues() {
