@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
+import org.usfirst.frc.team2175.command.autonomous.CrossBaselineTimeBasedAutonomous;
 import org.usfirst.frc.team2175.command.autonomous.DriveCurveAutonomous;
 import org.usfirst.frc.team2175.command.autonomous.KurveDriveRightSideOfSwitch;
 import org.usfirst.frc.team2175.control.DryverStation;
@@ -54,7 +55,8 @@ public class Robot extends TimedRobot {
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
 		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
-		m_chooser.addDefault("DriveCurve", new DriveCurveAutonomous());
+		m_chooser.addObject("DriveCurve", new DriveCurveAutonomous());
+		m_chooser.addDefault("Dumb Drive", new CrossBaselineTimeBasedAutonomous());
 		SmartDashboard.putData("Auto choices", m_chooser);
 		robotLogger.log();
 		logServer = new LogServer();
