@@ -12,6 +12,7 @@ import org.usfirst.frc.team2175.log.LoggableJoystick;
 import org.usfirst.frc.team2175.log.LoggableJoystickButton;
 import org.usfirst.frc.team2175.log.LoggableSolenoid;
 import org.usfirst.frc.team2175.log.LoggableTalonSRX;
+import org.usfirst.frc.team2175.log.LoggableVictorSPX;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.property.PropertiesLoader;
 
@@ -115,6 +116,8 @@ public class RobotInfo {
 			robotLogger.addLoggable(new LoggableSolenoid(key, (SolenoidWrapper) obj));
 		} else if (obj.getClass() == WPI_TalonSRX.class) {
 			robotLogger.addLoggable(new LoggableTalonSRX(key, (WPI_TalonSRX) obj));
+		} else if (obj.getClass() == WPI_VictorSPX.class) {
+			robotLogger.addLoggable(new LoggableVictorSPX(key, (WPI_VictorSPX) obj));
 		} else if (obj.getClass() == Joystick.class) {
 			robotLogger.addLoggable(new LoggableJoystick(key, (Joystick) obj));
 		} else if (obj.getClass() == JoystickButton.class) {
