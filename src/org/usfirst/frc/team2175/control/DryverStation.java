@@ -66,14 +66,6 @@ public class DryverStation {
 		return deadband(gamepad.getRawAxis(2), GAMEPAD_DEADBAND);
 	}
 
-	public boolean getIsSpinInButtonPressed() {
-		return gamepad.getRawButton(3);
-	}
-
-	public boolean getIsSpinOutButtonPressed() {
-		return gamepad.getRawButton(4);
-	}
-
 	protected double deadband(double value, double deadband) {
 		if (Math.abs(value) > deadband) {
 			if (value > 0.0) {
