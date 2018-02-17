@@ -48,7 +48,7 @@ public class SmartDashboardInfo {
 		putNumber(TURN_CORRECTION, 45, 45);
 		putNumber(DRIVE_CURVE_MAX_SPEED, 0.7, 0.7);
 		putNumber(DRIVE_STRAIGHT_ACCELERATION_RATE, 1, 1);
-		putNumber(INTAKE_SLOW_SPEED, 0.4, 0.4);
+		putNumber(INTAKE_SLOW_SPEED, -0.4, -0.4);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {
