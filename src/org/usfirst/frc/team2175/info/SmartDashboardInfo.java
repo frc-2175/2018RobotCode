@@ -10,19 +10,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SmartDashboardInfo {
 	private static final String PREFIX = "AutoPopulate/";
 	private final boolean isComp;
-	public static final String INTAKE_ROLLER_IN_SPEED = "intake.roller.in.speed";
-	public static final String INTAKE_ROLLER_OUT_SPEED = "intake.roller.out.speed";
-	public static final String RUN_INTAKE_IN_SPEED = "run.intake.in.speed";
-	public static final String RUN_INTAKE_OUT_SPEED = "run.intake.out.speed";
-	public static final String RUN_ELEVATOR_UP_SPEED = "run.elevator.up.speed";
-	public static final String RUN_ELEVATOR_DOWN_SPEED = "run.elevator.down.speed";
-	public static final String ELEVATOR_MAX_UP_SPEED = "elevator.speed.max.up";
-	public static final String ELEVATOR_MAX_DOWN_SPEED = "elevator.speed.max.down";
-	public static final String POSITIVE_DEADBAND = "driverstation.deadband.positive";
-	public static final String NEGATIVE_DEADBAND = "driverstation.deadband.negative";
-	public static final String INTAKE_TURN_CUBE_SPEED = "intake.turncube.speed";
+	public static final String ROLLER_IN_SPEED = "roller.in";
+	public static final String ROLLER_OUT_SPEED = "roller.out";
+	public static final String INTAKE_IN_SPEED = "intake.in";
+	public static final String INTAKE_OUT_SPEED = "intake.out";
+	public static final String RUN_ELEVATOR_UP_SPEED = "elevator.up";
+	public static final String RUN_ELEVATOR_DOWN_SPEED = "elevator.down";
+	public static final String ELEVATOR_MAX_UP_SPEED = "elevator.max.up";
+	public static final String ELEVATOR_MAX_DOWN_SPEED = "elevator.max.down";
+	public static final String POSITIVE_DEADBAND = "deadband.positive";
+	public static final String NEGATIVE_DEADBAND = "deadband.negative";
+	public static final String INTAKE_TURN_CUBE_SPEED = "turncube";
 	public static final String ELEVATOR_PRECISION_MODE = "elevator.precisionmode";
-	public static final String TURN_CORRECTION = "straight.drive.turn.correction";
+	public static final String TURN_CORRECTION = "turn.correction";
 	public static final String DRIVE_CURVE_MAX_SPEED = "drivecurve.maxspeed";
 	public static final String DRIVE_STRAIGHT_ACCELERATION_RATE = "drivestraight.acceleration";
 
@@ -34,10 +34,10 @@ public class SmartDashboardInfo {
 	}
 
 	private void populate() {
-		putNumber(INTAKE_ROLLER_IN_SPEED, -0.5, -0.5);
-		putNumber(INTAKE_ROLLER_OUT_SPEED, 0.4, 0.4);
-		putNumber(RUN_INTAKE_IN_SPEED, 0.7, 0.7);
-		putNumber(RUN_INTAKE_OUT_SPEED, -0.7, -0.7);
+		putNumber(ROLLER_IN_SPEED, -0.5, -0.5);
+		putNumber(ROLLER_OUT_SPEED, 0.4, 0.4);
+		putNumber(INTAKE_IN_SPEED, 0.7, 0.7);
+		putNumber(INTAKE_OUT_SPEED, -0.7, -0.7);
 		putNumber(ELEVATOR_MAX_UP_SPEED, 0.8, 0.8);
 		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.6, 0.6);
 		putNumber(POSITIVE_DEADBAND, 0.1, 0.1);
