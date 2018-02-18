@@ -25,11 +25,7 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	}
 
 	public void runElevatorUp() {
-		if (getInchesTraveled() < MAX_ELEVATOR_TRAVEL) {
-			elevatorMotor.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_ELEVATOR_UP_SPEED));
-		} else {
-			stopElevator();
-		}
+		elevatorMotor.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_ELEVATOR_UP_SPEED));
 	}
 
 	public void runElevatorDown() {
@@ -40,11 +36,7 @@ public class ElevatorSubsystem extends BaseSubsystem {
 		if (axisValue < 0) {
 			axisValue *= smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_MAX_DOWN_SPEED);
 		} else {
-			if (getInchesTraveled() < MAX_ELEVATOR_TRAVEL) {
-				axisValue *= smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_MAX_UP_SPEED);
-			} else {
-				axisValue = 0;
-			}
+			axisValue *= smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_MAX_UP_SPEED);
 		}
 		elevatorMotor.set(axisValue);
 	}
