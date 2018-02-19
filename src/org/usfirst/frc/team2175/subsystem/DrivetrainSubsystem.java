@@ -31,7 +31,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
 		rightVirtualSpeedController);
 
-	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024);
+	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
 	private AHRS navx;
 	private AnalogInput psiSensor;

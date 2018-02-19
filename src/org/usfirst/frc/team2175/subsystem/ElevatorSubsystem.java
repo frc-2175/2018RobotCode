@@ -38,6 +38,6 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	}
 
 	public double getInchesTraveled() {
-		return INCHES_PER_TICK * elevatorMotor.getSelectedSensorPosition(0);
+		return -INCHES_PER_TICK * elevatorMotor.getSelectedSensorPosition(0) / 35;
 	}
 }
