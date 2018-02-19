@@ -4,7 +4,7 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
 public class SpinIntakeRightCommand extends BaseCommand {
-	private IntakeSubsystem intakeSubsystem;
+	private final IntakeSubsystem intakeSubsystem;
 
 	public SpinIntakeRightCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);

@@ -5,8 +5,8 @@ import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
 public class IntakeDefaultCommand extends BaseCommand {
-	private IntakeSubsystem intakeSubsystem;
-	private DryverStation driverStation;
+	private final IntakeSubsystem intakeSubsystem;
+	private final DryverStation driverStation;
 
 	public IntakeDefaultCommand() {
 		intakeSubsystem = ServiceLocator.get(IntakeSubsystem.class);

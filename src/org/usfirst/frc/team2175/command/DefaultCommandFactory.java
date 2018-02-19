@@ -9,9 +9,9 @@ import org.usfirst.frc.team2175.subsystem.ElevatorSubsystem;
 import org.usfirst.frc.team2175.subsystem.IntakeSubsystem;
 
 public class DefaultCommandFactory {
-	private DrivetrainSubsystem drivetrainSubsystem;
-	private IntakeSubsystem intakeSubsystem;
-	private ElevatorSubsystem elevatorSubsystem;
+	private final DrivetrainSubsystem drivetrainSubsystem;
+	private final IntakeSubsystem intakeSubsystem;
+	private final ElevatorSubsystem elevatorSubsystem;
 
 	public DefaultCommandFactory() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);

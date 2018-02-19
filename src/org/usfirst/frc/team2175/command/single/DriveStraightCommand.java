@@ -10,8 +10,8 @@ public class DriveStraightCommand extends BaseCommand {
 	private double speed, distance, distanceTraveled, accelerationRate;
 	private boolean accelerate, decelerate;
 	public static final double PROPORTIONAL = 1.0 / 12.0;
-	private DrivetrainSubsystem drivetrainSubsystem;
-	private SmartDashboardInfo smartDashboardInfo;
+	private final DrivetrainSubsystem drivetrainSubsystem;
+	private final SmartDashboardInfo smartDashboardInfo;
 
 	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
 		this.speed = speed;

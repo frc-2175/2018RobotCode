@@ -11,11 +11,11 @@ public class DriveCurve extends BaseCommand {
 	private double radians;
 	private double maxLeftSpeed;
 	private double maxRightSpeed;
-	private double widthOfBot = 26.125;
+	private final double widthOfBot = 26.125;
 	private double accelerationRate;
 	private double radius;
 	private boolean accelerate, decelerate;
-	private SmartDashboardInfo smartDashboardInfo;
+	private final SmartDashboardInfo smartDashboardInfo;
 	private final double PROPORTIONAL = 1.0 / 12.0;
 
 	public DriveCurve(double radius, double degrees, double maxSpeed, boolean accelerate, boolean decelerate) {
