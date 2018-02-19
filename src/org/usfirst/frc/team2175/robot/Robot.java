@@ -37,10 +37,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	private final Logger log = RobotLogger.getLogger(this);
 	private Command m_autoSelected;
-	private final DrivetrainSubsystem drivetrainSubsystem;
-	private final ElevatorSubsystem elevatorSubsystem;
-	private final RobotLogger robotLogger;
-	private final LogServer logServer;
+	private DrivetrainSubsystem drivetrainSubsystem;
+	private ElevatorSubsystem elevatorSubsystem;
+	private RobotLogger robotLogger;
+	private LogServer logServer;
 	private AutonSelector autonSelector;
 
 	@Override
