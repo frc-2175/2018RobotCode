@@ -5,6 +5,7 @@ import org.usfirst.frc.team2175.command.single.MoveIntakeDownCommand;
 import org.usfirst.frc.team2175.command.single.MoveIntakeMiddleCommand;
 import org.usfirst.frc.team2175.command.single.MoveIntakeUpCommand;
 import org.usfirst.frc.team2175.command.single.ShiftCommand;
+import org.usfirst.frc.team2175.command.single.SpinClimberViaButtonCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeInCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeOutCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeOutSlowCommand;
@@ -20,5 +21,6 @@ public class JoystickEventMapper {
 		driverStation.getIntakeActuateHalfButton().whenPressed(new MoveIntakeMiddleCommand());
 		driverStation.getIntakeActuateNoneButton().whenPressed(new MoveIntakeUpCommand());
 		driverStation.getIntakeSpinOutSlowButton().whileHeld(new SpinIntakeOutSlowCommand());
+		driverStation.getClimberRunButton().whileHeld(new SpinClimberViaButtonCommand());
 	}
 }

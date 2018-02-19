@@ -42,7 +42,6 @@ public class RobotInfo {
 	public static final String RIGHT_JOYSTICK = "driverstation.joystick.right";
 	public static final String GAMEPAD = "driverstation.gamepad";
 	public static final String CLIMBER_MASTER = "climber.motor.master";
-	public static final String CLIMBER_SLAVE = "climber.motor.slave";
 	public static final String INTAKE_LEFT_MOTOR = "intake.motor.left";
 	public static final String INTAKE_RIGHT_MOTOR = "intake.motor.right";
 	public static final String INTAKE_PISTON1 = "intake.piston1";
@@ -73,7 +72,6 @@ public class RobotInfo {
 		put(RIGHT_MOTOR_SLAVE2, victor(new WPI_VictorSPX(3)), talon(new WPI_TalonSRX(3)));
 		put(ROLLER_BAR_MOTOR, victor(new WPI_VictorSPX(6)), talon(new WPI_TalonSRX(6)));
 		put(CLIMBER_MASTER, victor(new WPI_VictorSPX(9)), talon(new WPI_TalonSRX(9)));
-		put(CLIMBER_SLAVE, victor(new WPI_VictorSPX(10)), talon(new WPI_TalonSRX(10)));
 		put(INTAKE_LEFT_MOTOR, talon(new WPI_TalonSRX(8)));
 		put(INTAKE_RIGHT_MOTOR, talon(new WPI_TalonSRX(7)));
 		put(ELEVATOR_MOTOR, talon(new WPI_TalonSRX(5)));

@@ -20,6 +20,7 @@ public class DryverStation {
 	private JoystickButton intakeActuateHalfButton;
 	private JoystickButton intakeActuateNoneButton;
 	private JoystickButton intakeSpinOutSlowButton;
+	private JoystickButton climberRunButton;
 	private static final double JOYSTICK_DEADBAND = 0.15;
 	private static final double GAMEPAD_DEADBAND = 0.1;
 
@@ -40,6 +41,7 @@ public class DryverStation {
 		intakeActuateFullButton = new JoystickButton(gamepad, 2);
 		intakeActuateNoneButton = new JoystickButton(gamepad, 4);
 		intakeSpinOutSlowButton = new JoystickButton(gamepad, 5);
+		climberRunButton = new JoystickButton(gamepad, 10);
 	}
 
 	public double getMoveValue() {
@@ -106,6 +108,10 @@ public class DryverStation {
 
 	public JoystickButton getIntakeSpinOutSlowButton() {
 		return intakeSpinOutSlowButton;
+	}
+
+	public JoystickButton getClimberRunButton() {
+		return climberRunButton;
 	}
 
 	public boolean isSwitchLeft() {
