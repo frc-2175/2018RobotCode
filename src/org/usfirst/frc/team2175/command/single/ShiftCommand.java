@@ -6,7 +6,7 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ShiftCommand extends Command {
-	private DrivetrainSubsystem drivetrainSubsystem;
+	private final DrivetrainSubsystem drivetrainSubsystem;
 
 	public ShiftCommand() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);

@@ -4,7 +4,7 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 public class BlendedDriveForAutonCommand extends BaseCommand {
-	private DrivetrainSubsystem drivetrainsubsystem;
+	private final DrivetrainSubsystem drivetrainsubsystem;
 	private final double move;
 	private final double turn;
 

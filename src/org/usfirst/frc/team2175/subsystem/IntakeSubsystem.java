@@ -8,13 +8,13 @@ import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
 // Positive values are running a motor in, negative values are running a motor out
 public class IntakeSubsystem extends BaseSubsystem {
-	private MotorWrapper rollerBar;
-	private MotorWrapper leftIntakeWheel;
-	private MotorWrapper rightIntakeWheel;
-	private SolenoidWrapper actuationPiston1;
-	private SolenoidWrapper actuationPiston2;
-	private RobotInfo robotInfo;
-	private SmartDashboardInfo smartDashboardInfo;
+	private final MotorWrapper rollerBar;
+	private final MotorWrapper leftIntakeWheel;
+	private final MotorWrapper rightIntakeWheel;
+	private final SolenoidWrapper actuationPiston1;
+	private final SolenoidWrapper actuationPiston2;
+	private final RobotInfo robotInfo;
+	private final SmartDashboardInfo smartDashboardInfo;
 	private double leftSpeed;
 	private double rightSpeed;
 	private double barSpeed;
@@ -35,11 +35,16 @@ public class IntakeSubsystem extends BaseSubsystem {
 
 	@Override
 	public void periodic() {
-		double left = (turnSpeed < 0) ? leftSpeed - turnSpeed : leftSpeed;
-		double right = (turnSpeed > 0) ? rightSpeed + turnSpeed : rightSpeed;
-		leftIntakeWheel.set(left);
-		rightIntakeWheel.set(right);
-
+		if (turnSpeed < 0) {
+			leftIntakeWheel.set(turnSpeed * -1);
+			rightIntakeWheel.set(turnSpeed * 0.5);
+		} else if (turnSpeed > 0) {
+			leftIntakeWheel.set(turnSpeed * 0.5);
+			rightIntakeWheel.set(turnSpeed * -1);
+		} else {
+			leftIntakeWheel.set(leftSpeed);
+			rightIntakeWheel.set(rightSpeed);
+		}
 		rollerBar.set(barSpeed);
 		clearValues();
 	}

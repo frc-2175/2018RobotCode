@@ -7,8 +7,8 @@ import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.ElevatorSubsystem;
 
 public class ElevatorDefaultCommand extends BaseCommand {
-	private ElevatorSubsystem elevatorSubsystem;
-	private DryverStation driverStation;
+	private final ElevatorSubsystem elevatorSubsystem;
+	private final DryverStation driverStation;
 	private double precisionValue;
 	private double fullSpeedValue;
 

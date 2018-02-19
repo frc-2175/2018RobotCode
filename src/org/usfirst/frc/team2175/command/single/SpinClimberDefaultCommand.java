@@ -5,8 +5,8 @@ import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.ClimberSubsystem;
 
 public class SpinClimberDefaultCommand extends BaseCommand {
-	private ClimberSubsystem climberSubsystem;
-	private DryverStation driverStation;
+	private final ClimberSubsystem climberSubsystem;
+	private final DryverStation driverStation;
 
 	public SpinClimberDefaultCommand() {
 		climberSubsystem = ServiceLocator.get(ClimberSubsystem.class);
