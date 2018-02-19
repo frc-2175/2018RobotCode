@@ -37,9 +37,11 @@ public class IntakeSubsystem extends BaseSubsystem {
 	public void periodic() {
 		if (turnSpeed < 0) {
 			leftIntakeWheel.set(turnSpeed * -1);
-			rightIntakeWheel.set(turnSpeed * 0.5);
+			rightIntakeWheel
+				.set(turnSpeed * smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_OUT_SPEED));
 		} else if (turnSpeed > 0) {
-			leftIntakeWheel.set(turnSpeed * -0.5);
+			leftIntakeWheel
+				.set(turnSpeed * -smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_OUT_SPEED));
 			rightIntakeWheel.set(turnSpeed * 1);
 		} else {
 			leftIntakeWheel.set(leftSpeed);
@@ -51,14 +53,14 @@ public class IntakeSubsystem extends BaseSubsystem {
 
 	public void turnCube(boolean isLeft) {
 		if (isLeft) {
-			turnSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_SPEED);
+			turnSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_IN_SPEED);
 		} else {
-			turnSpeed = -smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_SPEED);
+			turnSpeed = -smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_IN_SPEED);
 		}
 	}
 
 	public void turnCube(double axisValue) {
-		turnSpeed = axisValue * smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_SPEED);
+		turnSpeed = axisValue * smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_TURN_CUBE_IN_SPEED);
 	}
 
 	public void moveUp() {
