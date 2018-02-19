@@ -35,11 +35,16 @@ public class IntakeSubsystem extends BaseSubsystem {
 
 	@Override
 	public void periodic() {
-		double left = (turnSpeed < 0) ? leftSpeed - turnSpeed : leftSpeed;
-		double right = (turnSpeed > 0) ? rightSpeed + turnSpeed : rightSpeed;
-		leftIntakeWheel.set(left);
-		rightIntakeWheel.set(right);
-
+		if (turnSpeed < 0) {
+			leftIntakeWheel.set(turnSpeed * -1);
+			rightIntakeWheel.set(turnSpeed * 0.5);
+		} else if (turnSpeed > 0) {
+			leftIntakeWheel.set(turnSpeed * 0.5);
+			rightIntakeWheel.set(turnSpeed * -1);
+		} else {
+			leftIntakeWheel.set(leftSpeed);
+			rightIntakeWheel.set(rightSpeed);
+		}
 		rollerBar.set(barSpeed);
 		clearValues();
 	}
