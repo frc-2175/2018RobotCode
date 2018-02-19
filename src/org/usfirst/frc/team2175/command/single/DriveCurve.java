@@ -7,7 +7,7 @@ import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 public class DriveCurve extends BaseCommand {
-	private DrivetrainSubsystem drivetrainSubsystem;
+	private final DrivetrainSubsystem drivetrainSubsystem;
 	private double radians;
 	private double maxLeftSpeed;
 	private double maxRightSpeed;

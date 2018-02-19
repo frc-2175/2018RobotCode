@@ -51,7 +51,7 @@ public class RobotInfo {
 	private HashMap<String, Object> info;
 	private final boolean isComp;
 
-	private RobotLogger robotLogger;
+	private final RobotLogger robotLogger;
 
 	public RobotInfo() {
 		log.info(getClass().getName() + "was constructed");

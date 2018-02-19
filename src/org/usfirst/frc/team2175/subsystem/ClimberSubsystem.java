@@ -5,8 +5,8 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.info.RobotInfo;
 
 public class ClimberSubsystem extends BaseSubsystem {
-	private MotorWrapper masterMotor;
-	private RobotInfo robotInfo;
+	private final MotorWrapper masterMotor;
+	private final RobotInfo robotInfo;
 
 	public ClimberSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);

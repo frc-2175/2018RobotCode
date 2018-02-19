@@ -8,9 +8,9 @@ import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 public class ElevatorSubsystem extends BaseSubsystem {
-	private MotorWrapper elevatorMotor;
-	private RobotInfo robotInfo;
-	private SmartDashboardInfo smartDashboardInfo;
+	private final MotorWrapper elevatorMotor;
+	private final RobotInfo robotInfo;
+	private final SmartDashboardInfo smartDashboardInfo;
 	public static final double SPROCKET_DIAMETER_INCHES = 2.688;
 	public static final double TICKS_PER_REVOLUTION = 1024;
 	public static final double INCHES_PER_TICK = Math.PI * SPROCKET_DIAMETER_INCHES / TICKS_PER_REVOLUTION * 2;

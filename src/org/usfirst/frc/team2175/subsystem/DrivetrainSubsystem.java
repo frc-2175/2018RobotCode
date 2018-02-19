@@ -16,16 +16,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
-	private RobotInfo robotInfo;
-	private SmartDashboardInfo smartDashboardInfo;
-	private MotorWrapper leftMaster;
-	private MotorWrapper leftSlaveOne;
-	private MotorWrapper leftSlaveTwo;
-	private MotorWrapper rightMaster;
-	private MotorWrapper rightSlaveOne;
-	private MotorWrapper rightSlaveTwo;
-	private SolenoidWrapper driveShifters;
-	private DifferentialDrive robotDrive;
+	private final RobotInfo robotInfo;
+	private final SmartDashboardInfo smartDashboardInfo;
+	private final MotorWrapper leftMaster;
+	private final MotorWrapper leftSlaveOne;
+	private final MotorWrapper leftSlaveTwo;
+	private final MotorWrapper rightMaster;
+	private final MotorWrapper rightSlaveOne;
+	private final MotorWrapper rightSlaveTwo;
+	private final SolenoidWrapper driveShifters;
+	private final DifferentialDrive robotDrive;
 	private static VirtualSpeedController leftVirtualSpeedController = new VirtualSpeedController();
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,

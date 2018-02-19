@@ -8,13 +8,13 @@ import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
 // Positive values are running a motor in, negative values are running a motor out
 public class IntakeSubsystem extends BaseSubsystem {
-	private MotorWrapper rollerBar;
-	private MotorWrapper leftIntakeWheel;
-	private MotorWrapper rightIntakeWheel;
-	private SolenoidWrapper actuationPiston1;
-	private SolenoidWrapper actuationPiston2;
-	private RobotInfo robotInfo;
-	private SmartDashboardInfo smartDashboardInfo;
+	private final MotorWrapper rollerBar;
+	private final MotorWrapper leftIntakeWheel;
+	private final MotorWrapper rightIntakeWheel;
+	private final SolenoidWrapper actuationPiston1;
+	private final SolenoidWrapper actuationPiston2;
+	private final RobotInfo robotInfo;
+	private final SmartDashboardInfo smartDashboardInfo;
 	private double leftSpeed;
 	private double rightSpeed;
 	private double barSpeed;
