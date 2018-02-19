@@ -21,6 +21,7 @@ public class JoystickEventMapper {
 		driverStation.getIntakeActuateHalfButton().whenPressed(new MoveIntakeMiddleCommand());
 		driverStation.getIntakeActuateNoneButton().whenPressed(new MoveIntakeUpCommand());
 		driverStation.getIntakeSpinOutSlowButton().whileHeld(new SpinIntakeOutSlowCommand());
-		driverStation.getClimberRunButton().whileHeld(new SpinClimberViaButtonCommand());
+		driverStation.getClimberRunButton().whileHeld(new SpinClimberViaButtonCommand(true));
+		driverStation.getClimberRunOutButton().whileHeld(new SpinClimberViaButtonCommand(false));
 	}
 }

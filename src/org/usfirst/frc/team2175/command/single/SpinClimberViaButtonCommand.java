@@ -9,14 +9,18 @@ public class SpinClimberViaButtonCommand extends BaseCommand {
 	protected final ClimberSubsystem climberSubsystem;
 	protected final SmartDashboardInfo smartDashboardInfo;
 
-	public SpinClimberViaButtonCommand() {
+	private boolean goingUp;
+
+	public SpinClimberViaButtonCommand(boolean goingUp) {
 		climberSubsystem = ServiceLocator.get(ClimberSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
+		this.goingUp = goingUp;
 	}
 
 	@Override
 	protected void execute() {
-		climberSubsystem.spinClimber(smartDashboardInfo.getNumber(SmartDashboardInfo.CLIMBER_SPEED));
+		String key = (goingUp) ? SmartDashboardInfo.CLIMBER_UP_SPEED : SmartDashboardInfo.CLIMBER_DOWN_SPEED;
+		climberSubsystem.spinClimber(smartDashboardInfo.getNumber(key));
 	}
 
 	@Override
