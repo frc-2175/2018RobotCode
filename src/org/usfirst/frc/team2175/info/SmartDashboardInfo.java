@@ -40,8 +40,8 @@ public class SmartDashboardInfo {
 		putNumber(ROLLER_OUT_SPEED, 0.4, 0.4);
 		putNumber(INTAKE_IN_SPEED, 0.7, 0.7);
 		putNumber(INTAKE_OUT_SPEED, -0.7, -0.7);
-		putNumber(ELEVATOR_MAX_UP_SPEED, 0.8, 0.8);
-		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.6, 0.6);
+		putNumber(ELEVATOR_MAX_UP_SPEED, 1.0, 1.0);
+		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.8, 0.8);
 		putNumber(POSITIVE_DEADBAND, 0.1, 0.1);
 		putNumber(NEGATIVE_DEADBAND, -0.05, -0.01);
 		putNumber(INTAKE_TURN_CUBE_SPEED, 0.5, 0.5);
