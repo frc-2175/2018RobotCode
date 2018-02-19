@@ -1,9 +1,8 @@
-package org.usfirst.frc.team2175.command.autonomous;
+package org.usfirst.frc.team2175.command.single;
 
 import static org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem.clamp;
 
 import org.usfirst.frc.team2175.ServiceLocator;
-import org.usfirst.frc.team2175.command.single.BaseCommand;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 

@@ -14,13 +14,13 @@ import org.usfirst.frc.team2175.command.DefaultCommandFactory;
 import org.usfirst.frc.team2175.command.autonomous.AutonSelector;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.control.JoystickEventMapper;
-import org.usfirst.frc.team2175.info.InfoFactory;
+import org.usfirst.frc.team2175.factory.InfoFactory;
+import org.usfirst.frc.team2175.factory.SubsystemsFactory;
 import org.usfirst.frc.team2175.log.LogServer;
 import org.usfirst.frc.team2175.log.LoggingConfig;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 import org.usfirst.frc.team2175.subsystem.ElevatorSubsystem;
-import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
