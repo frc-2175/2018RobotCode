@@ -6,7 +6,7 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 public class SimpleMoveStraightCommand extends BaseCommand {
 
-	private DrivetrainSubsystem drivetrainSubsystem;
+	private final DrivetrainSubsystem drivetrainSubsystem;
 	private double distance;
 
 	public SimpleMoveStraightCommand() {

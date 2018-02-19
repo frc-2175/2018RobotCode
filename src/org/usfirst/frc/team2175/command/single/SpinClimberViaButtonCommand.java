@@ -6,8 +6,8 @@ import org.usfirst.frc.team2175.subsystem.ClimberSubsystem;
 
 public class SpinClimberViaButtonCommand extends BaseCommand {
 
-	protected ClimberSubsystem climberSubsystem;
-	protected SmartDashboardInfo smartDashboardInfo;
+	protected final ClimberSubsystem climberSubsystem;
+	protected final SmartDashboardInfo smartDashboardInfo;
 
 	public SpinClimberViaButtonCommand() {
 		climberSubsystem = ServiceLocator.get(ClimberSubsystem.class);

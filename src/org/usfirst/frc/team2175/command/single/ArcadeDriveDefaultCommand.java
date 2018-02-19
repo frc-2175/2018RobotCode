@@ -5,8 +5,8 @@ import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 public class ArcadeDriveDefaultCommand extends BaseCommand {
-	private DrivetrainSubsystem drivetrainSubsystem;
-	private DryverStation driverStation;
+	private final DrivetrainSubsystem drivetrainSubsystem;
+	private final DryverStation driverStation;
 
 	public ArcadeDriveDefaultCommand() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);

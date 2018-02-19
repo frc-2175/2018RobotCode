@@ -6,7 +6,7 @@ import org.usfirst.frc.team2175.command.LambdaConditionalCommand;
 import org.usfirst.frc.team2175.control.DryverStation;
 
 public class LeftFieldAutonomousGroup extends BaseCommandGroup {
-	DryverStation driverStation;
+	private final DryverStation driverStation;
 
 	public LeftFieldAutonomousGroup() {
 		driverStation = ServiceLocator.get(DryverStation.class);
