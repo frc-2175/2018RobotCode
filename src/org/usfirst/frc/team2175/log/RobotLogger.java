@@ -55,6 +55,10 @@ public class RobotLogger {
 		loggers = new ArrayList<>();
 
 		File[] listedFiles = workingDirectory.listFiles();
+		if (listedFiles == null) {
+			log.log(Level.SEVERE, "Could not find directory at '" + BASE_DIRECTORY + "'");
+		}
+
 		for (File file : listedFiles) {
 			if (file.isDirectory()) {
 				try {
@@ -71,6 +75,10 @@ public class RobotLogger {
 		new File(BASE_DIRECTORY + matchNumber).mkdirs();
 
 		listedFiles = workingDirectory.listFiles();
+		if (listedFiles == null) {
+			log.log(Level.SEVERE, "Could not find directory at '" + BASE_DIRECTORY + "'");
+		}
+
 		Arrays.sort(listedFiles, (File fileOne, File fileTwo) -> {
 			try {
 				int fileOneNumber = Integer.parseInt(fileOne.getName());
@@ -154,7 +162,6 @@ public class RobotLogger {
 
 	public static Logger getLogger(Object obj) {
 		return Logger.getLogger(obj.getClass().getName());
-
 	}
 
 }

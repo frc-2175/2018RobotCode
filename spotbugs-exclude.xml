@@ -4,5 +4,8 @@
 		<Match>
 			<Package name="netconsole2" />
 		</Match>
+		<Match>
+			<Bug pattern="DMI_HARDCODED_ABSOLUTE_FILENAME" />
+		</Match>
 	</Or>
 </FindBugsFilter>

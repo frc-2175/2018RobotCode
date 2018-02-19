@@ -10,6 +10,7 @@ public class LoggableJoystickButton implements Loggable {
 	private HashMap<String, Object> fields;
 
 	public LoggableJoystickButton(String key, JoystickButton joystickButton) {
+		fields = new HashMap<>();
 		this.joystickButton = joystickButton;
 		this.key = key;
 	}
