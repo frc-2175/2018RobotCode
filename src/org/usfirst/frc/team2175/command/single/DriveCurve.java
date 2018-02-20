@@ -54,8 +54,9 @@ public class DriveCurve extends BaseCommand {
 		double leftSpeed;
 		double rightSpeed;
 		if (decelerate) {
-			leftSpeed = clamp(maxLeftSpeed * decelerate(), 0.5, 1);
-			rightSpeed = clamp(maxRightSpeed * decelerate(), 0.5, 1);
+			double decel = clamp(decelerate(), 0.5, 1);
+			leftSpeed = maxLeftSpeed * decel;
+			rightSpeed = maxRightSpeed * decel;
 		} else {
 			leftSpeed = maxLeftSpeed;
 			rightSpeed = maxRightSpeed;
@@ -82,7 +83,7 @@ public class DriveCurve extends BaseCommand {
 	}
 
 	private double decelerate() {
-		double error = (radians * radius) - drivetrainSubsystem.getAverageDistance();
+		double error = (Math.abs(radians * radius)) - Math.abs(drivetrainSubsystem.getAverageDistance());
 		return clamp(PROPORTIONAL * error, 0, 1);
 	}
 }

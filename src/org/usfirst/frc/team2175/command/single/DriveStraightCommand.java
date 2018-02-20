@@ -48,8 +48,7 @@ public class DriveStraightCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		log.info("Average Distance: " + drivetrainSubsystem.getAverageDistance());
-		return drivetrainSubsystem.getAverageDistance() >= distance;
+		return timeSinceInitialized() > 0.5 && drivetrainSubsystem.getAverageDistance() >= distance;
 	}
 
 	@Override
