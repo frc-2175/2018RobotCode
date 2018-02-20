@@ -24,14 +24,6 @@ public class ElevatorSubsystem extends BaseSubsystem {
 		elevatorMotor.setSelectedSensorPosition(0, 0, 0);
 	}
 
-	public void runElevatorUp() {
-		elevatorMotor.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_ELEVATOR_UP_SPEED));
-	}
-
-	public void runElevatorDown() {
-		elevatorMotor.set(smartDashboardInfo.getNumber(SmartDashboardInfo.RUN_ELEVATOR_DOWN_SPEED));
-	}
-
 	public void runElevator(double axisValue) {
 		if (axisValue < 0) {
 			axisValue *= smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_MAX_DOWN_SPEED);
