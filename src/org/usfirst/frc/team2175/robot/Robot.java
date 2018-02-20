@@ -11,10 +11,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.DefaultCommandFactory;
-import org.usfirst.frc.team2175.command.autonomous.CrossBaselineTimeBasedAutonomous;
-import org.usfirst.frc.team2175.command.autonomous.DoNothingCommandGroup;
-import org.usfirst.frc.team2175.command.autonomous.DriveCurveAutonomous;
-import org.usfirst.frc.team2175.command.autonomous.KurveDriveRightSideOfSwitch;
+import org.usfirst.frc.team2175.command.autonomous.AutonSelector;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.control.JoystickEventMapper;
 import org.usfirst.frc.team2175.info.InfoFactory;
@@ -28,7 +25,6 @@ import org.usfirst.frc.team2175.subsystem.SubsystemsFactory;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -41,11 +37,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	private final Logger log = RobotLogger.getLogger(this);
 	private Command m_autoSelected;
-	private SendableChooser<Command> m_chooser = new SendableChooser<>();
 	private DrivetrainSubsystem drivetrainSubsystem;
 	private ElevatorSubsystem elevatorSubsystem;
 	private RobotLogger robotLogger;
 	private LogServer logServer;
+	private AutonSelector autonSelector;
 
 	@Override
 	public void robotInit() {
@@ -55,11 +51,7 @@ public class Robot extends TimedRobot {
 		InfoFactory.makeAllInfos();
 		new DryverStation();
 		SubsystemsFactory.makeAllSubsystems();
-		m_chooser.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
-		m_chooser.addObject("DriveCurve", new DriveCurveAutonomous());
-		m_chooser.addObject("Dumb Drive", new CrossBaselineTimeBasedAutonomous());
-		m_chooser.addDefault("Do Nothing", new DoNothingCommandGroup());
-		SmartDashboard.putData("Auto choices", m_chooser);
+		autonSelector = new AutonSelector();
 		robotLogger.log();
 		logServer = new LogServer();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
@@ -92,7 +84,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		drivetrainSubsystem.resetAllSensors();
-		m_autoSelected = m_chooser.getSelected();
+		m_autoSelected = autonSelector.getCommand();
 		m_autoSelected.start();
 	}
 
