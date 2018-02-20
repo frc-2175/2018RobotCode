@@ -23,6 +23,7 @@ public class DriveCurve extends BaseCommand {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		radians = Math.toRadians(degrees);
+		drivetrainSubsystem.trainNavx(radians);
 		this.radius = radius;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;

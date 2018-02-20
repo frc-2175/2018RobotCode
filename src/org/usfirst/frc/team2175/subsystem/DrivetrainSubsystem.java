@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2175.subsystem;
 
+import org.usfirst.frc.team2175.GyroHandler;
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
@@ -8,10 +9,8 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
@@ -33,7 +32,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
-	private AHRS navx;
+	private GyroHandler navx;
 	private AnalogInput psiSensor;
 
 	public DrivetrainSubsystem() {
@@ -62,7 +61,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		leftMaster.setSelectedSensorPosition(0, 0, 0);
 		rightMaster.setSelectedSensorPosition(0, 0, 0);
 
-		navx = new AHRS(SPI.Port.kMXP);
+		navx = new GyroHandler();
 		navx.reset();
 
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
@@ -218,5 +217,9 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public double getDistance() {
 		return distance;
+	}
+
+	public void trainNavx(double radians) {
+		navx.giveRadians(radians);
 	}
 }
