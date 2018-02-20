@@ -19,6 +19,7 @@ public class DriveCurve extends BaseCommand {
 	private final double PROPORTIONAL = 1.0 / 12.0;
 
 	public DriveCurve(double radius, double degrees, double maxSpeed, boolean accelerate, boolean decelerate) {
+		super();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		radians = Math.toRadians(degrees);
@@ -81,7 +82,7 @@ public class DriveCurve extends BaseCommand {
 	}
 
 	private double decelerate() {
-		double error = (radians * radius) - drivetrainSubsystem.getDistance();
+		double error = (radians * radius) - drivetrainSubsystem.getAverageDistance();
 		return clamp(PROPORTIONAL * error, 0, 1);
 	}
 }

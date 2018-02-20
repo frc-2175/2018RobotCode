@@ -7,19 +7,18 @@ import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 public class DriveStraightCommand extends BaseCommand {
-	private double speed, distance, distanceTraveled, accelerationRate;
+	private double speed, distance, accelerationRate;
 	private boolean accelerate, decelerate;
 	public static final double PROPORTIONAL = 1.0 / 12.0;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 
 	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
+		super();
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
-		distanceTraveled = 0;
-		accelerationRate = 0;
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 
@@ -28,7 +27,7 @@ public class DriveStraightCommand extends BaseCommand {
 
 	@Override
 	protected void initialize() {
-		distanceTraveled = 0;
+		super.initialize();
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.DRIVE_STRAIGHT_ACCELERATION_RATE);
 		drivetrainSubsystem.resetAllSensors();
 	}
@@ -45,16 +44,17 @@ public class DriveStraightCommand extends BaseCommand {
 			moveValue *= accelerate();
 		}
 		drivetrainSubsystem.straightArcadeDrive(moveValue);
-		distanceTraveled = drivetrainSubsystem.getDistance();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return distanceTraveled >= distance;
+		log.info("Average Distance: " + drivetrainSubsystem.getAverageDistance());
+		return drivetrainSubsystem.getAverageDistance() >= distance;
 	}
 
 	@Override
 	protected void end() {
+		super.end();
 		if (decelerate) {
 			drivetrainSubsystem.stopAllMotors();
 		}

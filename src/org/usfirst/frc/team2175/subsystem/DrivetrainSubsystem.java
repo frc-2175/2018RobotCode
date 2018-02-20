@@ -161,6 +161,10 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return rightMaster.getSelectedSensorPosition(0) * INCHES_PER_TICK;
 	}
 
+	public double getAverageDistance() {
+		return (getRightEncoderDistance() + getLeftEncoderDistance()) / 2;
+	}
+
 	/**
 	 * Positive values = clockwise
 	 */
