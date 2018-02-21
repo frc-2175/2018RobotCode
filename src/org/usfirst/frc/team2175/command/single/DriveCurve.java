@@ -23,7 +23,6 @@ public class DriveCurve extends BaseCommand {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		radians = Math.toRadians(degrees);
-		drivetrainSubsystem.trainNavx(radians);
 		this.radius = radius;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
@@ -55,7 +54,7 @@ public class DriveCurve extends BaseCommand {
 		double leftSpeed;
 		double rightSpeed;
 		if (decelerate) {
-			double decel = clamp(decelerate(), 0.5, 1);
+			double decel = clamp(decelerate(), 0.3, 1);
 			leftSpeed = maxLeftSpeed * decel;
 			rightSpeed = maxRightSpeed * decel;
 		} else {
@@ -75,8 +74,10 @@ public class DriveCurve extends BaseCommand {
 
 	@Override
 	public boolean isFinished() {
-		double targetDiff = Math.toRadians(Math.abs(drivetrainSubsystem.getGyroValue())) - Math.abs(radians);
-		return targetDiff > 0;
+		double gyro = (decelerate) ? drivetrainSubsystem.getGyroValueUnadjusted()
+			: drivetrainSubsystem.getGyroValueAdjusted();
+		double targetDiff = Math.toRadians(Math.abs(gyro)) - Math.abs(radians);
+		return targetDiff > 0 && timeSinceInitialized() > .3;
 	}
 
 	private double accelerate() {

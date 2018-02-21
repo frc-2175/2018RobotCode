@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2175.subsystem;
 
-import org.usfirst.frc.team2175.GyroHandler;
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
@@ -9,8 +8,10 @@ import org.usfirst.frc.team2175.info.RobotInfo;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
@@ -32,7 +33,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
-	private GyroHandler navx;
+	private AHRS navx;
 	private AnalogInput psiSensor;
 
 	public DrivetrainSubsystem() {
@@ -61,7 +62,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		leftMaster.setSelectedSensorPosition(0, 0, 0);
 		rightMaster.setSelectedSensorPosition(0, 0, 0);
 
-		navx = new GyroHandler();
+		navx = new AHRS(SPI.Port.kMXP);
 		navx.reset();
 
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
@@ -167,7 +168,12 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	/**
 	 * Positive values = clockwise
 	 */
-	public double getGyroValue() {
+	public double getGyroValueAdjusted() {
+		double latency = smartDashboardInfo.getNumber(SmartDashboardInfo.GYRO_LATENCY);
+		return navx.getAngle() + latency * navx.getRate() * navx.getActualUpdateRate();
+	}
+
+	public double getGyroValueUnadjusted() {
 		return navx.getAngle();
 	}
 
@@ -202,7 +208,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public void straightArcadeDrive(double moveValue) {
 		double turnCorrection = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
-		arcadeDrive(moveValue, -(getGyroValue() / turnCorrection));
+		arcadeDrive(moveValue, -(getGyroValueUnadjusted() / turnCorrection));
 	}
 
 	public void tankDrive(double leftSpeed, double rightSpeed) {
@@ -217,9 +223,5 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public double getDistance() {
 		return distance;
-	}
-
-	public void trainNavx(double radians) {
-		navx.giveRadians(radians);
 	}
 }

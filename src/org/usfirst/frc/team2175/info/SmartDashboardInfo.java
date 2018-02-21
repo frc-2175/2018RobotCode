@@ -29,6 +29,7 @@ public class SmartDashboardInfo {
 	public static final String INTAKE_SLOW_SPEED = "intake.speed.slow";
 	public static final String CLIMBER_UP_SPEED = "climber.speed.up";
 	public static final String CLIMBER_DOWN_SPEED = "climber.speed.down";
+	public static final String GYRO_LATENCY = "gyro.latency";
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -55,6 +56,7 @@ public class SmartDashboardInfo {
 		putNumber(INTAKE_SLOW_SPEED, -0.4, -0.4);
 		putNumber(CLIMBER_UP_SPEED, 0.7, 0.7);
 		putNumber(CLIMBER_DOWN_SPEED, -0.5, -0.5);
+		putNumber(GYRO_LATENCY, 0.2, 0.2);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {

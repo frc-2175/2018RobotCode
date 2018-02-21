@@ -6,8 +6,8 @@ import org.usfirst.frc.team2175.command.single.DriveStraightCommand;
 
 public class TestCurveCommandGroup extends BaseCommandGroup {
 	public TestCurveCommandGroup() {
-		addSequential(new DriveCurve(36, 90, 0.7, true, false));
-		addSequential(new DriveStraightCommand(-0.7, 12.0, false, false));
-		addSequential(new DriveCurve(36, 90, 0.7, false, true));
+		addSequential(new DriveCurve(36, 90, 1, true, false));
+		addSequential(new DriveStraightCommand(0.7, 24.0, false, false));
+		addSequential(new DriveCurve(-36, 90, 1, false, true));
 	}
 }

@@ -43,7 +43,7 @@ public class DriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		drivetrainSubsystem.straightArcadeDrive(moveValue);
+		drivetrainSubsystem.blendedDrive(moveValue, 0);
 	}
 
 	@Override
