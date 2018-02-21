@@ -54,7 +54,7 @@ public class DriveCurve extends BaseCommand {
 		double leftSpeed;
 		double rightSpeed;
 		if (decelerate) {
-			double decel = clamp(decelerate(), 0.3, 1);
+			double decel = clamp(decelerate(), 0.6, 1);
 			leftSpeed = maxLeftSpeed * decel;
 			rightSpeed = maxRightSpeed * decel;
 		} else {

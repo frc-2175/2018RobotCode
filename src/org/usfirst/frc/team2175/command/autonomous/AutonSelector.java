@@ -36,6 +36,8 @@ public class AutonSelector {
 		temp.addObject("DriveCurve", new DriveCurveAutonomous());
 		temp.addObject("Dumb Drive", new CrossBaselineTimeBasedAutonomous());
 		temp.addObject("TestCurve", new TestCurveCommandGroup());
+		temp.addObject("CenterLeft", new CenterSwitchAutonomous(true));
+		temp.addObject("CenterRight", new CenterSwitchAutonomous(false));
 		SmartDashboard.putData("Temporary", temp);
 	}
 
