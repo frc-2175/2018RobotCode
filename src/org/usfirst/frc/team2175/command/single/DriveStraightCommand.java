@@ -48,7 +48,7 @@ public class DriveStraightCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return timeSinceInitialized() > 0.5 && drivetrainSubsystem.getAverageDistance() >= distance;
+		return timeSinceInitialized() > 0.5 && Math.abs(drivetrainSubsystem.getAverageDistance()) >= Math.abs(distance);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class DriveStraightCommand extends BaseCommand {
 	}
 
 	private double decelerate() {
-		double error = distance - drivetrainSubsystem.getDistance();
+		double error = distance;
 		return clamp(PROPORTIONAL * error, 0, 1);
 	}
 }

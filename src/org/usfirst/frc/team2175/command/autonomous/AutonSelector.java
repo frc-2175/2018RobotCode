@@ -32,12 +32,12 @@ public class AutonSelector {
 
 	private void addTemp() {
 		temp.addDefault("Do Nothing", new DoNothingCommandGroup());
-		temp.addObject("kurveRight", new KurveDriveRightSideOfSwitch());
 		temp.addObject("DriveCurve", new DriveCurveAutonomous());
 		temp.addObject("Dumb Drive", new CrossBaselineTimeBasedAutonomous());
 		temp.addObject("TestCurve", new TestCurveCommandGroup());
 		temp.addObject("CenterLeft", new CenterSwitchAutonomous(true));
 		temp.addObject("CenterRight", new CenterSwitchAutonomous(false));
+		temp.addObject("SwitchScaleLeft", new ScaleSwitchAutonomous(true));
 		SmartDashboard.putData("Temporary", temp);
 	}
 
