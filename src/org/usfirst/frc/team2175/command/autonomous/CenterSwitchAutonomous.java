@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterSwitchAutonomous extends CommandGroup {
 	public CenterSwitchAutonomous(boolean isLeft) {
 		double sign = (isLeft) ? -1 : 1;
+		addParallel(new MoveIntakeMiddleCommand());
 		addSequential(new SCurveCommandGroup(sign * (40), 130 - 39.25, 18));
-		addSequential(new MoveIntakeMiddleCommand());
 		addSequential(new SpinIntakeOutCommand(), 2);
 	}
 }
