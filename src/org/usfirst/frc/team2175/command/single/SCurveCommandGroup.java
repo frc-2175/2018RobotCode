@@ -25,13 +25,14 @@ public class SCurveCommandGroup extends BaseCommandGroup {
 		double f = Math.sqrt(h * h - r * r);
 		double d = 2 * f;
 
-		double phi = Math.atan(dy / r);
+		double p = Math.sqrt((dy * dy) + (dx - 3 * r) * (dx - 3 * r));
+		double phi = Math.acos((-p * p + 4 * h * h + r * r) / (4 * h * r));
 		double mu = Math.atan(f / r);
 		double theta = Math.PI - phi - mu;
 
 		addSequential(new DriveCurve(sign * r, Math.toDegrees(theta), 1, true, false));
 		if (doSecondStep) {
-			addSequential(new DriveStraightCommand(.7, d, false, false));
+			addSequential(new DriveStraightCommand(.8, d, false, false));
 		}
 		if (doSecondCurve) {
 			addSequential(new DriveCurve(-sign * r, Math.toDegrees(theta), 1, false, true));
