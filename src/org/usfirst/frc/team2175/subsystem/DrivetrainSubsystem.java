@@ -30,6 +30,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
 		rightVirtualSpeedController);
+	private final AnalogInput rightUltra;
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
@@ -45,6 +46,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		rightSlaveOne = robotInfo.get(RobotInfo.RIGHT_MOTOR_SLAVE1);
 		rightSlaveTwo = robotInfo.get(RobotInfo.RIGHT_MOTOR_SLAVE2);
 		driveShifters = robotInfo.get(RobotInfo.DRIVE_SHIFTERS);
+
+		rightUltra = robotInfo.get(RobotInfo.RIGHT_ULTRA);
 
 		leftSlaveOne.follow(leftMaster);
 		leftSlaveTwo.follow(leftMaster);
