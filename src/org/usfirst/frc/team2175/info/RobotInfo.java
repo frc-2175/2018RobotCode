@@ -37,7 +37,8 @@ public class RobotInfo {
 	public static final String RIGHT_MOTOR_SLAVE1 = "drivetrain.motor.right.slave1";
 	public static final String RIGHT_MOTOR_SLAVE2 = "drivetrain.motor.right.slave2";
 	public static final String ROLLER_BAR_MOTOR = "roller.bar.motor";
-	public static final String ELEVATOR_MOTOR = "elevator.motor1";
+	public static final String ELEVATOR_MASTER_MOTOR = "elevator.motor.master";
+	public static final String ELEVATOR_SLAVE_MOTOR = "elevator.motor.slave";
 	public static final String LEFT_JOYSTICK = "driverstation.joystick.left";
 	public static final String RIGHT_JOYSTICK = "driverstation.joystick.right";
 	public static final String GAMEPAD = "driverstation.gamepad";
@@ -71,10 +72,11 @@ public class RobotInfo {
 		put(RIGHT_MOTOR_SLAVE1, victor(new WPI_VictorSPX(2)), talon(new WPI_TalonSRX(2)));
 		put(RIGHT_MOTOR_SLAVE2, victor(new WPI_VictorSPX(3)), talon(new WPI_TalonSRX(3)));
 		put(ROLLER_BAR_MOTOR, victor(new WPI_VictorSPX(6)), talon(new WPI_TalonSRX(6)));
-		put(CLIMBER_MASTER, victor(new WPI_VictorSPX(9)), talon(new WPI_TalonSRX(9)));
+		put(CLIMBER_MASTER, victor(new WPI_VictorSPX(10)), talon(new WPI_TalonSRX(10)));
 		put(INTAKE_LEFT_MOTOR, talon(new WPI_TalonSRX(8)));
 		put(INTAKE_RIGHT_MOTOR, talon(new WPI_TalonSRX(7)));
-		put(ELEVATOR_MOTOR, talon(new WPI_TalonSRX(5)));
+		put(ELEVATOR_MASTER_MOTOR, talon(new WPI_TalonSRX(5)));
+		put(ELEVATOR_SLAVE_MOTOR, victor(new WPI_VictorSPX(9)), talon(new WPI_TalonSRX(9)));
 		put(INTAKE_PISTON1, () -> new SolenoidWrapper(0, 1), () -> new SolenoidWrapper(0, 1));
 		put(INTAKE_PISTON2, () -> new SolenoidWrapper(2, 3), () -> new SolenoidWrapper(2, 3));
 		put(DRIVE_SHIFTERS, () -> new SolenoidWrapper(4), () -> new SolenoidWrapper(4));

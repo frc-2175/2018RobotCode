@@ -8,7 +8,8 @@ import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 public class ElevatorSubsystem extends BaseSubsystem {
-	private final MotorWrapper elevatorMotor;
+	private final MotorWrapper masterMotor;
+	private final MotorWrapper slaveMotor;
 	private final RobotInfo robotInfo;
 	private final SmartDashboardInfo smartDashboardInfo;
 	public static final double SPROCKET_DIAMETER_INCHES = 2.688;
@@ -19,9 +20,11 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	public ElevatorSubsystem() {
 		robotInfo = ServiceLocator.get(RobotInfo.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
-		elevatorMotor = robotInfo.get(RobotInfo.ELEVATOR_MOTOR);
-		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-		elevatorMotor.setSelectedSensorPosition(0, 0, 0);
+		masterMotor = robotInfo.get(RobotInfo.ELEVATOR_MASTER_MOTOR);
+		slaveMotor = robotInfo.get(RobotInfo.ELEVATOR_SLAVE_MOTOR);
+		slaveMotor.follow(masterMotor);
+		masterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		masterMotor.setSelectedSensorPosition(0, 0, 0);
 	}
 
 	public void runElevator(double axisValue) {
@@ -30,14 +33,14 @@ public class ElevatorSubsystem extends BaseSubsystem {
 		} else {
 			axisValue *= smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_MAX_UP_SPEED);
 		}
-		elevatorMotor.set(axisValue);
+		masterMotor.set(axisValue);
 	}
 
 	public void stopElevator() {
-		elevatorMotor.set(0);
+		masterMotor.set(0);
 	}
 
 	public double getInchesTraveled() {
-		return -INCHES_PER_TICK * elevatorMotor.getSelectedSensorPosition(0) / 35;
+		return -INCHES_PER_TICK * masterMotor.getSelectedSensorPosition(0) / 35;
 	}
 }
