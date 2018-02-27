@@ -32,17 +32,14 @@ public class AutonSelector {
 
 	private void addTemp() {
 		temp.addDefault("Do Nothing", new DoNothingCommandGroup());
-		temp.addObject("DriveCurve", new DriveCurveAutonomous());
-		temp.addObject("Dumb Drive", new CrossBaselineTimeBasedAutonomous());
 		temp.addObject("TestCurve", new TestCurveCommandGroup());
-		temp.addObject("CenterLeft", new CenterSwitchAutonomous(true));
-		temp.addObject("CenterRight", new CenterSwitchAutonomous(false));
-		temp.addObject("SwitchScaleLeft", new ScaleSwitchAutonomous(true));
 		SmartDashboard.putData("Temporary", temp);
 	}
 
 	private void addSwitchAndScale() {
 		switchAndScale.addDefault("Do Nothing", new DoNothingCommandGroup());
+		switchAndScale.addObject("SwitchScaleLeft", new ScaleSwitchAutonomous(true));
+
 		SmartDashboard.putData("SwitchAndScale", switchAndScale);
 	}
 
@@ -59,11 +56,14 @@ public class AutonSelector {
 
 	private void addNeither() {
 		neither.addDefault("Do Nothing", new DoNothingCommandGroup());
+		neither.addObject("Dumb Drive", new CrossBaselineTimeBasedAutonomous());
 		SmartDashboard.putData("Neither", neither);
 	}
 
 	private void addCenter() {
 		center.addDefault("Do Nothing", new DoNothingCommandGroup());
+		center.addObject("CenterLeft", new CenterSwitchAutonomous(true));
+		center.addObject("CenterRight", new CenterSwitchAutonomous(false));
 		SmartDashboard.putData("Center", center);
 	}
 
