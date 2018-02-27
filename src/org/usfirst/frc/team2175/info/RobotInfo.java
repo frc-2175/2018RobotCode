@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
+import org.usfirst.frc.team2175.UltrasonicWrapper;
 import org.usfirst.frc.team2175.log.LoggableAnalogInput;
 import org.usfirst.frc.team2175.log.LoggableJoystick;
 import org.usfirst.frc.team2175.log.LoggableJoystickButton;
@@ -86,7 +87,7 @@ public class RobotInfo {
 		put(LEFT_JOYSTICK, new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1));
 		put(GAMEPAD, new Joystick(2));
-		put(RIGHT_ULTRA, new AnalogInput(1));
+		put(RIGHT_ULTRA, () -> new UltrasonicWrapper(1, true), () -> new UltrasonicWrapper(1, true));
 	}
 
 	private MotorWrapper talon(WPI_TalonSRX talon) {
