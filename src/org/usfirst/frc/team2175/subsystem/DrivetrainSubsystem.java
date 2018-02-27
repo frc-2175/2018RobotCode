@@ -3,6 +3,7 @@ package org.usfirst.frc.team2175.subsystem;
 import org.usfirst.frc.team2175.MotorWrapper;
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.SolenoidWrapper;
+import org.usfirst.frc.team2175.UltrasonicWrapper;
 import org.usfirst.frc.team2175.VirtualSpeedController;
 import org.usfirst.frc.team2175.info.RobotInfo;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
@@ -30,7 +31,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
 		rightVirtualSpeedController);
-	private final AnalogInput rightUltra;
+	private final UltrasonicWrapper rightUltra;
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
@@ -201,20 +202,10 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public void straightArcadeDrive(double moveValue) {
 		double turnCorrection = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
-		arcadeDrive(-moveValue, (getGyroValueUnadjusted() / 45));
+		arcadeDrive(-moveValue, (getGyroValueUnadjusted() / turnCorrection));
 	}
 
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		robotDrive.tankDrive(-leftSpeed, -rightSpeed);
-	}
-
-	double theta;
-
-	public void setTheta(double val) {
-		theta = val;
-	}
-
-	public double getTheta() {
-		return theta;
 	}
 }
