@@ -50,6 +50,7 @@ public class RobotInfo {
 	public static final String INTAKE_PISTON2 = "intake.piston2";
 	public static final String DRIVE_SHIFTERS = "drive.shifters";
 	public static final String PSI_SENSOR = "psi.sensor";
+	public static final String LEFT_ULTRA = "left.sensor.ultra";
 	public static final String RIGHT_ULTRA = "right.sensor.ultra";
 
 	private HashMap<String, Object> info;
@@ -87,7 +88,8 @@ public class RobotInfo {
 		put(LEFT_JOYSTICK, new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1));
 		put(GAMEPAD, new Joystick(2));
-		put(RIGHT_ULTRA, () -> new UltrasonicWrapper(1, true), () -> new UltrasonicWrapper(1, true));
+		put(LEFT_ULTRA, () -> new UltrasonicWrapper(1, true), () -> new UltrasonicWrapper(1, true));
+		put(RIGHT_ULTRA, () -> new UltrasonicWrapper(2, true), () -> new UltrasonicWrapper(2, true));
 	}
 
 	private MotorWrapper talon(WPI_TalonSRX talon) {

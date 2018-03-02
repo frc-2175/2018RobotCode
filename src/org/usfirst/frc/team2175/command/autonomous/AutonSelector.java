@@ -2,7 +2,9 @@ package org.usfirst.frc.team2175.command.autonomous;
 
 import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.command.LambdaConditionalCommand;
+import org.usfirst.frc.team2175.command.single.ElevatorAutonCommand;
 import org.usfirst.frc.team2175.control.DryverStation;
+import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -18,9 +20,11 @@ public class AutonSelector {
 	private SendableChooser<Command> neither = new SendableChooser<>();
 	private SendableChooser<Command> temp = new SendableChooser<>();
 	private SendableChooser<Command> center = new SendableChooser<>();
+	private SmartDashboardInfo smartDashboardInfo;
 
 	public AutonSelector() {
 		driverStation = ServiceLocator.get(DryverStation.class);
+		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		addSides();
 		addSwitchAndScale();
 		addJustSwitch();
@@ -33,6 +37,8 @@ public class AutonSelector {
 	private void addTemp() {
 		temp.addDefault("Do Nothing", new DoNothingCommandGroup());
 		temp.addObject("TestCurve", new TestCurveCommandGroup());
+		temp.addObject("Elevator To 5ft", new ElevatorAutonCommand(
+			smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_MAX_UP_SPEED), 60, true, true));
 		SmartDashboard.putData("Temporary", temp);
 	}
 

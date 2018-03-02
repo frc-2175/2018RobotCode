@@ -31,6 +31,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private static VirtualSpeedController rightVirtualSpeedController = new VirtualSpeedController();
 	private static DifferentialDrive virtualRobotDrive = new DifferentialDrive(leftVirtualSpeedController,
 		rightVirtualSpeedController);
+	private final UltrasonicWrapper leftUltra;
 	private final UltrasonicWrapper rightUltra;
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
@@ -48,6 +49,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		rightSlaveTwo = robotInfo.get(RobotInfo.RIGHT_MOTOR_SLAVE2);
 		driveShifters = robotInfo.get(RobotInfo.DRIVE_SHIFTERS);
 
+		leftUltra = robotInfo.get(RobotInfo.LEFT_ULTRA);
 		rightUltra = robotInfo.get(RobotInfo.RIGHT_ULTRA);
 
 		leftSlaveOne.follow(leftMaster);
@@ -207,5 +209,13 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		robotDrive.tankDrive(-leftSpeed, -rightSpeed);
+	}
+
+	public double getLeftUltraVal() {
+		return leftUltra.getDistance();
+	}
+
+	public double getRightUltraVal() {
+		return rightUltra.getDistance();
 	}
 }
