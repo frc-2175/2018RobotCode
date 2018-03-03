@@ -13,6 +13,7 @@ import org.usfirst.frc.team2175.log.LoggableJoystick;
 import org.usfirst.frc.team2175.log.LoggableJoystickButton;
 import org.usfirst.frc.team2175.log.LoggableSolenoid;
 import org.usfirst.frc.team2175.log.LoggableTalonSRX;
+import org.usfirst.frc.team2175.log.LoggableUltrasonic;
 import org.usfirst.frc.team2175.log.LoggableVictorSPX;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.property.PropertiesLoader;
@@ -130,6 +131,8 @@ public class RobotInfo {
 			robotLogger.addLoggable(new LoggableJoystickButton(key, (JoystickButton) obj));
 		} else if (obj.getClass() == AnalogInput.class) {
 			robotLogger.addLoggable(new LoggableAnalogInput(key, (AnalogInput) obj));
+		} else if (obj.getClass() == UltrasonicWrapper.class) {
+			robotLogger.addLoggable(new LoggableUltrasonic(key, (UltrasonicWrapper) obj));
 		} else if (obj.getClass() == MotorWrapper.class) {
 			MotorWrapper mw = (MotorWrapper) obj;
 			roboLog(key, mw.getMotor());
