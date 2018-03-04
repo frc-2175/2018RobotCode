@@ -4,7 +4,7 @@ import org.usfirst.frc.team2175.command.BaseCommandGroup;
 
 public class SCurveCommandGroup extends BaseCommandGroup {
 
-	public SCurveCommandGroup(double dx, double dy, double r) {
+	public SCurveCommandGroup(double dx, double dy, double r, boolean accelerate, boolean decelerate) {
 		double sign = Math.signum(dx);
 		dx = Math.abs(dx);
 
@@ -18,8 +18,8 @@ public class SCurveCommandGroup extends BaseCommandGroup {
 		double mu = Math.atan(f / r);
 		double theta = Math.PI - phi - mu;
 
-		addSequential(new DriveCurve(sign * r, Math.toDegrees(theta), 1, true, false));
+		addSequential(new DriveCurve(sign * r, Math.toDegrees(theta), 1, accelerate, false));
 		addSequential(new DriveStraightCommand(.8, d, false, false));
-		addSequential(new DriveCurve(-sign * r, Math.toDegrees(theta), 1, false, true));
+		addSequential(new DriveCurve(-sign * r, Math.toDegrees(theta), 1, false, decelerate));
 	}
 }

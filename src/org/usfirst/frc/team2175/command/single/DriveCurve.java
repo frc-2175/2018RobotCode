@@ -11,7 +11,6 @@ public class DriveCurve extends BaseCommand {
 	private double radians;
 	private double maxLeftSpeed;
 	private double maxRightSpeed;
-	private final double widthOfBot = 26.125;
 	private double accelerationRate;
 	private double radius;
 	private boolean accelerate, decelerate;
@@ -26,8 +25,8 @@ public class DriveCurve extends BaseCommand {
 		this.radius = radius;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
-		double r2 = (2 * radius - widthOfBot);
-		double r1 = (2 * radius + widthOfBot);
+		double r2 = (2 * radius - DrivetrainSubsystem.WIDTH_OF_BOT);
+		double r1 = (2 * radius + DrivetrainSubsystem.WIDTH_OF_BOT);
 		boolean radiusPositive = radius > 0;
 		if (radiusPositive) {
 			double wheelRatio = r2 / r1;

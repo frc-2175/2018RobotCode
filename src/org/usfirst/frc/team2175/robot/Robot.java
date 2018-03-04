@@ -66,6 +66,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("LeftEncoder", drivetrainSubsystem.getLeftEncoderDistance());
 		SmartDashboard.putNumber("RightEncoder", drivetrainSubsystem.getRightEncoderDistance());
 		SmartDashboard.putNumber("ElevatorEncoder", elevatorSubsystem.getInchesTraveled());
+		SmartDashboard.putNumber("Left Ultrasonic Sensor Value", drivetrainSubsystem.getLeftUltraVal());
 		SmartDashboard.putNumber("gyroAdjusted", drivetrainSubsystem.getGyroValueAdjusted());
 		SmartDashboard.putNumber("gyroUnadjusted", drivetrainSubsystem.getGyroValueUnadjusted());
 	}

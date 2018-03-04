@@ -39,6 +39,12 @@ public class AutonSelector {
 		temp.addObject("TestCurve", new TestCurveCommandGroup());
 		temp.addObject("Elevator To 5ft", new ElevatorAutonCommand(
 			smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_MAX_UP_SPEED), 60, true, true));
+		temp.addObject("CenterLeft", new CenterSwitchAutonomous(true));
+		temp.addObject("CenterRight", new CenterSwitchAutonomous(false));
+		temp.addObject("SwitchScaleLeft", new ScaleSwitchAutonomous(true));
+		temp.addObject("SideSwitchLeft", new SideSwitchAutonomous(true));
+		temp.addObject("SideSwitchRight", new SideSwitchAutonomous(false));
+		temp.addObject("LeftUltrasonicStraightFiveFeet", new TestUltrasonicDriveStraightAutonomous(true));
 		SmartDashboard.putData("Temporary", temp);
 	}
 

@@ -34,6 +34,9 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private final UltrasonicWrapper leftUltra;
 	private final UltrasonicWrapper rightUltra;
 
+	public static final double WIDTH_OF_BOT = 26.125;
+	public static final double LENGTH_OF_BOT_WITH_BUMPERS = 39.25;
+
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
 	private AHRS navx;

@@ -89,7 +89,7 @@ public class RobotInfo {
 		put(LEFT_JOYSTICK, new Joystick(0));
 		put(RIGHT_JOYSTICK, new Joystick(1));
 		put(GAMEPAD, new Joystick(2));
-		put(LEFT_ULTRA, () -> new UltrasonicWrapper(1, true), () -> new UltrasonicWrapper(1, true));
+		put(LEFT_ULTRA, () -> new UltrasonicWrapper(1, false), () -> new UltrasonicWrapper(1, false));
 		put(RIGHT_ULTRA, () -> new UltrasonicWrapper(2, true), () -> new UltrasonicWrapper(2, true));
 	}
 

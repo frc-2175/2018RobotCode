@@ -9,7 +9,8 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 public class UltrasonicDriveStraightCommand extends BaseCommand {
 	private double speed, distance, accelerationRate, distanceFromWall;
 	private boolean accelerate, decelerate, isLeftSide;
-	public static final double PROPORTIONAL = 1.0 / 12.0;
+	public static final double DECELERATE_PROPORTIONAL = 1 / 36.0;
+	public static final double CORRECTION_PROPORTIONAL = 0.15 / 12.0;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 
@@ -52,7 +53,17 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 		} else {
 			wantedDirection = (distanceFromWall - drivetrainSubsystem.getRightUltraVal());
 		}
-		drivetrainSubsystem.blendedDrive(moveValue, (wantedDirection) / 30);
+
+		if (drivetrainSubsystem.getAverageDistance() < 24) {
+			wantedDirection = 0;
+		}
+
+		if (drivetrainSubsystem.getGyroValueUnadjusted() > 2 && wantedDirection > 0) {
+			wantedDirection = 0;
+		} else if (drivetrainSubsystem.getGyroValueUnadjusted() < -2 && wantedDirection < 0) {
+			wantedDirection = 0;
+		}
+		drivetrainSubsystem.blendedDrive(moveValue, clamp(wantedDirection * CORRECTION_PROPORTIONAL, -0.15, 0.15));
 	}
 
 	@Override
@@ -73,7 +84,7 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 	}
 
 	private double decelerate() {
-		double error = distance;
-		return clamp(PROPORTIONAL * error, 0, 1);
+		double error = distance - drivetrainSubsystem.getAverageDistance();
+		return clamp(DECELERATE_PROPORTIONAL * error, 0, 1);
 	}
 }
