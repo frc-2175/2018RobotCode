@@ -21,6 +21,7 @@ import org.usfirst.frc.team2175.log.LoggingConfig;
 import org.usfirst.frc.team2175.log.RobotLogger;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 import org.usfirst.frc.team2175.subsystem.ElevatorSubsystem;
+import org.usfirst.frc.team2175.subsystem.LimeLight;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -58,6 +59,8 @@ public class Robot extends TimedRobot {
 		elevatorSubsystem = ServiceLocator.get(ElevatorSubsystem.class);
 		new JoystickEventMapper();
 		new DefaultCommandFactory();
+
+		logServer.runServer();
 	}
 
 	@Override
@@ -65,10 +68,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("AutoPopulate/PSI Value", drivetrainSubsystem.getPSIValue());
 		SmartDashboard.putNumber("LeftEncoder", drivetrainSubsystem.getLeftEncoderDistance());
 		SmartDashboard.putNumber("RightEncoder", drivetrainSubsystem.getRightEncoderDistance());
-		SmartDashboard.putNumber("ElevatorEncoder", elevatorSubsystem.getInchesTraveled());
 		SmartDashboard.putNumber("Left Ultrasonic Sensor Value", drivetrainSubsystem.getLeftUltraVal());
 		SmartDashboard.putNumber("gyroAdjusted", drivetrainSubsystem.getGyroValueAdjusted());
 		SmartDashboard.putNumber("gyroUnadjusted", drivetrainSubsystem.getGyroValueUnadjusted());
+
+		SmartDashboard.putNumber("TX", LimeLight.getTx());
+		SmartDashboard.putNumber("TY", LimeLight.getTy());
+		SmartDashboard.putNumber("TS", LimeLight.getTs());
 	}
 
 	@Override
@@ -113,7 +119,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testInit() {
 		robotLogger.moveLogFile();
-		logServer.runServer();
 	}
 
 	@Override

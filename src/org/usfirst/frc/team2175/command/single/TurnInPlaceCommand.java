@@ -9,10 +9,9 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 public class TurnInPlaceCommand extends BaseCommand {
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private double degrees;
-	private double maxLeftSpeed;
-	private double maxRightSpeed;
 	private double accelerationRate;
 	private boolean accelerate, decelerate;
+	private double speed;
 	private final SmartDashboardInfo smartDashboardInfo;
 	private final double PROPORTIONAL = 2.0 / 12.0;
 
@@ -21,6 +20,7 @@ public class TurnInPlaceCommand extends BaseCommand {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		this.degrees = degrees;
+		this.speed = maxSpeed;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
 
@@ -36,25 +36,16 @@ public class TurnInPlaceCommand extends BaseCommand {
 
 	@Override
 	public void execute() {
-		double leftSpeed;
-		double rightSpeed;
+		double turnVal;
 		if (decelerate) {
-			double decel = clamp(decelerate(), 0.5, 1);
-			leftSpeed = maxLeftSpeed * decel;
-			rightSpeed = maxRightSpeed * decel;
+			turnVal = clamp(decelerate() * speed, 0.5, speed);
 		} else {
-			leftSpeed = maxLeftSpeed;
-			rightSpeed = maxRightSpeed;
+			turnVal = speed;
 		}
 		if (accelerate) {
-			leftSpeed = maxLeftSpeed * accelerate();
-			rightSpeed = maxRightSpeed * accelerate();
+			turnVal *= accelerate();
 		}
-		if (degrees > 0) {
-			drivetrainSubsystem.tankDrive(leftSpeed, -rightSpeed);
-		} else {
-			drivetrainSubsystem.tankDrive(-leftSpeed, rightSpeed);
-		}
+		drivetrainSubsystem.blendedDrive(0, Math.signum(degrees) * turnVal);
 	}
 
 	@Override

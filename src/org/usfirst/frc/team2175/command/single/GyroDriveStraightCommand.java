@@ -6,23 +6,19 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
-public class UltrasonicDriveStraightCommand extends BaseCommand {
-	private double speed, distance, accelerationRate, distanceFromWall;
-	private boolean accelerate, decelerate, isLeftSide;
-	public static final double DECELERATE_PROPORTIONAL = 1 / 36.0;
-	public static final double CORRECTION_PROPORTIONAL = 0.15 / 12.0;
+public class GyroDriveStraightCommand extends BaseCommand {
+	private double speed, distance, accelerationRate;
+	private boolean accelerate, decelerate;
+	public static final double PROPORTIONAL = 1.0 / 24.0;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 
-	public UltrasonicDriveStraightCommand(double speed, double distance, double distanceFromWall, boolean isLeftSide,
-		boolean accelerate, boolean decelerate) {
+	public GyroDriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
 		super();
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
-		this.distanceFromWall = distanceFromWall;
-		this.isLeftSide = isLeftSide;
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 
@@ -40,30 +36,15 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 	protected void execute() {
 		double moveValue;
 		if (decelerate) {
-			moveValue = clamp(decelerate() * speed, 0.5, speed);
+			moveValue = clamp(decelerate() * speed, 0.4, speed);
 		} else {
 			moveValue = speed;
 		}
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		double wantedDirection;
-		if (isLeftSide) {
-			wantedDirection = (distanceFromWall - drivetrainSubsystem.getLeftUltraVal());
-		} else {
-			wantedDirection = (distanceFromWall - drivetrainSubsystem.getRightUltraVal());
-		}
-
-		if (drivetrainSubsystem.getAverageDistance() < 24) {
-			wantedDirection = 0;
-		}
-
-		if (drivetrainSubsystem.getGyroValueUnadjusted() > 3 && wantedDirection > 0) {
-			wantedDirection = 0;
-		} else if (drivetrainSubsystem.getGyroValueUnadjusted() < -3 && wantedDirection < 0) {
-			wantedDirection = 0;
-		}
-		drivetrainSubsystem.blendedDrive(moveValue, clamp(wantedDirection * CORRECTION_PROPORTIONAL, -0.15, 0.15));
+		double turnValue = (timeSinceInitialized() > .3) ? drivetrainSubsystem.getGyroValueUnadjusted() : 0;
+		drivetrainSubsystem.blendedDrive(moveValue, -turnValue / 20);
 	}
 
 	@Override
@@ -85,6 +66,6 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 
 	private double decelerate() {
 		double error = distance - drivetrainSubsystem.getAverageDistance();
-		return clamp(DECELERATE_PROPORTIONAL * error, 0, 1);
+		return clamp(PROPORTIONAL * error, 0, 1);
 	}
 }

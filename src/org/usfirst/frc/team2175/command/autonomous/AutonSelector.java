@@ -45,6 +45,10 @@ public class AutonSelector {
 		temp.addObject("SideSwitchLeft", new SideSwitchAutonomous(true));
 		temp.addObject("SideSwitchRight", new SideSwitchAutonomous(false));
 		temp.addObject("LeftUltrasonicStraightFiveFeet", new TestUltrasonicDriveStraightAutonomous(true));
+		temp.addObject("LeftScale", new ScaleAutonomous(true));
+		temp.addObject("RightScale", new ScaleAutonomous(false));
+		temp.addObject("ExperimentalScale", new ExperimentalScaleAutonomous());
+		temp.addObject("LeftSideOtherScale", new ExperimentalOtherScaleAutonomous());
 		SmartDashboard.putData("Temporary", temp);
 	}
 

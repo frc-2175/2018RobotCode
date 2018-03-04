@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
 	private final RobotInfo robotInfo;
@@ -81,6 +82,11 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public void stopAllMotors() {
 		blendedDrive(0, 0);
+	}
+
+	@Override
+	public void periodic() {
+		SmartDashboard.putNumber("LeftUltrasonic", leftUltra.getDistance());
 	}
 
 	/**
@@ -202,12 +208,12 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	}
 
 	public void arcadeDrive(double moveValue, double turnValue) {
-		robotDrive.arcadeDrive(moveValue, turnValue);
+		robotDrive.arcadeDrive(-moveValue, -turnValue);
 	}
 
 	public void straightArcadeDrive(double moveValue) {
 		double turnCorrection = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
-		arcadeDrive(-moveValue, (getGyroValueUnadjusted() / turnCorrection));
+		arcadeDrive(moveValue, -(getGyroValueUnadjusted() / turnCorrection));
 	}
 
 	public void tankDrive(double leftSpeed, double rightSpeed) {

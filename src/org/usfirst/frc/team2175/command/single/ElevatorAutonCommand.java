@@ -36,7 +36,9 @@ public class ElevatorAutonCommand extends BaseCommand {
 	protected void execute() {
 		double moveValue;
 		if (decelerate) {
-			moveValue = clamp(decelerate() * speed, 0.2, speed);
+			double min = (speed < 0) ? speed : .2;
+			double max = (speed < 0) ? -.9 : speed;
+			moveValue = clamp(decelerate() * speed, min, max);
 		} else {
 			moveValue = speed;
 		}

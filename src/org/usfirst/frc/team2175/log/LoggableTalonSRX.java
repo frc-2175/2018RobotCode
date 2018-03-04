@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class LoggableTalonSRX implements Loggable {
 	private HashMap<String, Object> fields;
 	private WPI_TalonSRX talon;
@@ -30,7 +28,6 @@ public class LoggableTalonSRX implements Loggable {
 	@Override
 	public HashMap<String, Object> getValues() {
 		fields.put("current", talon.getOutputCurrent());
-		SmartDashboard.putNumber(key, talon.getOutputCurrent());
 		return fields;
 	}
 }
