@@ -55,6 +55,7 @@ public class AutonSelector {
 	private void addSwitchAndScale() {
 		switchAndScale.addDefault("Do Nothing", new DoNothingCommandGroup());
 		switchAndScale.addObject("SwitchScaleLeft", new ScaleSwitchAutonomous(true));
+		switchAndScale.addObject("SideSwitchLeft", new SideSwitchAutonomous(true));
 
 		SmartDashboard.putData("SwitchAndScale", switchAndScale);
 	}
@@ -78,8 +79,10 @@ public class AutonSelector {
 
 	private void addCenter() {
 		center.addDefault("Do Nothing", new DoNothingCommandGroup());
-		center.addObject("CenterLeft", new CenterSwitchAutonomous(true));
-		center.addObject("CenterRight", new CenterSwitchAutonomous(false));
+		Command switchLeft = new CenterSwitchAutonomous(true);
+		Command switchRight = new CenterSwitchAutonomous(false);
+		center.addObject("Switch-GameData",
+			new LambdaConditionalCommand(() -> driverStation.isSwitchLeft(), switchLeft, switchRight));
 		SmartDashboard.putData("Center", center);
 	}
 

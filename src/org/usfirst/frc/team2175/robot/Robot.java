@@ -70,7 +70,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("RightEncoder", drivetrainSubsystem.getRightEncoderDistance());
 		SmartDashboard.putNumber("Left Ultrasonic Sensor Value", drivetrainSubsystem.getLeftUltraVal());
 		SmartDashboard.putNumber("gyroAdjusted", drivetrainSubsystem.getGyroValueAdjusted());
-		SmartDashboard.putNumber("gyroUnadjusted", drivetrainSubsystem.getGyroValueUnadjusted());
+		// SmartDashboard.putNumber("gyroUnadjusted",
+		// drivetrainSubsystem.getGyroValueUnadjusted());
 
 		SmartDashboard.putNumber("TX", LimeLight.getTx());
 		SmartDashboard.putNumber("TY", LimeLight.getTy());

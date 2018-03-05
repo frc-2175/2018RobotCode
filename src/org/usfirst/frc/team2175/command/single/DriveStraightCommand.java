@@ -9,7 +9,7 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 public class DriveStraightCommand extends BaseCommand {
 	private double speed, distance, accelerationRate;
 	private boolean accelerate, decelerate;
-	public static final double PROPORTIONAL = 1.0 / 12.0;
+	public static final double PROPORTIONAL = 1.0 / 24.0;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 
@@ -43,7 +43,7 @@ public class DriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		drivetrainSubsystem.blendedDrive(moveValue, 0);
+		drivetrainSubsystem.straightArcadeDrive(moveValue);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class DriveStraightCommand extends BaseCommand {
 	}
 
 	private double decelerate() {
-		double error = distance;
+		double error = distance - drivetrainSubsystem.getAverageDistance();
 		return clamp(PROPORTIONAL * error, 0, 1);
 	}
 }
