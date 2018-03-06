@@ -24,6 +24,8 @@ public class IntakeDefaultCommand extends BaseCommand {
 		return false;
 	}
 
-	// TODO: Should this do a turnCube(0) on end?
-
+	@Override
+	protected void end() {
+		intakeSubsystem.turnCube(0);
+	}
 }

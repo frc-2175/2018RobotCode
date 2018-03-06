@@ -54,12 +54,6 @@ public class DryverStation {
 		return deadband(rightJoystick.getX(), JOYSTICK_DEADBAND);
 	}
 
-	// TODO: Delete!
-	public double getClimberAxisValue() {
-		return 0;
-		// return deadband(gamepad.getRawAxis(6), GAMEPAD_DEADBAND);
-	}
-
 	public double getElevatorFullSpeedAxisValue() {
 		return deadband(-gamepad.getRawAxis(1), GAMEPAD_DEADBAND);
 	}

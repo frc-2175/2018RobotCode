@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2175.command;
 
 import org.usfirst.frc.team2175.ServiceLocator;
-import org.usfirst.frc.team2175.command.single.ArcadeDriveDefaultCommand;
+import org.usfirst.frc.team2175.command.single.BlendedDriveDefaultCommand;
 import org.usfirst.frc.team2175.command.single.ElevatorDefaultCommand;
 import org.usfirst.frc.team2175.command.single.IntakeDefaultCommand;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
@@ -21,7 +21,7 @@ public class DefaultCommandFactory {
 	}
 
 	private void constructDefaultCommands() {
-		drivetrainSubsystem.setDefaultCommand(new ArcadeDriveDefaultCommand());
+		drivetrainSubsystem.setDefaultCommand(new BlendedDriveDefaultCommand());
 		elevatorSubsystem.setDefaultCommand(new ElevatorDefaultCommand());
 		intakeSubsystem.setDefaultCommand(new IntakeDefaultCommand());
 	}

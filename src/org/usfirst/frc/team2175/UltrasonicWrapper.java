@@ -6,12 +6,11 @@ public class UltrasonicWrapper {
 	private AnalogInput ultrasonic;
 	private double voltageToInches;
 
-	// TODO (kevin): We should rename this boolean to "isGreen" or "isBlack" or
-	// something, since the color of the sensor's circuit board is much easier to
-	// remember than the specific part number.
-	public UltrasonicWrapper(int channel, boolean isHRLS) {
+	// Voltage to inches is determined by color of sensor,
+	// because we can't remember which color is a certain part number
+	public UltrasonicWrapper(int channel, boolean isBlack) {
 		ultrasonic = new AnalogInput(channel);
-		voltageToInches = (isHRLS) ? (0.009766 / 2) / 5.08 : 0.009766;
+		voltageToInches = (isBlack) ? (0.009766 / 2) / 5.08 : 0.009766;
 	}
 
 	public double getDistance() {

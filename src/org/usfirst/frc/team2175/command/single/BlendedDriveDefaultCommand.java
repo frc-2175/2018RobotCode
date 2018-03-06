@@ -5,11 +5,11 @@ import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 // TODO: Should this be renamed? We're not using "arcade drive", exactly.
-public class ArcadeDriveDefaultCommand extends BaseCommand {
+public class BlendedDriveDefaultCommand extends BaseCommand {
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final DryverStation driverStation;
 
-	public ArcadeDriveDefaultCommand() {
+	public BlendedDriveDefaultCommand() {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		driverStation = ServiceLocator.get(DryverStation.class);
 		requires(drivetrainSubsystem);
