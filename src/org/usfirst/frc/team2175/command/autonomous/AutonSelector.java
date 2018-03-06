@@ -49,6 +49,9 @@ public class AutonSelector {
 		temp.addObject("RightScale", new ScaleAutonomous(false));
 		temp.addObject("ExperimentalScale", new ExperimentalScaleAutonomous());
 		temp.addObject("LeftSideOtherScale", new ExperimentalOtherScaleAutonomous());
+
+		// TODO (kevin): Since the side choice is called "Test", maybe we should rename
+		// this selector to Test as well.
 		SmartDashboard.putData("Temporary", temp);
 	}
 

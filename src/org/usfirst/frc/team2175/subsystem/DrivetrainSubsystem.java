@@ -35,6 +35,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	private final UltrasonicWrapper leftUltra;
 	private final UltrasonicWrapper rightUltra;
 
+	// TODO: We should grab a few more of these before competition.
 	public static final double WIDTH_OF_BOT = 26.125;
 	public static final double LENGTH_OF_BOT_WITH_BUMPERS = 39.25;
 

@@ -6,6 +6,7 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.info.SmartDashboardInfo;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
+// TODO (noah): Has this been tested? If not, we might want to remove it before competition, or at least leave a comment so we remember.
 public class HighGearDriveStraightCommand extends BaseCommand {
 	private double speed, distance, accelerationRate;
 	private boolean accelerate, decelerate;

@@ -22,4 +22,5 @@ public class SCurveCommandGroup extends BaseCommandGroup {
 		addSequential(new DriveStraightCommand(.8, d, false, false));
 		addSequential(new DriveCurve(-sign * r, Math.toDegrees(theta), 1, false, decelerate));
 	}
+
 }
