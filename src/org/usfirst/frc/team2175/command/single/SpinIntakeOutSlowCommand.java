@@ -16,7 +16,7 @@ public class SpinIntakeOutSlowCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
+	protected void onEnd() {
 		intakeSubsystem.clearValues();
 	}
 

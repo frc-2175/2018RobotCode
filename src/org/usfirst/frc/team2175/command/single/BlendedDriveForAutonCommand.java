@@ -32,7 +32,7 @@ public class BlendedDriveForAutonCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
+	protected void onEnd() {
 		drivetrainsubsystem.stopAllMotors();
 	}
 }

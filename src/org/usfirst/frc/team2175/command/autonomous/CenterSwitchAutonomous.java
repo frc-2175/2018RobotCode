@@ -1,14 +1,14 @@
 package org.usfirst.frc.team2175.command.autonomous;
 
+import org.usfirst.frc.team2175.command.BaseCommandGroup;
 import org.usfirst.frc.team2175.command.single.MoveIntakeMiddleCommand;
 import org.usfirst.frc.team2175.command.single.SCurveCommandGroup;
 import org.usfirst.frc.team2175.command.single.SpinIntakeOutSlowCommand;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class CenterSwitchAutonomous extends CommandGroup {
+public class CenterSwitchAutonomous extends BaseCommandGroup {
 	private final double WIDTH_OF_SWITCH = 153.5;
 	private final double X = (WIDTH_OF_SWITCH / 2 - DrivetrainSubsystem.WIDTH_OF_BOT / 2) - 5;
 

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2175.command.autonomous;
 
+import org.usfirst.frc.team2175.command.BaseCommandGroup;
 import org.usfirst.frc.team2175.command.single.DriveCurve;
 import org.usfirst.frc.team2175.command.single.ElevatorAutonCommand;
 import org.usfirst.frc.team2175.command.single.MoveIntakeMiddleCommand;
@@ -7,9 +8,7 @@ import org.usfirst.frc.team2175.command.single.SpinIntakeOutCommand;
 import org.usfirst.frc.team2175.command.single.UltrasonicDriveStraightCommand;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
-public class TestUltrasonicDriveStraightAutonomous extends CommandGroup {
+public class TestUltrasonicDriveStraightAutonomous extends BaseCommandGroup {
 	public TestUltrasonicDriveStraightAutonomous(boolean isLeft) {
 		addSequential(new MoveIntakeMiddleCommand());
 		addSequential(new UltrasonicDriveStraightCommand(1, 217, 22, isLeft, false, false));

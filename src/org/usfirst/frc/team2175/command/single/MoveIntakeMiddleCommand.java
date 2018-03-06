@@ -12,7 +12,7 @@ public class MoveIntakeMiddleCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void initialize() {
+	protected void init() {
 		intakeSubsystem.moveHalf();
 	}
 

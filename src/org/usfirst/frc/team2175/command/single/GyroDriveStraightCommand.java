@@ -26,8 +26,7 @@ public class GyroDriveStraightCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void initialize() {
-		super.initialize();
+	protected void init() {
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.DRIVE_STRAIGHT_ACCELERATION_RATE);
 		drivetrainSubsystem.resetAllSensors();
 	}
@@ -45,9 +44,7 @@ public class GyroDriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		double turnValue = (timeSinceInitialized() > .3) ? drivetrainSubsystem.getGyroValueUnadjusted() : 0;
-		// TODO: Let's make this another proportional constant that we multiply by. Make
-		// sure to name things clearly.
+		double turnValue = (timeGreatEnough()) ? drivetrainSubsystem.getGyroValueUnadjusted() : 0;
 		drivetrainSubsystem.blendedDrive(moveValue,
 			-turnValue / smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION));
 	}
@@ -58,8 +55,7 @@ public class GyroDriveStraightCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
-		super.end();
+	protected void onEnd() {
 		if (decelerate) {
 			drivetrainSubsystem.stopAllMotors();
 		}

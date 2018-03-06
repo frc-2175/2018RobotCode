@@ -14,7 +14,6 @@ public class ElevatorAutonCommand extends BaseCommand {
 	private final SmartDashboardInfo smartDashboardInfo;
 
 	public ElevatorAutonCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
-		super();
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
@@ -26,8 +25,7 @@ public class ElevatorAutonCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void initialize() {
-		super.initialize();
+	protected void init() {
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_ACCELERATION_RATE);
 		elevatorSubsystem.resetAllSensors();
 	}
@@ -54,8 +52,7 @@ public class ElevatorAutonCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
-		super.end();
+	protected void onEnd() {
 		if (decelerate) {
 			elevatorSubsystem.runElevator(0);
 		}

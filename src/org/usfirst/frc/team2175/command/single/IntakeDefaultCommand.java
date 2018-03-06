@@ -25,7 +25,7 @@ public class IntakeDefaultCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
+	protected void onEnd() {
 		intakeSubsystem.turnCube(0);
 	}
 }

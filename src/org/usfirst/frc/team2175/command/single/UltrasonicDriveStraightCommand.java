@@ -16,7 +16,6 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 
 	public UltrasonicDriveStraightCommand(double speed, double distance, double distanceFromWall, boolean isLeftSide,
 		boolean accelerate, boolean decelerate) {
-		super();
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
@@ -30,8 +29,7 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void initialize() {
-		super.initialize();
+	protected void init() {
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.DRIVE_STRAIGHT_ACCELERATION_RATE);
 		drivetrainSubsystem.resetAllSensors();
 	}
@@ -69,12 +67,11 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return timeSinceInitialized() > 0.5 && Math.abs(drivetrainSubsystem.getAverageDistance()) >= Math.abs(distance);
+		return timeGreatEnough() && Math.abs(drivetrainSubsystem.getAverageDistance()) >= Math.abs(distance);
 	}
 
 	@Override
-	protected void end() {
-		super.end();
+	protected void onEnd() {
 		if (decelerate) {
 			drivetrainSubsystem.stopAllMotors();
 		}

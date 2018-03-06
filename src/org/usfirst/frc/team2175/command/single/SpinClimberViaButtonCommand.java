@@ -29,7 +29,7 @@ public class SpinClimberViaButtonCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
+	protected void onEnd() {
 		climberSubsystem.stop();
 	}
 

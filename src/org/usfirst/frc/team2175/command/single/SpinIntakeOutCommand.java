@@ -21,7 +21,7 @@ public class SpinIntakeOutCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
+	protected void onEnd() {
 		intakeSubsystem.clearValues();
 	}
 }

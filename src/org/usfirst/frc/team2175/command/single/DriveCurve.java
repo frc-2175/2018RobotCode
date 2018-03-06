@@ -18,7 +18,6 @@ public class DriveCurve extends BaseCommand {
 	private final double PROPORTIONAL = 1.0 / 12.0;
 
 	public DriveCurve(double radius, double degrees, double maxSpeed, boolean accelerate, boolean decelerate) {
-		super();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		radians = Math.toRadians(degrees);
@@ -42,8 +41,7 @@ public class DriveCurve extends BaseCommand {
 	}
 
 	@Override
-	public void initialize() {
-		super.initialize();
+	public void init() {
 		drivetrainSubsystem.resetAllSensors();
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.DRIVE_STRAIGHT_ACCELERATION_RATE);
 	}

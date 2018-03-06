@@ -14,7 +14,6 @@ public class DriveStraightCommand extends BaseCommand {
 	private final SmartDashboardInfo smartDashboardInfo;
 
 	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
-		super();
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
@@ -26,8 +25,7 @@ public class DriveStraightCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void initialize() {
-		super.initialize();
+	protected void init() {
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.DRIVE_STRAIGHT_ACCELERATION_RATE);
 		drivetrainSubsystem.resetAllSensors();
 	}
@@ -52,8 +50,7 @@ public class DriveStraightCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
-		super.end();
+	protected void onEnd() {
 		if (decelerate) {
 			drivetrainSubsystem.stopAllMotors();
 		}

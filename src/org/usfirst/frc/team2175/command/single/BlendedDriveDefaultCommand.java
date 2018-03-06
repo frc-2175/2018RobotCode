@@ -26,7 +26,7 @@ public class BlendedDriveDefaultCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void end() {
+	protected void onEnd() {
 		drivetrainSubsystem.stopAllMotors();
 	}
 }

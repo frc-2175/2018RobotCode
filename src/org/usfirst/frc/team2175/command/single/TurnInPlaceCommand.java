@@ -16,7 +16,6 @@ public class TurnInPlaceCommand extends BaseCommand {
 	private final double PROPORTIONAL = 2.0 / 12.0;
 
 	public TurnInPlaceCommand(double degrees, double maxSpeed, boolean accelerate, boolean decelerate) {
-		super();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		this.degrees = degrees;
@@ -28,8 +27,7 @@ public class TurnInPlaceCommand extends BaseCommand {
 	}
 
 	@Override
-	public void initialize() {
-		super.initialize();
+	public void init() {
 		drivetrainSubsystem.resetAllSensors();
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.DRIVE_STRAIGHT_ACCELERATION_RATE);
 	}

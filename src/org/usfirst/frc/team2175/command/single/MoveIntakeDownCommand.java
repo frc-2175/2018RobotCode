@@ -12,7 +12,7 @@ public class MoveIntakeDownCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void initialize() {
+	protected void init() {
 		intakeSubsystem.moveDown();
 	}
 
