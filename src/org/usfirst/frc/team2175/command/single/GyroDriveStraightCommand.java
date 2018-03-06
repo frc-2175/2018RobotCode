@@ -10,6 +10,7 @@ public class GyroDriveStraightCommand extends BaseCommand {
 	private double speed, distance, accelerationRate;
 	private boolean accelerate, decelerate;
 	public static final double PROPORTIONAL = 1.0 / 24.0;
+	public static final double MIN_DECELERATE_SPEED = 0.4;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 
@@ -35,9 +36,7 @@ public class GyroDriveStraightCommand extends BaseCommand {
 	protected void execute() {
 		double moveValue;
 		if (decelerate) {
-			// TODO: It might be good to make 0.4 into a named constant at the top of the
-			// file.
-			moveValue = clamp(decelerate() * speed, 0.4, speed);
+			moveValue = clamp(decelerate() * speed, MIN_DECELERATE_SPEED, speed);
 		} else {
 			moveValue = speed;
 		}

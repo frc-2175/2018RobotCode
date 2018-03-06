@@ -3,18 +3,23 @@ package org.usfirst.frc.team2175.command.autonomous;
 import org.usfirst.frc.team2175.command.BaseCommandGroup;
 import org.usfirst.frc.team2175.command.single.DriveCurve;
 import org.usfirst.frc.team2175.command.single.ElevatorAutonCommand;
+import org.usfirst.frc.team2175.command.single.GyroDriveStraightCommand;
 import org.usfirst.frc.team2175.command.single.MoveIntakeMiddleCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeOutCommand;
-import org.usfirst.frc.team2175.command.single.UltrasonicDriveStraightCommand;
-import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
+
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class ScaleAutonomous extends BaseCommandGroup {
 	public ScaleAutonomous(boolean isLeft) {
 		int sign = isLeft ? 1 : -1;
 		addSequential(new MoveIntakeMiddleCommand());
-		addSequential(new UltrasonicDriveStraightCommand(1, 230, 22, isLeft, false, false));
-		addSequential(new DriveCurve(DrivetrainSubsystem.WIDTH_OF_BOT / 2 * sign, 40, 0.8, false, false));
+		addSequential(new WaitCommand(0.1));
+		addSequential(new GyroDriveStraightCommand(1, 224, true, true));
+		addSequential(new WaitCommand(0.2));
 		addSequential(new ElevatorAutonCommand(1, 60, true, true));
-		addSequential(new SpinIntakeOutCommand(), 2);
+		addSequential(new DriveCurve(sign * 20, 20, .7, false, false));
+		addSequential(new SpinIntakeOutCommand(), .5);
+		addSequential(new DriveCurve(sign * 20, 20, -.7, false, false));
+		addSequential(new ElevatorAutonCommand(-1, -61, false, true));
 	}
 }
