@@ -12,6 +12,9 @@ public class BlendedDriveForAutonCommand extends BaseCommand {
 		this.move = move;
 		this.turn = turn;
 		drivetrainsubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
+
+		// TODO: This command doesn't actually require the drivetrain subsystem.
+		// Problem?
 	}
 
 	public BlendedDriveForAutonCommand(double move) {

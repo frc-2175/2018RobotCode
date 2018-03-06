@@ -4,6 +4,7 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.control.DryverStation;
 import org.usfirst.frc.team2175.subsystem.ClimberSubsystem;
 
+// TODO: Do we need this command?
 public class SpinClimberDefaultCommand extends BaseCommand {
 	private final ClimberSubsystem climberSubsystem;
 	private final DryverStation driverStation;

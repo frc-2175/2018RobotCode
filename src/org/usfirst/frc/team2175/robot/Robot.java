@@ -66,6 +66,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() {
 		SmartDashboard.putNumber("AutoPopulate/PSI Value", drivetrainSubsystem.getPSIValue());
+		// TODO: Do we need/want all of these?
 		SmartDashboard.putNumber("LeftEncoder", drivetrainSubsystem.getLeftEncoderDistance());
 		SmartDashboard.putNumber("RightEncoder", drivetrainSubsystem.getRightEncoderDistance());
 		SmartDashboard.putNumber("Left Ultrasonic Sensor Value", drivetrainSubsystem.getLeftUltraVal());

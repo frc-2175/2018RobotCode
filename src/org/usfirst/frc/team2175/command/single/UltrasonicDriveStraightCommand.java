@@ -58,6 +58,7 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 			wantedDirection = 0;
 		}
 
+		// TODO (noah): The number 3 here should probably be a constant.
 		if (drivetrainSubsystem.getGyroValueUnadjusted() > 3 && wantedDirection > 0) {
 			wantedDirection = 0;
 		} else if (drivetrainSubsystem.getGyroValueUnadjusted() < -3 && wantedDirection < 0) {

@@ -12,6 +12,7 @@ public class CenterSwitchAutonomous extends CommandGroup {
 	private final double WIDTH_OF_SWITCH = 153.5;
 	private final double X = (WIDTH_OF_SWITCH / 2 - DrivetrainSubsystem.WIDTH_OF_BOT / 2) - 5;
 
+	// TODO (ben): Put diagrams in the project so we remember the math we did.
 	public CenterSwitchAutonomous(boolean isLeft) {
 		double sign = (isLeft) ? -1 : 1;
 		addSequential(

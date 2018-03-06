@@ -36,6 +36,8 @@ public class GyroDriveStraightCommand extends BaseCommand {
 	protected void execute() {
 		double moveValue;
 		if (decelerate) {
+			// TODO: It might be good to make 0.4 into a named constant at the top of the
+			// file.
 			moveValue = clamp(decelerate() * speed, 0.4, speed);
 		} else {
 			moveValue = speed;
@@ -44,6 +46,8 @@ public class GyroDriveStraightCommand extends BaseCommand {
 			moveValue *= accelerate();
 		}
 		double turnValue = (timeSinceInitialized() > .3) ? drivetrainSubsystem.getGyroValueUnadjusted() : 0;
+		// TODO: Let's make this another proportional constant that we multiply by. Make
+		// sure to name things clearly.
 		drivetrainSubsystem.blendedDrive(moveValue, -turnValue / 20);
 	}
 

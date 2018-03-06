@@ -21,7 +21,6 @@ public class BamboozleStaticInterface implements Timer.StaticInterface {
 
 	@Override
 	public Interface newTimer() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
