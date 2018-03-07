@@ -10,7 +10,7 @@ public class TurnInPlaceCommand extends BaseCommand {
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private double degrees;
 	private double accelerationRate;
-	private boolean accelerate, decelerate;
+	private boolean accelerate, decelerate, resetGyro;
 	private double speed;
 	private final SmartDashboardInfo smartDashboardInfo;
 	private final double PROPORTIONAL = 2.0 / 12.0;
@@ -26,9 +26,24 @@ public class TurnInPlaceCommand extends BaseCommand {
 		requires(drivetrainSubsystem);
 	}
 
+	public TurnInPlaceCommand(double degrees, double maxSpeed, boolean accelerate, boolean decelerate,
+		boolean resetGyro) {
+		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
+		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
+		this.degrees = degrees;
+		this.speed = maxSpeed;
+		this.accelerate = accelerate;
+		this.decelerate = decelerate;
+		this.resetGyro = resetGyro;
+
+		requires(drivetrainSubsystem);
+	}
+
 	@Override
 	public void init() {
-		drivetrainSubsystem.resetAllSensors();
+		if (Boolean.valueOf(resetGyro) != null || resetGyro) {
+			drivetrainSubsystem.resetAllSensors();
+		}
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.DRIVE_STRAIGHT_ACCELERATION_RATE);
 	}
 
@@ -36,7 +51,7 @@ public class TurnInPlaceCommand extends BaseCommand {
 	public void execute() {
 		double turnVal;
 		if (decelerate) {
-			turnVal = clamp(decelerate() * speed, 0.5, speed);
+			turnVal = clamp(decelerate() * speed, 0.6, speed);
 		} else {
 			turnVal = speed;
 		}

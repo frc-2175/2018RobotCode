@@ -14,12 +14,12 @@ public class ScaleAutonomous extends BaseCommandGroup {
 		int sign = isLeft ? 1 : -1;
 		addSequential(new MoveIntakeMiddleCommand());
 		addSequential(new WaitCommand(0.1));
-		addSequential(new GyroDriveStraightCommand(1, 224, true, true));
+		addSequential(new GyroDriveStraightCommand(1, 240, true, true));
 		addSequential(new WaitCommand(0.2));
 		addSequential(new ElevatorAutonCommand(1, 60, true, true));
-		addSequential(new DriveCurve(sign * 20, 20, .7, false, false));
+		addSequential(new DriveCurve(sign * 20, 20, .5, false, false));
 		addSequential(new SpinIntakeOutCommand(), .5);
-		addSequential(new DriveCurve(sign * 20, 20, -.7, false, false));
+		addSequential(new DriveCurve(sign * 20, 20, -.5, false, false));
 		addSequential(new ElevatorAutonCommand(-1, -61, false, true));
 	}
 }

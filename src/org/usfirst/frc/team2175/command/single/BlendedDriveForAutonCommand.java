@@ -4,17 +4,16 @@ import org.usfirst.frc.team2175.ServiceLocator;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 public class BlendedDriveForAutonCommand extends BaseCommand {
-	private final DrivetrainSubsystem drivetrainsubsystem;
+	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final double move;
 	private final double turn;
 
 	public BlendedDriveForAutonCommand(double move, double turn) {
 		this.move = move;
 		this.turn = turn;
-		drivetrainsubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
+		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 
-		// TODO: This command doesn't actually require the drivetrain subsystem.
-		// Problem?
+		requires(drivetrainSubsystem);
 	}
 
 	public BlendedDriveForAutonCommand(double move) {
@@ -28,11 +27,11 @@ public class BlendedDriveForAutonCommand extends BaseCommand {
 
 	@Override
 	protected void execute() {
-		drivetrainsubsystem.blendedDrive(move, turn);
+		drivetrainSubsystem.blendedDrive(move, turn);
 	}
 
 	@Override
 	protected void onEnd() {
-		drivetrainsubsystem.stopAllMotors();
+		drivetrainSubsystem.stopAllMotors();
 	}
 }

@@ -40,11 +40,16 @@ public class AutonSelector {
 		switchAndScale.addDefault("Do Nothing", new DoNothingCommandGroup());
 		switchAndScale.addObject("Cross Baseline", new CrossBaselineTimeBasedAutonomous());
 
-		switchAndScale.addObject("SwitchScale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
-			new UntestedFullyScaleSwitchAutonomous(true), new UntestedFullyScaleSwitchAutonomous(false)));
+		// switchAndScale.addObject("SwitchScale", new LambdaConditionalCommand(() ->
+		// side.getSelected() == Side.Left,
+		// new UntestedFullyScaleSwitchAutonomous(true), new
+		// UntestedFullyScaleSwitchAutonomous(false)));
 
 		switchAndScale.addObject("SideSwitch", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
 			new SideSwitchAutonomous(true), new SideSwitchAutonomous(false)));
+
+		switchAndScale.addObject("Scale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
+			new ScaleAutonomous(true), new ScaleAutonomous(false)));
 
 		SmartDashboard.putData("SwitchAndScale", switchAndScale);
 	}
@@ -53,8 +58,11 @@ public class AutonSelector {
 		justSwitch.addDefault("Do Nothing", new DoNothingCommandGroup());
 		justSwitch.addObject("Cross Baseline", new CrossBaselineTimeBasedAutonomous());
 
-		switchAndScale.addObject("SideSwitch", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
+		justSwitch.addObject("SideSwitch", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
 			new SideSwitchAutonomous(true), new SideSwitchAutonomous(false)));
+
+		justSwitch.addObject("Other Side Scale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
+			new ExperimentalOtherScaleAutonomous(true), new ExperimentalOtherScaleAutonomous(false)));
 
 		SmartDashboard.putData("JustSwitch", justSwitch);
 

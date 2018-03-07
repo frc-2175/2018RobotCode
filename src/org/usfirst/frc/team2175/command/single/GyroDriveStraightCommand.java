@@ -9,8 +9,8 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 public class GyroDriveStraightCommand extends BaseCommand {
 	private double speed, distance, accelerationRate;
 	private boolean accelerate, decelerate;
-	public static final double PROPORTIONAL = 1.0 / 24.0;
-	public static final double MIN_DECELERATE_SPEED = 0.4;
+	public static final double PROPORTIONAL = 1.0 / 30.0;
+	public static final double MIN_DECELERATE_SPEED = 0.45;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 
@@ -43,9 +43,7 @@ public class GyroDriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		double turnValue = (timeGreatEnough()) ? drivetrainSubsystem.getGyroValueUnadjusted() : 0;
-		drivetrainSubsystem.blendedDrive(moveValue,
-			-turnValue / smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION));
+		drivetrainSubsystem.straightArcadeDrive(moveValue);
 	}
 
 	@Override
