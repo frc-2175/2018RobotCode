@@ -11,6 +11,7 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 	private boolean accelerate, decelerate, isLeftSide;
 	public static final double DECELERATE_PROPORTIONAL = 1 / 36.0;
 	public static final double CORRECTION_PROPORTIONAL = 0.15 / 12.0;
+	public static final double GYRO_CORRECTION_RANGE = 3;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 
@@ -56,10 +57,9 @@ public class UltrasonicDriveStraightCommand extends BaseCommand {
 			wantedDirection = 0;
 		}
 
-		// TODO (noah): The number 3 here should probably be a constant.
-		if (drivetrainSubsystem.getGyroValueUnadjusted() > 3 && wantedDirection > 0) {
+		if (drivetrainSubsystem.getGyroValueUnadjusted() > GYRO_CORRECTION_RANGE && wantedDirection > 0) {
 			wantedDirection = 0;
-		} else if (drivetrainSubsystem.getGyroValueUnadjusted() < -3 && wantedDirection < 0) {
+		} else if (drivetrainSubsystem.getGyroValueUnadjusted() < -GYRO_CORRECTION_RANGE && wantedDirection < 0) {
 			wantedDirection = 0;
 		}
 		drivetrainSubsystem.blendedDrive(moveValue, clamp(wantedDirection * CORRECTION_PROPORTIONAL, -0.15, 0.15));
