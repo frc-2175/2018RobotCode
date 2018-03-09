@@ -27,14 +27,16 @@ public class AutonSelector {
 		addJustScale();
 		addNeither();
 		addCenter();
-		addTemp();
+		// addTemp();
 	}
 
-	private void addTemp() {
-		test.addObject("LeftUltrasonicStraightFiveFeet", new TestUltrasonicDriveStraightAutonomous(true));
-
-		SmartDashboard.putData("Test", test);
-	}
+	// Commented out for comp
+	// private void addTemp() {
+	// test.addObject("LeftUltrasonicStraightFiveFeet", new
+	// TestUltrasonicDriveStraightAutonomous(true));
+	//
+	// SmartDashboard.putData("Test", test);
+	// }
 
 	private void addSwitchAndScale() {
 		switchAndScale.addDefault("Do Nothing", new DoNothingCommandGroup());

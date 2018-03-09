@@ -97,10 +97,13 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 	 * @return {left, right}
 	 */
 	public static double[] getBlendedMotorValues(double moveValue, double turnValue) {
+		SmartDashboardInfo smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		final double INPUT_THRESHOLD = 0.1;
 		virtualRobotDrive.arcadeDrive(moveValue, turnValue, false);
-		double leftArcadeValue = leftVirtualSpeedController.get();
-		double rightArcadeValue = rightVirtualSpeedController.get();
+		double leftArcadeValue = leftVirtualSpeedController.get()
+			* smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_IN_PLACE);
+		double rightArcadeValue = rightVirtualSpeedController.get()
+			* smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_IN_PLACE);
 
 		virtualRobotDrive.curvatureDrive(moveValue, turnValue, false);
 		double leftCurvatureValue = leftVirtualSpeedController.get();

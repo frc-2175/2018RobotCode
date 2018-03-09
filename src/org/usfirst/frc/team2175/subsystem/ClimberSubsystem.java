@@ -14,7 +14,8 @@ public class ClimberSubsystem extends BaseSubsystem {
 	}
 
 	public void spinClimber(double axisValue) {
-		masterMotor.set(axisValue);
+		// Inverted during Duluth
+		masterMotor.set(-axisValue);
 	}
 
 	public void stop() {

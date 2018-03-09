@@ -31,6 +31,7 @@ public class SmartDashboardInfo {
 	public static final String CLIMBER_DOWN_SPEED = "climber.speed.down";
 	public static final String GYRO_LATENCY = "gyro.latency";
 	public static final String ELEVATOR_ACCELERATION_RATE = "elevator.accelerator";
+	public static final String TURN_IN_PLACE = "drivetraim.turninplace";
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -44,7 +45,7 @@ public class SmartDashboardInfo {
 		putNumber(ROLLER_OUT_SPEED, 0.7, 0.7);
 		putNumber(INTAKE_IN_SPEED, 0.7, 0.7);
 		putNumber(INTAKE_OUT_SPEED, -0.7, -0.7);
-		putNumber(ELEVATOR_MAX_UP_SPEED, 1.0, 1.0);
+		putNumber(ELEVATOR_MAX_UP_SPEED, 0.8, 0.8);
 		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.6, 0.6);
 		putNumber(POSITIVE_DEADBAND, 0.1, 0.1);
 		putNumber(NEGATIVE_DEADBAND, -0.05, -0.01);
@@ -55,10 +56,11 @@ public class SmartDashboardInfo {
 		putNumber(DRIVE_CURVE_MAX_SPEED, 0.7, 0.7);
 		putNumber(DRIVE_STRAIGHT_ACCELERATION_RATE, 3, 3);
 		putNumber(INTAKE_SLOW_SPEED, -0.4, -0.4);
-		putNumber(CLIMBER_UP_SPEED, 1.0, 1.0);
+		putNumber(CLIMBER_UP_SPEED, 0.8, 0.8);
 		putNumber(CLIMBER_DOWN_SPEED, -0.5, -0.5);
 		putNumber(GYRO_LATENCY, 0.2, 0.2);
 		putNumber(ELEVATOR_ACCELERATION_RATE, 2, 2);
+		putNumber(TURN_IN_PLACE, 0.8, 0.8);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {

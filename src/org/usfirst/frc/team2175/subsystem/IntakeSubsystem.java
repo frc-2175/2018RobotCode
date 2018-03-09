@@ -47,7 +47,8 @@ public class IntakeSubsystem extends BaseSubsystem {
 			leftIntakeWheel.set(leftSpeed);
 			rightIntakeWheel.set(rightSpeed);
 		}
-		rollerBar.set(barSpeed);
+		// Inverted during Duluth
+		rollerBar.set(-barSpeed);
 		clearValues();
 	}
 
