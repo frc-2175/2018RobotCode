@@ -11,6 +11,7 @@ import org.usfirst.frc.team2175.UltrasonicWrapper;
 import org.usfirst.frc.team2175.log.LoggableAnalogInput;
 import org.usfirst.frc.team2175.log.LoggableJoystick;
 import org.usfirst.frc.team2175.log.LoggableJoystickButton;
+import org.usfirst.frc.team2175.log.LoggableNavX;
 import org.usfirst.frc.team2175.log.LoggableSolenoid;
 import org.usfirst.frc.team2175.log.LoggableTalonSRX;
 import org.usfirst.frc.team2175.log.LoggableUltrasonic;
@@ -20,6 +21,7 @@ import org.usfirst.frc.team2175.property.PropertiesLoader;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -136,6 +138,8 @@ public class RobotInfo {
 		} else if (obj.getClass() == MotorWrapper.class) {
 			MotorWrapper mw = (MotorWrapper) obj;
 			roboLog(key, mw.getMotor());
+		} else if (obj.getClass() == AHRS.class) {
+			robotLogger.addLoggable(new LoggableNavX((AHRS) obj, key));
 		}
 	}
 
