@@ -99,6 +99,8 @@ public class AutonSelector {
 		Command switchRight = new CenterSwitchAutonomous(false);
 		center.addObject("Switch-GameData",
 			new LambdaConditionalCommand(() -> driverStation.isSwitchLeft(), switchLeft, switchRight));
+		center.addObject("Switch-Left", switchLeft);
+		center.addObject("Switch-Left", switchRight);
 
 		SmartDashboard.putData("Center", center);
 	}
