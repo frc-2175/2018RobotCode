@@ -7,7 +7,6 @@ import org.usfirst.frc.team2175.command.single.MoveIntakeMiddleCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeInCommand;
 import org.usfirst.frc.team2175.command.single.SpinIntakeOutCommand;
 import org.usfirst.frc.team2175.command.single.TurnInPlaceCommand;
-import org.usfirst.frc.team2175.command.single.TurnViaLimeLight;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -17,7 +16,7 @@ public class UntestedFullyScaleSwitchAutonomous extends BaseCommandGroup {
 		addSequential(new ScaleAutonomous(isLeft));
 		addSequential(new TurnInPlaceCommand(turn * 125, 1, false, true), 2);
 		addSequential(new MoveIntakeDownCommand());
-		addSequential(new TurnViaLimeLight(), .5);
+		// addSequential(new TurnViaLimeLight(), .5);
 		addParallel(new GyroDriveStraightCommand(1, 18, false, false), 2);
 		addSequential(new SpinIntakeInCommand(), 1.3);
 		addParallel(new GyroDriveStraightCommand(-.8, -5, false, false));

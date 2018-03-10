@@ -23,5 +23,6 @@ public class JoystickEventMapper {
 		driverStation.getIntakeSpinOutSlowButton().whileHeld(new SpinIntakeOutSlowCommand());
 		driverStation.getClimberRunButton().whileHeld(new SpinClimberViaButtonCommand(true));
 		driverStation.getClimberRunOutButton().whileHeld(new SpinClimberViaButtonCommand(false));
+		driverStation.getDriverSpinOutButton().whileHeld(new SpinIntakeOutCommand());
 	}
 }

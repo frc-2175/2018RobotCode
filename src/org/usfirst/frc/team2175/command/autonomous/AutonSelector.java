@@ -42,16 +42,18 @@ public class AutonSelector {
 		switchAndScale.addDefault("Do Nothing", new DoNothingCommandGroup());
 		switchAndScale.addObject("Cross Baseline", new CrossBaselineTimeBasedAutonomous());
 
-		// switchAndScale.addObject("SwitchScale", new LambdaConditionalCommand(() ->
-		// side.getSelected() == Side.Left,
-		// new UntestedFullyScaleSwitchAutonomous(true), new
-		// UntestedFullyScaleSwitchAutonomous(false)));
+		switchAndScale.addObject("SwitchScale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
+			new UntestedFullyScaleSwitchAutonomous(true), new UntestedFullyScaleSwitchAutonomous(false)));
 
 		switchAndScale.addObject("SideSwitch", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
 			new SideSwitchAutonomous(true), new SideSwitchAutonomous(false)));
 
 		switchAndScale.addObject("Scale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
 			new ScaleAutonomous(true), new ScaleAutonomous(false)));
+		// switchAndScale.addObject("TwoCube",new LambdaConditionalCommand(() ->
+		// side.getSelected() == Side.Left,
+		// (Command)(new UntestedFullyScaleSwitchAutonomous(true)), (Command)(new
+		// UntestedFullyScaleSwitchAutonomous(false)));
 
 		SmartDashboard.putData("SwitchAndScale", switchAndScale);
 	}
@@ -99,9 +101,6 @@ public class AutonSelector {
 		Command switchRight = new CenterSwitchAutonomous(false);
 		center.addObject("Switch-GameData",
 			new LambdaConditionalCommand(() -> driverStation.isSwitchLeft(), switchLeft, switchRight));
-		center.addObject("Switch-Left", switchLeft);
-		center.addObject("Switch-Left", switchRight);
-
 		SmartDashboard.putData("Center", center);
 	}
 
