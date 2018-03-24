@@ -34,7 +34,7 @@ public class DriveStraightCommand extends BaseCommand {
 	protected void execute() {
 		double moveValue;
 		if (decelerate) {
-			moveValue = clamp(decelerate() * speed, 0.5, speed);
+			moveValue = Math.signum(speed) * clamp(decelerate() * Math.abs(speed), 0.5, Math.abs(speed));
 		} else {
 			moveValue = speed;
 		}

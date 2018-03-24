@@ -27,16 +27,21 @@ public class AutonSelector {
 		addJustScale();
 		addNeither();
 		addCenter();
-		// addTemp();
+		addTemp();
 	}
 
-	// Commented out for comp
-	// private void addTemp() {
-	// test.addObject("LeftUltrasonicStraightFiveFeet", new
-	// TestUltrasonicDriveStraightAutonomous(true));
-	//
-	// SmartDashboard.putData("Test", test);
-	// }
+	private void addTemp() {
+		test.addObject("LeftUltrasonicStraightFiveFeet", new TestUltrasonicDriveStraightAutonomous(true));
+		test.addObject("Right Side Switch", new SideSwitchAutonomous(false));
+		test.addObject("Right Side Scale", new ScaleAutonomous(false));
+		test.addObject("Right Side Opposite Scale", new ExperimentalOtherScaleAutonomous(false));
+		test.addObject("Right Side Two Cube Scale", new TwoCubeScaleAutonomous(false));
+		test.addObject("Left Side Switch", new SideSwitchAutonomous(true));
+		test.addObject("Left Side Scale", new ScaleAutonomous(true));
+		test.addObject("Left Side Opposite Scale", new ExperimentalOtherScaleAutonomous(true));
+		test.addObject("Left Side Two Cube Scale", new TwoCubeScaleAutonomous(true));
+		SmartDashboard.putData("Test", test);
+	}
 
 	private void addSwitchAndScale() {
 		switchAndScale.addDefault("Do Nothing", new DoNothingCommandGroup());

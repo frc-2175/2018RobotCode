@@ -51,7 +51,7 @@ public class TurnInPlaceCommand extends BaseCommand {
 	public void execute() {
 		double turnVal;
 		if (decelerate) {
-			turnVal = clamp(decelerate() * speed, 0.6, speed);
+			turnVal = clamp(decelerate() * speed, 0.5, speed);
 		} else {
 			turnVal = speed;
 		}

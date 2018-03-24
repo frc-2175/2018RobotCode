@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
@@ -79,6 +80,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 
 		psiSensor = robotInfo.get(RobotInfo.PSI_SENSOR);
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	public void stopAllMotors() {

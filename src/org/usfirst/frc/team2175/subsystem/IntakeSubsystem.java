@@ -80,8 +80,8 @@ public class IntakeSubsystem extends BaseSubsystem {
 	}
 
 	public void runIntakeIn() {
-		leftSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_IN_SPEED);
-		rightSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_IN_SPEED);
+		leftSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_LEFT_SPEED);
+		rightSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.INTAKE_RIGHT_SPEED);
 		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.ROLLER_IN_SPEED);
 	}
 

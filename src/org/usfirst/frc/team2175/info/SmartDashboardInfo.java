@@ -32,6 +32,8 @@ public class SmartDashboardInfo {
 	public static final String GYRO_LATENCY = "gyro.latency";
 	public static final String ELEVATOR_ACCELERATION_RATE = "elevator.accelerator";
 	public static final String TURN_IN_PLACE = "drivetraim.turninplace";
+	public static final String INTAKE_LEFT_SPEED = "intake.left.speed";
+	public static final String INTAKE_RIGHT_SPEED = "intake.right.speed";
 
 	public SmartDashboardInfo() {
 		ServiceLocator.register(this);
@@ -45,7 +47,7 @@ public class SmartDashboardInfo {
 		putNumber(ROLLER_OUT_SPEED, 0.7, 0.7);
 		putNumber(INTAKE_IN_SPEED, 0.7, 0.7);
 		putNumber(INTAKE_OUT_SPEED, -0.6, -0.6);
-		putNumber(ELEVATOR_MAX_UP_SPEED, 0.7, 0.7);
+		putNumber(ELEVATOR_MAX_UP_SPEED, 0.6, 0.6);
 		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.6, 0.6);
 		putNumber(POSITIVE_DEADBAND, 0.1, 0.1);
 		putNumber(NEGATIVE_DEADBAND, -0.05, -0.01);
@@ -61,6 +63,8 @@ public class SmartDashboardInfo {
 		putNumber(GYRO_LATENCY, 0.2, 0.2);
 		putNumber(ELEVATOR_ACCELERATION_RATE, 2, 2);
 		putNumber(TURN_IN_PLACE, 0.8, 0.8);
+		putNumber(INTAKE_LEFT_SPEED, 0.8, 0.8);
+		putNumber(INTAKE_RIGHT_SPEED, 0.55, 0.55);
 	}
 
 	public void putBoolean(String key, boolean comp, boolean practice) {

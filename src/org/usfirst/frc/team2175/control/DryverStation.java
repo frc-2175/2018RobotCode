@@ -18,11 +18,16 @@ public class DryverStation {
 	private JoystickButton intakeSpinOutButton;
 	private JoystickButton intakeActuateFullButton;
 	private JoystickButton intakeActuateHalfButton;
+	private JoystickButton elevatorPresetLowButton;
 	private JoystickButton intakeActuateNoneButton;
 	private JoystickButton intakeSpinOutSlowButton;
 	private JoystickButton climberRunOutButton;
 	private JoystickButton climberRunButton;
 	private JoystickButton driverSpinOutButton;
+	private JoystickButton driverSpinOutSlowButton;
+	private JoystickButton driverSpinInButton;
+	private JoystickButton driverActuateDownButton;
+	private JoystickButton actuateDownAndSpinInButton;
 	private static final double JOYSTICK_DEADBAND = 0.15;
 	private static final double GAMEPAD_DEADBAND = 0.1;
 
@@ -41,11 +46,16 @@ public class DryverStation {
 		intakeSpinOutButton = new JoystickButton(gamepad, 7);
 		intakeActuateHalfButton = new JoystickButton(gamepad, 1);
 		intakeActuateFullButton = new JoystickButton(gamepad, 2);
+		elevatorPresetLowButton = new JoystickButton(gamepad, 3);
 		intakeActuateNoneButton = new JoystickButton(gamepad, 4);
 		intakeSpinOutSlowButton = new JoystickButton(gamepad, 5);
 		climberRunOutButton = new JoystickButton(gamepad, 9);
 		climberRunButton = new JoystickButton(gamepad, 10);
-		driverSpinOutButton = new JoystickButton(rightJoystick, 1);
+		driverSpinOutButton = new JoystickButton(rightJoystick, 3);
+		driverSpinOutSlowButton = new JoystickButton(rightJoystick, 2);
+		driverSpinInButton = new JoystickButton(rightJoystick, 1);
+		driverActuateDownButton = new JoystickButton(leftJoystick, 2);
+		actuateDownAndSpinInButton = new JoystickButton(gamepad, 6);
 	}
 
 	public double getMoveValue() {
@@ -53,7 +63,8 @@ public class DryverStation {
 	}
 
 	public double getTurnValue() {
-		return deadband(rightJoystick.getX(), JOYSTICK_DEADBAND);
+		double value = Math.asin(rightJoystick.getX()) * 0.8;
+		return deadband(value, JOYSTICK_DEADBAND);
 	}
 
 	public double getElevatorFullSpeedAxisValue() {
@@ -119,6 +130,26 @@ public class DryverStation {
 
 	public JoystickButton getDriverSpinOutButton() {
 		return driverSpinOutButton;
+	}
+
+	public JoystickButton getDriverSpinOutSlowButton() {
+		return driverSpinOutSlowButton;
+	}
+
+	public JoystickButton getDriverSpinInButton() {
+		return driverSpinInButton;
+	}
+
+	public JoystickButton getElevatorPresetLowButton() {
+		return elevatorPresetLowButton;
+	}
+
+	public JoystickButton getDriverActuateDownButton() {
+		return driverActuateDownButton;
+	}
+
+	public JoystickButton getActuateDownAndSpinInButton() {
+		return actuateDownAndSpinInButton;
 	}
 
 	public boolean isSwitchLeft() {

@@ -30,5 +30,7 @@
 	<classpathentry kind="lib" path="lib/maven/kotlin-stdlib-jre7-1.2.10.jar"/>
 	<classpathentry kind="lib" path="lib/maven/kotlin-stdlib-jre8-1.2.10.jar"/>
 	<classpathentry kind="lib" path="lib/maven/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

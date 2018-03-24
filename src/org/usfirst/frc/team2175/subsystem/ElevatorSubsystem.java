@@ -12,7 +12,7 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	private final MotorWrapper slaveMotor;
 	private final RobotInfo robotInfo;
 	private final SmartDashboardInfo smartDashboardInfo;
-	public static final double INCHES_PER_TICKS = 72 / 447670.0;
+	public static final double INCHES_PER_TICKS = 28 / 347119;
 	public static final double MAX_ELEVATOR_TRAVEL = 78.0357;
 
 	public ElevatorSubsystem() {
