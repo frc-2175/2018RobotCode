@@ -9,8 +9,8 @@ import org.usfirst.frc.team2175.command.single.TurnInPlaceCommand;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class ExperimentalOtherScaleAutonomous extends BaseCommandGroup {
-	public ExperimentalOtherScaleAutonomous(boolean isLeft) {
+public class OtherSideScaleAutonomous extends BaseCommandGroup {
+	public OtherSideScaleAutonomous(boolean isLeft) {
 		int sign = isLeft ? 1 : -1;
 		addSequential(new MoveIntakeMiddleCommand());
 		addSequential(new WaitCommand(0.1));
