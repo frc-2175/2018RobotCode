@@ -28,9 +28,9 @@ import org.usfirst.frc.team2175.factory.SubsystemsFactory;
 import org.usfirst.frc.team2175.log.LogServer;
 import org.usfirst.frc.team2175.log.LoggingConfig;
 import org.usfirst.frc.team2175.log.RobotLogger;
+import org.usfirst.frc.team2175.subsystem.ClimberSubsystem;
 import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 import org.usfirst.frc.team2175.subsystem.ElevatorSubsystem;
-import org.usfirst.frc.team2175.subsystem.LimeLight;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
 	private Command m_autoSelected;
 	private DrivetrainSubsystem drivetrainSubsystem;
 	private ElevatorSubsystem elevatorSubsystem;
+	private ClimberSubsystem climberSubsystem;
 	private RobotLogger robotLogger;
 	private LogServer logServer;
 	private AutonSelector autonSelector;
@@ -66,8 +67,11 @@ public class Robot extends TimedRobot {
 		logServer = new LogServer();
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		elevatorSubsystem = ServiceLocator.get(ElevatorSubsystem.class);
+		climberSubsystem = ServiceLocator.get(ClimberSubsystem.class);
 		new JoystickEventMapper();
 		new DefaultCommandFactory();
+
+		elevatorSubsystem.resetAllSensors();
 
 		logServer.runServer();
 	}
@@ -83,11 +87,15 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("gyroUnadjusted", drivetrainSubsystem.getGyroValueUnadjusted());
 		SmartDashboard.putNumber("gyroAdjusted", drivetrainSubsystem.getGyroValueAdjusted());
 		SmartDashboard.putNumber("ElevatorEncoder", elevatorSubsystem.getInchesTraveled());
+		SmartDashboard.putNumber("RandoEncoder", climberSubsystem.getRandoEncoder());
 
-		// LimeLight Testing
-		SmartDashboard.putNumber("TX", LimeLight.getTx());
-		SmartDashboard.putNumber("TY", LimeLight.getTy());
-		SmartDashboard.putNumber("TS", LimeLight.getTs());
+		// Console Logging
+		// System.out.println("Elevator Encoder: " +
+		// elevatorSubsystem.getInchesTraveled());
+		// System.out.println("Left Encoder: " +
+		// drivetrainSubsystem.getLeftEncoderDistance());
+		// System.out.println("Right Encoder: " +
+		// drivetrainSubsystem.getRightEncoderDistance());
 	}
 
 	@Override
@@ -105,6 +113,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		drivetrainSubsystem.resetAllSensors();
+		elevatorSubsystem.resetAllSensors();
 		m_autoSelected = autonSelector.getCommand();
 		m_autoSelected.start();
 	}

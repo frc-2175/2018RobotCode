@@ -48,13 +48,13 @@ public class SmartDashboardInfo {
 		putNumber(INTAKE_IN_SPEED, 0.7, 0.7);
 		putNumber(INTAKE_OUT_SPEED, -0.6, -0.6);
 		putNumber(ELEVATOR_MAX_UP_SPEED, 0.6, 0.6);
-		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.6, 0.6);
+		putNumber(ELEVATOR_MAX_DOWN_SPEED, 0.7, 0.7);
 		putNumber(POSITIVE_DEADBAND, 0.1, 0.1);
 		putNumber(NEGATIVE_DEADBAND, -0.05, -0.01);
 		putNumber(INTAKE_TURN_CUBE_IN_SPEED, 0.5, 0.5);
 		putNumber(INTAKE_TURN_CUBE_OUT_SPEED, 0.25, 0.25);
 		putNumber(ELEVATOR_PRECISION_MODE, 0.5, 0.5);
-		putNumber(TURN_CORRECTION, 20, 20);
+		putNumber(TURN_CORRECTION, 8, 8);
 		putNumber(DRIVE_CURVE_MAX_SPEED, 0.7, 0.7);
 		putNumber(DRIVE_STRAIGHT_ACCELERATION_RATE, 3, 3);
 		putNumber(INTAKE_SLOW_SPEED, -0.4, -0.4);

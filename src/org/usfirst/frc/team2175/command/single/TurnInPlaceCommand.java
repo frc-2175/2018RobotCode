@@ -14,6 +14,7 @@ public class TurnInPlaceCommand extends BaseCommand {
 	private double speed;
 	private final SmartDashboardInfo smartDashboardInfo;
 	private final double PROPORTIONAL = 2.0 / 12.0;
+	private boolean useAdjusted;
 
 	public TurnInPlaceCommand(double degrees, double maxSpeed, boolean accelerate, boolean decelerate) {
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
@@ -22,6 +23,7 @@ public class TurnInPlaceCommand extends BaseCommand {
 		this.speed = maxSpeed;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
+		useAdjusted = true;
 
 		requires(drivetrainSubsystem);
 	}
@@ -35,8 +37,15 @@ public class TurnInPlaceCommand extends BaseCommand {
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
 		this.resetGyro = resetGyro;
+		useAdjusted = true;
 
 		requires(drivetrainSubsystem);
+	}
+
+	public TurnInPlaceCommand(boolean useAdjusted, double degrees, double maxSpeed, boolean accelerate,
+		boolean decelerate, boolean resetGyro) {
+		this(degrees, maxSpeed, accelerate, decelerate, resetGyro);
+		this.useAdjusted = useAdjusted;
 	}
 
 	@Override
@@ -63,8 +72,8 @@ public class TurnInPlaceCommand extends BaseCommand {
 
 	@Override
 	public boolean isFinished() {
-		double gyro = (decelerate) ? drivetrainSubsystem.getGyroValueUnadjusted()
-			: drivetrainSubsystem.getGyroValueAdjusted();
+		double gyro = (useAdjusted) ? drivetrainSubsystem.getGyroValueAdjusted()
+			: drivetrainSubsystem.getGyroValueUnadjusted();
 		double targetDiff = Math.abs(gyro) - Math.abs(degrees);
 		return targetDiff > 0 && timeSinceInitialized() > .3;
 	}

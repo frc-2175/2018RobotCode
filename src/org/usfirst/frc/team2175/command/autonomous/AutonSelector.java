@@ -31,15 +31,18 @@ public class AutonSelector {
 	}
 
 	private void addTemp() {
-		test.addObject("LeftUltrasonicStraightFiveFeet", new TestUltrasonicDriveStraightAutonomous(true));
 		test.addObject("Right Side Switch", new SideSwitchAutonomous(false));
-		test.addObject("Right Side Scale", new ScaleAutonomous(false));
-		test.addObject("Right Side Opposite Scale", new ExperimentalOtherScaleAutonomous(false));
-		test.addObject("Right Side Two Cube Scale", new TwoCubeScaleAutonomous(false));
 		test.addObject("Left Side Switch", new SideSwitchAutonomous(true));
+		test.addObject("Right Side Scale", new ScaleAutonomous(false));
 		test.addObject("Left Side Scale", new ScaleAutonomous(true));
+		test.addObject("Right Side Opposite Scale", new ExperimentalOtherScaleAutonomous(false));
 		test.addObject("Left Side Opposite Scale", new ExperimentalOtherScaleAutonomous(true));
+		test.addObject("Right Side Two Cube Scale", new TwoCubeScaleAutonomous(false));
 		test.addObject("Left Side Two Cube Scale", new TwoCubeScaleAutonomous(true));
+		test.addObject("Right Side One Cube Scale One Cube Switch", new TwoCubeScaleAndSwitchAutonomous(false));
+		test.addObject("Left Side One Cube Scale One Cube Switch", new TwoCubeScaleAndSwitchAutonomous(true));
+		test.addObject("Center Two Cube Right", new TwoCubeCenterSwitch(false));
+		test.addObject("Center Two Cube Left", new TwoCubeCenterSwitch(true));
 		SmartDashboard.putData("Test", test);
 	}
 

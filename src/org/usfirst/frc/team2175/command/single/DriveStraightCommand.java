@@ -9,18 +9,24 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 public class DriveStraightCommand extends BaseCommand {
 	private double speed, distance, accelerationRate;
 	private boolean accelerate, decelerate;
-	public static final double PROPORTIONAL = 1.0 / 24.0;
+	public static final double PROPORTIONAL = 1.0 / 36.0;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
+	private final boolean useTurnCorrection;
 
 	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
+		this(speed, distance, accelerate, decelerate, true);
+	}
+
+	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate,
+		boolean useTurnCorrection) {
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
-
+		this.useTurnCorrection = useTurnCorrection;
 		requires(drivetrainSubsystem);
 	}
 
@@ -41,7 +47,7 @@ public class DriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		drivetrainSubsystem.straightArcadeDrive(moveValue);
+		drivetrainSubsystem.straightArcadeDrive(moveValue, useTurnCorrection);
 	}
 
 	@Override

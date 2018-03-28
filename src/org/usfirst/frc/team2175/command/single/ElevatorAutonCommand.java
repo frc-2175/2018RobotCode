@@ -28,7 +28,7 @@ public class ElevatorAutonCommand extends BaseCommand {
 	@Override
 	protected void init() {
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_ACCELERATION_RATE);
-		elevatorSubsystem.resetAllSensors();
+		// elevatorSubsystem.resetAllSensors();
 	}
 
 	@Override
@@ -49,14 +49,18 @@ public class ElevatorAutonCommand extends BaseCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return timeSinceInitialized() > 0.2 && Math.abs(elevatorSubsystem.getInchesTraveled()) >= Math.abs(distance);
+		if (speed > 0) {
+			return timeSinceInitialized() > 0.2 && elevatorSubsystem.getInchesTraveled() >= distance;
+		} else if (speed < 0) {
+			return timeSinceInitialized() > 0.2 && distance >= elevatorSubsystem.getInchesTraveled();
+		} else {
+			return true;
+		}
 	}
 
 	@Override
 	protected void onEnd() {
-		if (decelerate) {
-			elevatorSubsystem.runElevator(0);
-		}
+		elevatorSubsystem.runElevator(0);
 	}
 
 	private double accelerate() {

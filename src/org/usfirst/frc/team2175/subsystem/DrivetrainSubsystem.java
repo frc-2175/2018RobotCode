@@ -222,6 +222,11 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		arcadeDrive(moveValue, -(getGyroValueUnadjusted() / turnCorrection));
 	}
 
+	public void straightArcadeDrive(double moveValue, boolean useTurnCorrection) {
+		double turnCorrection = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
+		arcadeDrive(moveValue, useTurnCorrection ? -(getGyroValueUnadjusted() / turnCorrection) : 0);
+	}
+
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		robotDrive.tankDrive(-leftSpeed, -rightSpeed);
 	}

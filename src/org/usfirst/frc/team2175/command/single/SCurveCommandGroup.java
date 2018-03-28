@@ -19,7 +19,7 @@ public class SCurveCommandGroup extends BaseCommandGroup {
 		double theta = Math.PI - phi - mu;
 
 		addSequential(new DriveCurve(sign * r, Math.toDegrees(theta), 1, accelerate, false));
-		addSequential(new DriveStraightCommand(.8, d, false, false));
+		addSequential(new DriveStraightCommand(.8, d, false, false, false));
 		addSequential(new DriveCurve(-sign * r, Math.toDegrees(theta), 1, false, decelerate));
 	}
 

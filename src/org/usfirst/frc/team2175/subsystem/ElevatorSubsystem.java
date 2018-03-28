@@ -12,7 +12,7 @@ public class ElevatorSubsystem extends BaseSubsystem {
 	private final MotorWrapper slaveMotor;
 	private final RobotInfo robotInfo;
 	private final SmartDashboardInfo smartDashboardInfo;
-	public static final double INCHES_PER_TICKS = 28 / 347119;
+	public static final double INCHES_PER_TICKS = 34.0 / 398515.0;
 	public static final double MAX_ELEVATOR_TRAVEL = 78.0357;
 
 	public ElevatorSubsystem() {
@@ -21,6 +21,7 @@ public class ElevatorSubsystem extends BaseSubsystem {
 		masterMotor = robotInfo.get(RobotInfo.ELEVATOR_MASTER_MOTOR);
 		slaveMotor = robotInfo.get(RobotInfo.ELEVATOR_SLAVE_MOTOR);
 		slaveMotor.follow(masterMotor);
+		slaveMotor.setInverted(true);
 		masterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		masterMotor.setSelectedSensorPosition(0, 0, 0);
 	}

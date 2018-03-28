@@ -93,6 +93,12 @@ public class IntakeSubsystem extends BaseSubsystem {
 		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.ROLLER_OUT_SPEED);
 	}
 
+	public void runIntakeOut(double speed) {
+		leftSpeed = -speed;
+		rightSpeed = -speed;
+		barSpeed = smartDashboardInfo.getNumber(SmartDashboardInfo.ROLLER_OUT_SPEED);
+	}
+
 	public void clearValues() {
 		leftSpeed = 0;
 		rightSpeed = 0;

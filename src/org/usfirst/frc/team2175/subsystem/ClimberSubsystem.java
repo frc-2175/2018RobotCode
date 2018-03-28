@@ -22,4 +22,8 @@ public class ClimberSubsystem extends BaseSubsystem {
 		spinClimber(0);
 	}
 
+	public double getRandoEncoder() {
+		return masterMotor.getSelectedSensorPosition(0);
+	}
+
 }
