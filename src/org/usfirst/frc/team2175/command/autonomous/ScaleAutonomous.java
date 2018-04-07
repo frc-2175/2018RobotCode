@@ -14,7 +14,7 @@ public class ScaleAutonomous extends BaseCommandGroup {
 		int sign = isLeft ? 1 : -1;
 		addSequential(new DriveStraightCommand(1, 268, true, true));
 		addParallel(new TurnInPlaceCommand(true, 55 * sign, 0.85, true, true, true));
-		addSequential(new ElevatorAutonCommand(1, 60, true, true), 3);
+		addSequential(new ElevatorAutonCommand(1, 65, true, true), 3);
 		addSequential(new MoveIntakeMiddleCommand());
 		addSequential(new WaitCommand(0.2));
 		addSequential(new SpinIntakeOutCommand(0.7), .5);

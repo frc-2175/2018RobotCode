@@ -16,6 +16,6 @@ public class ScaleAndGetCubeAutonomous extends BaseCommandGroup {
 		addSequential(new ElevatorAutonCommand(-1, 0, false, true));
 		addSequential(new WaitCommand(0.2));
 		addParallel(new DriveStraightCommand(1, 76, true, true), 1.5);
-		addSequential(new SpinIntakeInDriverCommand(), 2);
+		addSequential(new SpinIntakeInDriverCommand(), 1.5);
 	}
 }

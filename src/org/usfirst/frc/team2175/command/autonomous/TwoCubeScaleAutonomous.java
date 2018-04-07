@@ -14,7 +14,7 @@ public class TwoCubeScaleAutonomous extends BaseCommandGroup {
 		addParallel(new SpinIntakeInCommand(), 1);
 		addSequential(new DriveStraightCommand(-0.85, 60, true, true));
 		addParallel(new TurnInPlaceCommand(-82 * sign, 0.85, true, true, true));
-		addSequential(new ElevatorAutonCommand(1, 60, true, true));
+		addSequential(new ElevatorAutonCommand(1, 65, true, true));
 		addSequential(new SpinIntakeOutCommand(), .5);
 		addSequential(new ElevatorAutonCommand(-1, 0, false, true));
 	}
