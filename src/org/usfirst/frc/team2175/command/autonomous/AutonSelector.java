@@ -60,6 +60,9 @@ public class AutonSelector {
 			new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
 				new TwoCubeScaleAndSwitchAutonomous(true), new TwoCubeScaleAndSwitchAutonomous(false)));
 
+		switchAndScale.addObject("One Cube Scale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
+			new ScaleAutonomous(true), new ScaleAutonomous(false)));
+
 		SmartDashboard.putData("SwitchAndScale", switchAndScale);
 	}
 
@@ -83,6 +86,9 @@ public class AutonSelector {
 
 		justScale.addObject("Two Cube Scale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
 			new TwoCubeScaleAutonomous(true), new TwoCubeScaleAutonomous(false)));
+
+		justScale.addObject("One Cube Scale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
+			new ScaleAutonomous(true), new ScaleAutonomous(false)));
 
 		SmartDashboard.putData("JustScale", justScale);
 	}

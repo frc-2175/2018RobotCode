@@ -12,7 +12,7 @@ public class ScaleAutonomous extends BaseCommandGroup {
 		int sign = isLeft ? 1 : -1;
 		addSequential(new MoveIntakeMiddleCommand());
 		addSequential(new DriveStraightCommand(1, 268, true, true));
-		addParallel(new TurnInPlaceCommand(true, 45 * sign, 0.85, true, true, true));
+		addSequential(new TurnInPlaceCommand(true, 45 * sign, 0.85, true, true, true));
 		addSequential(new ElevatorAutonCommand(1, 60, true, true), 3);
 		addSequential(new SpinIntakeOutCommand(1), .5);
 	}

@@ -21,7 +21,7 @@ public class ElevatorSubsystem extends BaseSubsystem {
 		masterMotor = robotInfo.get(RobotInfo.ELEVATOR_MASTER_MOTOR);
 		slaveMotor = robotInfo.get(RobotInfo.ELEVATOR_SLAVE_MOTOR);
 		slaveMotor.follow(masterMotor);
-		slaveMotor.setInverted(true);
+		slaveMotor.setInverted(false);
 		masterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		masterMotor.setSelectedSensorPosition(0, 0, 0);
 	}
