@@ -25,7 +25,7 @@ public class IntakeSubsystem extends BaseSubsystem {
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		rollerBar = robotInfo.get(RobotInfo.ROLLER_BAR_MOTOR);
 		leftIntakeWheel = robotInfo.get(RobotInfo.INTAKE_LEFT_MOTOR);
-		leftIntakeWheel.setInverted(false);
+		leftIntakeWheel.setInverted(true);
 		rightIntakeWheel = robotInfo.get(RobotInfo.INTAKE_RIGHT_MOTOR);
 		actuationPiston1 = robotInfo.get(RobotInfo.INTAKE_PISTON1);
 		actuationPiston2 = robotInfo.get(RobotInfo.INTAKE_PISTON2);

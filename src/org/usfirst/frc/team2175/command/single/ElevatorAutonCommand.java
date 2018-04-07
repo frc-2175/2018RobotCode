@@ -12,12 +12,18 @@ public class ElevatorAutonCommand extends BaseCommand {
 	public static final double PROPORTIONAL = 1.0 / 12.0;
 	private final ElevatorSubsystem elevatorSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
+	private double delay;
+	private double startTime;
 
 	public ElevatorAutonCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
+		this(speed, distance, accelerate, decelerate, 0);
+	}
+
+	public ElevatorAutonCommand(double speed, double distance, boolean accelerate, boolean decelerate, double delay) {
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
-
+		this.delay = delay;
 		this.decelerate = decelerate;
 		elevatorSubsystem = ServiceLocator.get(ElevatorSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
@@ -28,6 +34,7 @@ public class ElevatorAutonCommand extends BaseCommand {
 	@Override
 	protected void init() {
 		accelerationRate = smartDashboardInfo.getNumber(SmartDashboardInfo.ELEVATOR_ACCELERATION_RATE);
+		startTime = System.currentTimeMillis();
 		// elevatorSubsystem.resetAllSensors();
 	}
 
@@ -44,7 +51,10 @@ public class ElevatorAutonCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		elevatorSubsystem.runElevator(moveValue);
+		if (System.currentTimeMillis() - startTime > delay * 1000) {
+			elevatorSubsystem.runElevator(moveValue);
+			System.out.println("delay is finished");
+		}
 	}
 
 	@Override
