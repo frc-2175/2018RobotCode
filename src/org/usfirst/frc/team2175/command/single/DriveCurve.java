@@ -71,7 +71,7 @@ public class DriveCurve extends BaseCommand {
 
 	@Override
 	public boolean isFinished() {
-		double gyro = (decelerate) ? drivetrainSubsystem.getGyroValueUnadjusted()
+		double gyro = (decelerate) ? drivetrainSubsystem.getGyroValueAdjusted()
 			: drivetrainSubsystem.getGyroValueAdjusted();
 		double targetDiff = Math.toRadians(Math.abs(gyro)) - Math.abs(radians);
 		return targetDiff > 0 && timeSinceInitialized() > .3;

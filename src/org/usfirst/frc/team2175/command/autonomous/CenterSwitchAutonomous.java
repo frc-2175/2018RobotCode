@@ -16,7 +16,7 @@ public class CenterSwitchAutonomous extends BaseCommandGroup {
 	// TODO (ben): Put diagrams in the project so we remember the math we did.
 	public CenterSwitchAutonomous(boolean isLeft) {
 		double sign = (isLeft) ? -1 : 1;
-		X += isLeft ? 12 : -30;
+		X += isLeft ? 6 : -30;
 		Y += isLeft ? 12 : 0;
 		addSequential(new SCurveCommandGroup(sign * X, Y, 30, true, true), 3.5);
 		addSequential(new MoveIntakeMiddleCommand());
