@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.32638164754953075,
+  "dividerPosition": 0.32654402102496716,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -64,17 +64,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/AutoPopulate/turncube",
               "_title": "AutoPopulate/turncube"
-            }
-          },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/gyro",
-              "_title": "gyro"
             }
           },
           "6,0": {
@@ -582,6 +571,17 @@
               "_source0": "network_table:///SmartDashboard/AutoPopulate/drivetraim.turninplace",
               "_title": "AutoPopulate/drivetraim.turninplace"
             }
+          },
+          "5,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Test/selected",
+              "_title": "Test/selected"
+            }
           }
         }
       }
@@ -889,7 +889,7 @@
             "content": {
               "_type": "Graph",
               "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [5]/Value",
-              "_title": "LiveWindow/Ungrouped/Talon SRX [5]/Value",
+              "_title": "/LiveWindow/Ungrouped/Talon SRX [5]/Value",
               "Visible time": 30.0,
               "LiveWindow/Ungrouped/Talon SRX [5]/Value visible": true
             }
@@ -902,7 +902,7 @@
             "content": {
               "_type": "Graph",
               "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [9]/Value",
-              "_title": "LiveWindow/Ungrouped/Talon SRX [9]/Value",
+              "_title": "/LiveWindow/Ungrouped/Talon SRX [9]/Value",
               "Visible time": 30.0,
               "LiveWindow/Ungrouped/Talon SRX [9]/Value visible": true
             }
@@ -984,6 +984,17 @@
               "_type": "ComboBox Chooser",
               "_source0": "network_table:///SmartDashboard/SwitchAndScale",
               "_title": "SmartDashboard/SwitchAndScale"
+            }
+          },
+          "2,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Test",
+              "_title": "/SmartDashboard/Test"
             }
           }
         }
