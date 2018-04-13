@@ -43,6 +43,8 @@ public class AutonSelector {
 		test.addObject("Left Side One Cube Scale One Cube Switch", new TwoCubeScaleAndSwitchAutonomous(true));
 		test.addObject("Center Two Cube Right", new TwoCubeCenterSwitch(false));
 		test.addObject("Center Two Cube Left", new TwoCubeCenterSwitch(true));
+		test.addObject("Center Three Cube Right", new ThreeCubeCenterSwitch(false));
+		test.addObject("Center Three Cube Left", new ThreeCubeCenterSwitch(true));
 		test.addObject("Right Scale And Get Cube Autonomous", new ScaleAndGetCubeAutonomous(false));
 		SmartDashboard.putData("Test", test);
 	}
