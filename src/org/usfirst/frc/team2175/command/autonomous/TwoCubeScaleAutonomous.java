@@ -12,10 +12,11 @@ public class TwoCubeScaleAutonomous extends BaseCommandGroup {
 		int sign = isLeft ? 1 : -1;
 		addSequential(new ScaleAndGetCubeAutonomous(isLeft));
 		addParallel(new SpinIntakeInCommand(), 1);
-		addSequential(new DriveStraightCommand(-0.85, 60, true, true));
-		addParallel(new TurnInPlaceCommand(-82 * sign, 0.85, true, true, true));
-		addSequential(new ElevatorAutonCommand(1, 65, true, true));
+		addSequential(new DriveStraightCommand(-0.9, 60, true, true));
+		addParallel(new TurnInPlaceCommand(-82 * sign, 0.9, true, true, true));
+		addSequential(new ElevatorAutonCommand(1, 68, true, true));
 		addSequential(new SpinIntakeOutCommand(), .5);
-		addSequential(new ElevatorAutonCommand(-1, 0, false, true));
+		addParallel(new ElevatorAutonCommand(-1, 0, false, true));
+		addSequential(new TurnInPlaceCommand(82 * sign, 0.9, true, true, true));
 	}
 }

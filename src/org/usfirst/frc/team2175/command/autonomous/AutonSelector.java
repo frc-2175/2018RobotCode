@@ -37,6 +37,10 @@ public class AutonSelector {
 		test.addObject("Left Side Scale", new ScaleAutonomous(true));
 		test.addObject("Right Side Opposite Scale", new OtherSideScaleAutonomous(false));
 		test.addObject("Left Side Opposite Scale", new OtherSideScaleAutonomous(true));
+		test.addObject("Right Side Opposite Scale Get Cube", new OtherSideScaleAndGetCubeAutonomous(false));
+		test.addObject("Left Side Opposite Scale Get Cube", new OtherSideScaleAndGetCubeAutonomous(true));
+		test.addObject("Right Side Scale Opposite Side Switch", new SideScaleOppositeSwitch(false));
+		test.addObject("Left Side Scale Opposite Side Switch", new SideScaleOppositeSwitch(true));
 		test.addObject("Right Side Two Cube Scale", new TwoCubeScaleAutonomous(false));
 		test.addObject("Left Side Two Cube Scale", new TwoCubeScaleAutonomous(true));
 		test.addObject("Right Side One Cube Scale One Cube Switch", new TwoCubeScaleAndSwitchAutonomous(false));

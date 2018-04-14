@@ -8,16 +8,15 @@ import org.usfirst.frc.team2175.command.single.TurnInPlaceCommand;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class ScaleAndGetCubeAutonomous extends BaseCommandGroup {
-	public ScaleAndGetCubeAutonomous(boolean isLeft) {
+public class OtherSideScaleAndGetCubeAutonomous extends BaseCommandGroup {
+	public OtherSideScaleAndGetCubeAutonomous(boolean isLeft) {
 		int sign = isLeft ? 1 : -1;
-		double secondCubeTurnAngle = 88;
-		secondCubeTurnAngle += isLeft ? 4 : 0;
-		addSequential(new ScaleAutonomous(isLeft));
-		addParallel(new TurnInPlaceCommand(secondCubeTurnAngle * sign, 0.85, true, true, true));
+		addSequential(new OtherSideScaleAutonomous(isLeft));
+		addSequential(new DriveStraightCommand(-0.8, 12, true, true));
+		addParallel(new TurnInPlaceCommand(-sign * 145, 0.9, true, true, false));
 		addSequential(new ElevatorAutonCommand(-1, 0, false, true));
 		addSequential(new WaitCommand(0.2));
-		addParallel(new DriveStraightCommand(1, 76, true, true), 1.5);
+		addParallel(new DriveStraightCommand(0.9, 37, true, true));
 		addSequential(new SpinIntakeInDriverCommand(), 1.5);
 	}
 }
