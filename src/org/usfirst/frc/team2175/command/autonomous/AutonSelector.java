@@ -31,6 +31,8 @@ public class AutonSelector {
 	}
 
 	private void addTemp() {
+		test.addObject("Center One Cube Right", new CenterSwitchAutonomous(false));
+		test.addObject("Center One Cube Left", new CenterSwitchAutonomous(true));
 		test.addObject("Right Side Switch", new SideSwitchAutonomous(false));
 		test.addObject("Left Side Switch", new SideSwitchAutonomous(true));
 		test.addObject("Right Side Scale", new ScaleAutonomous(false));

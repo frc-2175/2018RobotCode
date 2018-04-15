@@ -27,7 +27,7 @@ public class TwoCubeCenterSwitch extends BaseCommandGroup {
 		addSequential(new MoveIntakeDownCommand());
 		addParallel(new DriveStraightCommand(0.9, distance, true, true));
 		addSequential(new SpinIntakeInDriverCommand(), 2.5);
-		addParallel(new SpinIntakeInCommand(), 2);
+		addParallel(new SpinIntakeInCommand(), 1);
 		addSequential(new DriveStraightCommand(-0.9, 48, true, true));
 		addSequential(new TurnInPlaceCommand(sign * 50, 0.8, true, true));
 		addSequential(new WaitCommand(0.3));

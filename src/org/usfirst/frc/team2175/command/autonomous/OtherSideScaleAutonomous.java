@@ -24,10 +24,10 @@ public class OtherSideScaleAutonomous extends BaseCommandGroup {
 		addSequential(new WaitCommand(0.2));
 		double val = (isLeft) ? 204 : 212;
 		addSequential(new DriveStraightCommand(1, val, true, true));
-		addSequential(new TurnInPlaceCommand(-sign * 115, 0.9, true, true, false));
-		addSequential(new WaitCommand(0.2));
-		addParallel(new DriveStraightCommand(0.8, 33, true, true));
-		addSequential(new ElevatorAutonCommand(0.8, 65, true, true));
+		addSequential(new TurnInPlaceCommand(-sign * 105, 0.9, true, true, false));
+		addSequential(new WaitCommand(0.3));
+		addParallel(new DriveStraightCommand(0.9, 35, true, true));
+		addSequential(new ElevatorAutonCommand(0.9, 65, true, true));
 		addSequential(new MoveIntakeMiddleCommand());
 		addSequential(new WaitCommand(0.2));
 		addSequential(new SpinIntakeOutCommand(0.7), .5);
