@@ -8,22 +8,28 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
 
 public class DriveStraightCommand extends BaseCommand {
 	private double speed, distance, accelerationRate;
-	private boolean accelerate, decelerate;
+	private boolean accelerate, decelerate, justTurned;
 	public static final double PROPORTIONAL = 1.0 / 36.0;
 	private final DrivetrainSubsystem drivetrainSubsystem;
 	private final SmartDashboardInfo smartDashboardInfo;
 	private final boolean useTurnCorrection;
 
 	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
-		this(speed, distance, accelerate, decelerate, true);
+		this(speed, distance, accelerate, decelerate, true, false);
 	}
 
 	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate,
-		boolean useTurnCorrection) {
+		boolean justTurned) {
+		this(speed, distance, accelerate, decelerate, true, true);
+	}
+
+	public DriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate,
+		boolean useTurnCorrection, boolean justTurned) {
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
+		this.justTurned = justTurned;
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 		smartDashboardInfo = ServiceLocator.get(SmartDashboardInfo.class);
 		this.useTurnCorrection = useTurnCorrection;
@@ -47,7 +53,11 @@ public class DriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		drivetrainSubsystem.straightArcadeDrive(moveValue, useTurnCorrection);
+		if (justTurned) {
+			drivetrainSubsystem.gyroAssumptionDrive(moveValue);
+		} else {
+			drivetrainSubsystem.straightArcadeDrive(moveValue, useTurnCorrection);
+		}
 	}
 
 	@Override

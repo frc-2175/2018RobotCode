@@ -42,6 +42,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
+	private double unaccountedTurnAngle;
+
 	private AHRS navx;
 	private AnalogInput psiSensor;
 
@@ -73,6 +75,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		leftMaster.setSelectedSensorPosition(0, 0, 0);
 		rightMaster.setSelectedSensorPosition(0, 0, 0);
+
+		unaccountedTurnAngle = 0;
 
 		navx = new AHRS(SPI.Port.kMXP);
 		navx.reset();
@@ -237,5 +241,14 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	public double getRightUltraVal() {
 		return rightUltra.getDistance();
+	}
+
+	public void setUnaccountedTurnAngle(double val) {
+		unaccountedTurnAngle = val;
+	}
+
+	public void gyroAssumptionDrive(double moveValue) {
+		double turnCorrection = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
+		arcadeDrive(moveValue, -((getGyroValueUnadjusted() - unaccountedTurnAngle) / turnCorrection));
 	}
 }
