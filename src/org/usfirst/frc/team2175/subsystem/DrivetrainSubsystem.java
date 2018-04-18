@@ -42,7 +42,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
 	private static final double INCHES_PER_TICK = (Math.PI * 6.25) / (15.32 * 1024) / 2;
 
-	private double unaccountedTurnAngle;
+	private boolean justTurned;
 
 	private AHRS navx;
 	private AnalogInput psiSensor;
@@ -76,7 +76,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		leftMaster.setSelectedSensorPosition(0, 0, 0);
 		rightMaster.setSelectedSensorPosition(0, 0, 0);
 
-		unaccountedTurnAngle = 0;
+		justTurned = false;
 
 		navx = new AHRS(SPI.Port.kMXP);
 		navx.reset();
@@ -202,10 +202,14 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return navx.getAngle();
 	}
 
+	public void resetGyro() {
+		navx.reset();
+	}
+
 	public void resetAllSensors() {
 		leftMaster.setSelectedSensorPosition(0, 0, 0);
 		rightMaster.setSelectedSensorPosition(0, 0, 0);
-		navx.reset();
+		resetGyro();
 	}
 
 	public void shift(boolean isHigh) {
@@ -243,12 +247,24 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 		return rightUltra.getDistance();
 	}
 
-	public void setUnaccountedTurnAngle(double val) {
-		unaccountedTurnAngle = val;
+	public void turned(boolean isTrue) {
+		justTurned = isTrue;
 	}
 
-	public void gyroAssumptionDrive(double moveValue) {
-		double turnCorrection = smartDashboardInfo.getNumber(SmartDashboardInfo.TURN_CORRECTION);
-		arcadeDrive(moveValue, -((getGyroValueUnadjusted() - unaccountedTurnAngle) / turnCorrection));
+	public void gyroCorrectAssumptionDrive(double moveValue, double initTime, boolean useTurnCorrection) {
+		boolean usingCorrection = true;
+		if (initTime > 0.2 && justTurned) {
+			resetGyro();
+			justTurned = false;
+		} else if (justTurned) {
+			usingCorrection = false;
+		}
+		straightArcadeDrive(moveValue, usingCorrection && useTurnCorrection);
 	}
+
+	public void coast(boolean wantCoast) {
+		leftMaster.coast(wantCoast);
+		rightMaster.coast(wantCoast);
+	}
+
 }

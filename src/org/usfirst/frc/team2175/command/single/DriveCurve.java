@@ -75,9 +75,8 @@ public class DriveCurve extends BaseCommand {
 			: drivetrainSubsystem.getGyroValueAdjusted();
 		double targetDiff = Math.toRadians(Math.abs(gyro)) - Math.abs(radians);
 		boolean commandComplete = targetDiff > 0 && timeSinceInitialized() > .3;
-		if (decelerate) {
-			drivetrainSubsystem.setUnaccountedTurnAngle(
-				drivetrainSubsystem.getGyroValueAdjusted() - drivetrainSubsystem.getGyroValueUnadjusted());
+		if (commandComplete) {
+			drivetrainSubsystem.turned(true);
 		}
 		return commandComplete;
 	}

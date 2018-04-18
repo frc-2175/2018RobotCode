@@ -75,7 +75,11 @@ public class TurnInPlaceCommand extends BaseCommand {
 		double gyro = (useAdjusted) ? drivetrainSubsystem.getGyroValueAdjusted()
 			: drivetrainSubsystem.getGyroValueUnadjusted();
 		double targetDiff = Math.abs(gyro) - Math.abs(degrees);
-		return targetDiff > 0 && timeSinceInitialized() > .3;
+		boolean commandComplete = targetDiff > 0 && timeSinceInitialized() > .3;
+		if (commandComplete) {
+			drivetrainSubsystem.turned(true);
+		}
+		return commandComplete;
 	}
 
 	private double accelerate() {

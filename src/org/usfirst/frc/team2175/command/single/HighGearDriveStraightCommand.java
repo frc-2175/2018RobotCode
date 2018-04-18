@@ -10,22 +10,16 @@ import org.usfirst.frc.team2175.subsystem.DrivetrainSubsystem;
  */
 public class HighGearDriveStraightCommand extends BaseCommand {
 	private double speed, distance;
-	private boolean accelerate, decelerate, justTurned;
+	private boolean accelerate, decelerate;
 	public static final double ACCEL_PROPORTIONAL = 5;
 	public static final double DECEL_PROPORTIONAL = 1.0 / 60.0;
 	private DrivetrainSubsystem drivetrainSubsystem;
 
 	public HighGearDriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate) {
-		this(speed, distance, accelerate, decelerate, false);
-	}
-
-	public HighGearDriveStraightCommand(double speed, double distance, boolean accelerate, boolean decelerate,
-		boolean justTurned) {
 		this.speed = speed;
 		this.distance = distance;
 		this.accelerate = accelerate;
 		this.decelerate = decelerate;
-		this.justTurned = justTurned;
 		drivetrainSubsystem = ServiceLocator.get(DrivetrainSubsystem.class);
 
 		requires(drivetrainSubsystem);
@@ -48,11 +42,7 @@ public class HighGearDriveStraightCommand extends BaseCommand {
 		if (accelerate) {
 			moveValue *= accelerate();
 		}
-		if (justTurned) {
-			drivetrainSubsystem.gyroAssumptionDrive(moveValue);
-		} else {
-			drivetrainSubsystem.straightArcadeDrive(moveValue);
-		}
+		drivetrainSubsystem.gyroCorrectAssumptionDrive(moveValue, timeSinceInitialized(), true);
 	}
 
 	@Override
@@ -66,6 +56,7 @@ public class HighGearDriveStraightCommand extends BaseCommand {
 		if (decelerate) {
 			drivetrainSubsystem.stopAllMotors();
 		}
+		drivetrainSubsystem.turned(false);
 	}
 
 	private double accelerate() {

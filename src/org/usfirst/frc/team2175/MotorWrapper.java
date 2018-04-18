@@ -2,6 +2,7 @@ package org.usfirst.frc.team2175;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.IMotorController;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -27,6 +28,14 @@ public class MotorWrapper {
 			talon.set(number);
 		} else {
 			victor.set(number);
+		}
+	}
+
+	public void coast(boolean wantCoast) {
+		if (wantCoast) {
+			talon.setNeutralMode(NeutralMode.Coast);
+		} else {
+			talon.setNeutralMode(NeutralMode.Brake);
 		}
 	}
 
