@@ -32,5 +32,6 @@ public class JoystickEventMapper {
 		driverStation.getDriverSpinOutSuperFastButton().whileHeld(new SpinIntakeOutCommand(1));
 		driverStation.getDriverActuateDownButton().whileHeld(new ToggleIntakeDownAndMiddleCommand());
 		driverStation.getActuateDownAndSpinInButton().whileHeld(new SpinIntakeInDriverCommand());
+		driverStation.getDriverSpinOutVerySlowButton().whileHeld(new SpinIntakeOutCommand(0.25));
 	}
 }

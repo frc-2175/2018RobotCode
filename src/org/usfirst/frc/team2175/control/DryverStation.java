@@ -28,6 +28,7 @@ public class DryverStation {
 	private JoystickButton driverSpinOutSuperFastButton;
 	private JoystickButton driverActuateDownButton;
 	private JoystickButton actuateDownAndSpinInButton;
+	private JoystickButton driverSpinOutVerySlowButton;
 	private static final double JOYSTICK_DEADBAND = 0.15;
 	private static final double GAMEPAD_DEADBAND = 0.1;
 
@@ -56,6 +57,7 @@ public class DryverStation {
 		driverSpinOutSuperFastButton = new JoystickButton(rightJoystick, 1);
 		driverActuateDownButton = new JoystickButton(leftJoystick, 2);
 		actuateDownAndSpinInButton = new JoystickButton(gamepad, 6);
+		driverSpinOutVerySlowButton = new JoystickButton(rightJoystick, 5);
 	}
 
 	public double getMoveValue() {
@@ -138,6 +140,10 @@ public class DryverStation {
 
 	public JoystickButton getDriverSpinOutSuperFastButton() {
 		return driverSpinOutSuperFastButton;
+	}
+
+	public JoystickButton getDriverSpinOutVerySlowButton() {
+		return driverSpinOutVerySlowButton;
 	}
 
 	public JoystickButton getElevatorPresetLowButton() {
