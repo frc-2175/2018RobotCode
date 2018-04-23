@@ -20,8 +20,8 @@ public class TwoCubeCenterSwitch extends BaseCommandGroup {
 		secondCubeTurn += isLeft ? -5 : 0;
 		distance += isLeft ? -6 : 0;
 		addSequential(new CenterSwitchAutonomous(isLeft));
-		addParallel(new ElevatorAutonCommand(-0.8, 0, false, false), 0.2);
 		addSequential(new DriveStraightCommand(-0.9, 52, true, true));
+		addParallel(new ElevatorAutonCommand(-0.8, 0, false, false), 0.2);
 		addSequential(new TurnInPlaceCommand(sign * secondCubeTurn, 0.8, true, true));
 		addSequential(new WaitCommand(0.3));
 		addSequential(new MoveIntakeDownCommand());
