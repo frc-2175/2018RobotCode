@@ -59,7 +59,7 @@ public class SmartDashboardInfo {
 		putNumber(DRIVE_STRAIGHT_ACCELERATION_RATE, 3, 3);
 		putNumber(INTAKE_SLOW_SPEED, -0.4, -0.4);
 		putNumber(CLIMBER_UP_SPEED, 1, 1);
-		putNumber(CLIMBER_DOWN_SPEED, -0.5, -0.5);
+		putNumber(CLIMBER_DOWN_SPEED, -1, -1);
 		putNumber(GYRO_LATENCY, 0.2, 0.2);
 		putNumber(ELEVATOR_ACCELERATION_RATE, 2, 2);
 		putNumber(TURN_IN_PLACE, 0.8, 0.8);

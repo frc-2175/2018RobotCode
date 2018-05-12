@@ -75,11 +75,11 @@ public class RobotInfo {
 		put(LEFT_MOTOR_MASTER, talon(new WPI_TalonSRX(1)));
 		put(LEFT_MOTOR_SLAVE1, victor(new WPI_VictorSPX(11)), talon(new WPI_TalonSRX(11)));
 		put(LEFT_MOTOR_SLAVE2, victor(new WPI_VictorSPX(12)), talon(new WPI_TalonSRX(12)));
-		put(RIGHT_MOTOR_MASTER, talon(new WPI_TalonSRX(2)));
-		put(RIGHT_MOTOR_SLAVE1, victor(new WPI_VictorSPX(20)), talon(new WPI_TalonSRX(20)));
+		put(RIGHT_MOTOR_MASTER, talon(new WPI_TalonSRX(4)));
+		put(RIGHT_MOTOR_SLAVE1, victor(new WPI_VictorSPX(2)), talon(new WPI_TalonSRX(20)));
 		put(RIGHT_MOTOR_SLAVE2, victor(new WPI_VictorSPX(3)), talon(new WPI_TalonSRX(3)));
 		put(ROLLER_BAR_MOTOR, victor(new WPI_VictorSPX(6)), talon(new WPI_TalonSRX(6)));
-		put(CLIMBER_MASTER, victor(new WPI_VictorSPX(4)), talon(new WPI_TalonSRX(4)));
+		put(CLIMBER_MASTER, victor(new WPI_VictorSPX(10)), talon(new WPI_TalonSRX(4)));
 		put(INTAKE_LEFT_MOTOR, talon(new WPI_TalonSRX(8)));
 		put(INTAKE_RIGHT_MOTOR, talon(new WPI_TalonSRX(7)));
 		put(ELEVATOR_MASTER_MOTOR, talon(new WPI_TalonSRX(5)));

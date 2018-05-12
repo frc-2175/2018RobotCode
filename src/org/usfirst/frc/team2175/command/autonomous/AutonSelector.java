@@ -89,6 +89,8 @@ public class AutonSelector {
 
 		justSwitch.addObject("Other Side Scale", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
 			new OtherSideScaleAutonomous(true), new OtherSideScaleAutonomous(false)));
+		justSwitch.addObject("Drive Other Side", new LambdaConditionalCommand(() -> side.getSelected() == Side.Left,
+			new DriveOppositeSideAutonomous(true), new DriveOppositeSideAutonomous(false)));
 
 		SmartDashboard.putData("JustSwitch", justSwitch);
 
